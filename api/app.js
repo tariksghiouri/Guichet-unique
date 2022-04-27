@@ -1,4 +1,4 @@
-var createError = require('http-errors');
+  var createError = require('http-errors');
  var express = require('express');
  var path = require('path');
  var cookieParser = require('cookie-parser');
@@ -7,24 +7,32 @@ var createError = require('http-errors');
  var flash = require('express-flash');
  var session = require('express-session');
  var bodyParser = require('body-parser');
- 
+
+ const cors = require('cors');
+ var app = express();
+ app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
  var mysql = require('mysql');
  var connection  = require('./connection');
- 
+
  var indexRouter = require('./routes/index');
- var usersRouter = require('./routes/users');
  var homeRouter = require('./routes/home');
 
+
  
- var app = express();
+ 
  
 // view engine setup
  app.set('views', path.join(__dirname, 'views'));
  app.set('view engine', 'ejs');
- 
+ app.use(cors({  origin: '*'}));
  app.use(logger('dev'));
- app.use(bodyParser.json());
+ 
  app.use(bodyParser.urlencoded({ extended: true }));
+ app.use(bodyParser.json());
  app.use(cookieParser());
  app.use(express.static(path.join(__dirname, 'public')));
  
@@ -39,8 +47,8 @@ var createError = require('http-errors');
  app.use(expressValidator());
  
  app.use('/', indexRouter);
- app.use('/list', usersRouter);
- app.use('/home', homeRouter);
+ app.use('/fils', homeRouter);
+
  
  // catch 404 and forward to error handler
  app.use(function(req, res, next) {

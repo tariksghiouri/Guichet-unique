@@ -1,0 +1,66 @@
+<div id="outerdiv">
+  <img id="icon" src="../assets/Dessin12.jpg" alt="" height="170">
+</div>
+<div>
+  <nav class="cl-effect-3">
+    <ul>
+      <li><a [routerLink]="['/home']">Accueil</a></li>
+      <li><a href="#" (click)="openScrollableContent(longContent)">Critères</a></li>
+      <li><a href="#">Procédures</a></li>
+      <li><a href="#">Vérifiez l'état votre candidature</a></li>
+      <li><a [routerLink]="['./form']">Compte</a></li>
+    </ul>
+  </nav>
+
+</div>
+
+
+<ng-template #longContent let-modal >
+  <div class="modal-header">
+    <h4 class="modal-title">CRITÈRES ET MÉTHODE DE NOTATION</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <accordion>
+      <accordion-group heading="CRITÈRES">
+        <ul>
+          <li>La Note obtenue au Baccalauréat.</li>
+          <li>
+            Les Notes obtenues aux différents semestres (ou années) validés pondérées par leur mode de validation : V
+            (validé) ou VPC (validé par compensation).
+          </li>
+          <li>
+            Le Nombre d’Années de Retard dans la scolarité (depuis l'année du Bac).
+          </li>
+        </ul>
+      </accordion-group>
+      <accordion-group heading="METHODE DE NOTATION">
+        <h3>
+          Chaque note de semestre est multipliée par 0.9 si VPC
+        </h3>
+        <ul>
+          <li>
+            Moyenne = 10% Note au Bac + 90% Moyenne des notes des semestres
+          </li>
+          <li>
+            Note du dossier = Moyenne * (0.9)AR, où AR est le nombre d’années de retard (exemples : *0.9 pour 1 année de retard, *0.81 pour 2 années, etc.)
+          </li>
+          <li>
+            AR = (Année en cours – Année du Bac) – (Nombre d’années exigées pour le plus haut niveau validé) – (Nombre entier des années de retard justifiées)
+          </li>
+        </ul>
+      </accordion-group>
+
+    </accordion>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<router-outlet>
+
+</router-outlet>
+

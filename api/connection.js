@@ -1,9 +1,12 @@
 var mysql = require('mysql');
 var conn = mysql.createConnection({
-  host: 'localhost', 
+  host: 'localhost',
+  port:'3306', 
   user: 'root',     
   password: '',      
-  database: 'guichet' 
+  database: 'candidaturelp-ests' ,
+  connectionLimit: 10
+  
 }); 
  
 conn.connect(function(err) {
