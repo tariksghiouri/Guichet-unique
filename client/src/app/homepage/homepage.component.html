@@ -1,25 +1,25 @@
 <div>
-    <table class=" table-bordered table is-striped is-bordered mt-2 is-fullwidth">
-      <thead>
-        <tr>
-          <!-- <th>Id</th> -->
-          <th>Intitule</th>
-          <th>Responsable</th>
-          <th>email</th>
-          <th>capacite</th>
-   
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let fil of readData">
-          <!-- <th scope="row">{{fil.id}}</th> -->
-          <td>{{fil.Intitule}}</td>
-          <td>{{fil.NomComplet}}</td>
-          <!-- <a href="mailto:{{fil.email}}"><td>{{fil.email}}</td></a> -->
-          <td>{{fil.email}}</td>
-  
-          <td>{{fil.Effectif_maximal}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <table class=" table-bordered table is-striped is-bordered mt-2 is-fullwidth">
+    <thead>
+      <tr>
+        <!-- <th>Id</th> -->
+        <th>Intitule</th>
+        <th>Responsable</th>
+        <th>email</th>
+        <th>capacite</th>
+ 
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fil of readData">
+        <!-- <th scope="row">{{fil.id}}</th> -->
+        <td>{{fil.Intitule}}</td>
+        <td>{{fil.NomComplet}}</td>
+        <!-- <a href="mailto:{{fil.email}}"><td>{{fil.email}}</td></a> -->
+        <td>{{fil.email}}</td>
+
+        <td>{{fil.Effectif_maximal}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

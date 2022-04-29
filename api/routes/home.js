@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var connection  = require('../connection');
+var connection  = require('../connections/connection');
+// var connection  = require('../connections/database');
  
 
 router.get('/', function(req, res, next) {
