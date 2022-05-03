@@ -15,7 +15,7 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: [
     `.wrapper{
-      height:90vh;
+     
     }
     .form{
       width:550px;

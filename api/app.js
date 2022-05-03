@@ -15,6 +15,9 @@ var connection = require('./connections/database');
 var indexRouter = require('./routes/index');
 var homeRouter = require('./routes/home');
 var usersRouter = require('./routes/users');
+var bacRouter = require('./routes/bac');
+var diplomesRouter = require('./routes/diplomes');
+var curDateRouter = require('./routes/date');
 //database connection
 connection
   .authenticate()
@@ -51,6 +54,10 @@ app.use(expressValidator());
 app.use('/', indexRouter);
 app.use('/fils', homeRouter);
 app.use('/user', usersRouter);
+app.use('/bacs', bacRouter);
+app.use('/diplomes', diplomesRouter);
+app.use('/curDate', curDateRouter);
+
 
 
 

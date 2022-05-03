@@ -1,5 +1,8 @@
 import { Component,OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ApiServiceService } from './api-service.service';
+import { AuthService } from "./service/auth.service";
+
 
 
 @Component({
@@ -20,11 +23,21 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   `]
 })
 export class AppComponent implements OnInit {
-  
-   constructor( private modalService: NgbModal){
+    date:any
+    year:any
+    nextyear: any;
+   constructor( private modalService: NgbModal, private service:ApiServiceService ,private authservice: AuthService){
 
   }
   ngOnInit(): void {
+    this.service.getCurrentDate().subscribe((result: { data: any; }) =>{
+      // console.log(result);
+      this.date=result.data;
+      this.year=String(this.date[0].current_timestamp).substring(0,4);
+      this.nextyear=Number(this.year) +1;
+      // console.log(this.authservice.getProfile());
+
+    })
     
     
   }

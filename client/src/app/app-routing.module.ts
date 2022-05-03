@@ -8,16 +8,26 @@ import {  MultistepFormComponent} from "./multistep-form/multistep-form.componen
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () =>
-      import('./nonAuthModules/authentication.module').then(
+    loadChildren: () => import('./nonAuthModules/authentication.module').then(
         (m) => m.AuthenticationModule
       ),
   },
   {
-    path: 'dashboard',
+    path: 'tessst',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'tessst',
+    component:HomepageComponent,
+    canActivate: [AuthGuard],
+  },
+  // {
+  //   path: 'form',
+  //   component:MultistepFormComponent,
+  //   canActivate: [AuthGuard],
+  // },
+  
   
   {path:'home',component:HomepageComponent},
   {path:'form',component:MultistepFormComponent},

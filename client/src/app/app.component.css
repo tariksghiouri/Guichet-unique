@@ -2,6 +2,12 @@
 .centered{
 	width:90%;
 	margin :auto;
+	text-align: center;
+}
+.sticky{
+	position: -webkit-sticky; /* Safari */
+	position: sticky !important;
+	top: 0 !important	;
 }
 
 a {text-decoration: none;}

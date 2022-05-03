@@ -45,6 +45,9 @@ export class LoginformComponent implements OnInit {
   handleSubmit() {
     this.authService.logIn(this.loginForm.value).subscribe((res: any) => {
       this.toastr.success(res.message);
+      this.authService.getProfile().subscribe((res: any) => {
+        this.toastr.show(res.data.name);
+      })
     });
   }
 }
