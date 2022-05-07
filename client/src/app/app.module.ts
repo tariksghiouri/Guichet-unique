@@ -15,6 +15,7 @@ import { ServiceModule } from './service/service.module';
 import { AuthGuard } from './auth/auth.guard';
 import { MultistepFormComponent } from './multistep-form/multistep-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavigationComponent } from './navigation/navigation.component';
 
 
 
@@ -26,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomepageComponent,
     PagenotfoundComponent,
     MultistepFormComponent,
+    NavigationComponent,
   ],
   imports: [
     ReactiveFormsModule,

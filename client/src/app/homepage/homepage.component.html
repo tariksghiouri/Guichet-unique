@@ -1,25 +1,117 @@
-<div >
-  <table class=" table-bordered table is-striped is-bordered mt-2 is-fullwidth">
-    <thead>
-      <tr>
-        <!-- <th>Id</th> -->
-        <th>Intitule</th>
-        <th>Responsable</th>
-        <th>email</th>
-        <th>capacite</th>
- 
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let fil of readData">
-        <!-- <th scope="row">{{fil.id}}</th> -->
-        <td>{{fil.Intitule}}</td>
-        <td>{{fil.NomComplet}}</td>
-        <!-- <a href="mailto:{{fil.email}}"><td>{{fil.email}}</td></a> -->
-        <td>{{fil.email}}</td>
+<div class="homepage">
 
-        <td>{{fil.Effectif_maximal}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <h1>l'Ecole Supérieure de Technologie lance un appel à candidature pour les filières licences professionnelles
+      suivantes :
+    </h1>
+    <table class=" table-bordered table is-striped is-bordered mt-2 is-fullwidth">
+      <thead>
+        <tr>
+          <th>departement</th>
+          <th>Intitule</th>
+          <th>Responsable</th>
+          <th>email</th>
+          <th>capacite</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fil of readData">
+          <td >{{fil.NomDept}}</td>
+          <td>{{fil.Intitule}}</td>
+          <td>{{fil.NomComplet}}</td>
+          <!-- <a href="mailto:{{fil.email}}"><td>{{fil.email}}</td></a> -->
+          <td>{{fil.email}}</td>
+
+          <td>{{fil.capaciteMax}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <accordion>
+    <accordion-group heading="CONDITIONS D'ADMISSION    ">
+      <p>
+        L’accès à la licence professionnelle se fait directement au semestre 5 pour les titulaires d’un DUT ou
+        équivalent ayant les prérequis nécessaires.Pour plus d'informations, consulter les descriptifs spécifiques à
+        chaque filière à partir des liens dans le tableau ci-dessus.
+
+        La présélection des candidats se fera sur la base de critères de mérite en plus d'un test écrit.
+      </p>
+    </accordion-group>
+    <accordion-group heading="CANDIDATURE">
+      <h2>Il est important de consulter la page des Procédures dans la barre de menu avant de remplir le formulaire.
+      </h2>
+      
+
+      <h3>(2 étapes obligatoires)</h3>
+      <ul>
+        <li>
+          <b> 1ère étape</b> : pré-inscription en ligne, avant la date de fermeture de la candidature en ligne affichée
+          en bas de
+          cette page, en cliquant sur Formulaire
+        </li>
+        <li> <b> 2ème étape:</b> La présentation en cas de présélection pour le test écrit ,des documents suivants:
+          Fiche de renseignements imprimée à la fin de la validation de la pré-inscription en ligne, et signée par le
+          candidat.
+
+        </li>
+
+      </ul>
+
+<p>
+      Les originaux des diplômes et des relevés de notes.
+      Important: Les originaux des diplômes et des relevés de notes seront aussi exigés à l'inscription définitive.
+      Pour les candidats étrangers ayant suivi leurs études et obtenu leur diplôme de DUT ou équivalent au Maroc:
+      La pré-inscription en ligne avant la date limite mentionnée ci-dessous est obligatoire. Les dossiers concernant
+      ces candidats et qui parviendront à travers l'Agence Marocaine de Coopération ne seront pas traités si cette
+      pré-inscription n'est pas effectuée.
+      </p>
+
+    </accordion-group>
+    <accordion-group heading="CANDIDATURE">
+      <table class="table-bordered table is-striped is-bordered mt-2 is-fullwidth">    
+        <tbody><tr>            
+            <td style="font-size: large;color: red">Candidatures</td>	
+            <td>29-08-2021 à minuit</td>            
+            <td style="font-size: large;color: black">Date limite des candidatures en ligne. (n'envoyer aucun dossiers)</td>    
+        </tr>
+        <tr>
+            <td rowspan="3" style="font-size: large;color: red">
+               Présélection
+            </td>
+            <td>30/08/2021</td>
+            <td>DÉBUT DU TRAITEMENT PRELIMINAIRE DES DOSSIERS.</td>
+        </tr>
+        <tr>
+            <td>6/09/2021</td>
+            <td>DEBUT DU TRAITEMENT DES DOSSIERS PAR LES FILIERES.</td>
+        </tr>
+        <tr>
+            <td>16/09/2021</td>
+            <td>FIN DU TRAITEMENT DES DOSSIERS PAR LES FILIERES ET EDITION DES LISTES DE PRESELECTION.</td>
+        </tr>
+        <tr>
+            <td style="font-size: large;color: red">Test</td>
+            <td>20/09/2021 au 25/09/2021</td>
+            <td>TESTS ET AFFICHAGE DES RESULTATS PAR FILIERE.</td>
+        </tr>
+        <tr>
+            <td rowspan="2" style="font-size: large;color: red">
+               Inscriptions
+            </td>
+            <td>27-28/09/2021</td>
+            <td>DÉBUT DES INSCRIPTIONS AUX FILIERES LP (Listes Principales).</td>
+        </tr>
+         <tr>
+            <td>29/09/2021</td>
+            <td>DÉBUT DES INSCRIPTIONS AUX FILIERES LP (Listes d’attente).</td>
+        </tr>
+    </tbody></table>
+    </accordion-group>
+
+  </accordion>
+
+
+
 </div>

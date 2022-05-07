@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class ApiServiceService {
+ 
 
   constructor(private _http: HttpClient) { }
 
@@ -15,6 +16,16 @@ export class ApiServiceService {
 
       return this._http.get(`${this.apiUrl+"/fils"}`);
     }
+    
+    getAllfilsC():Observable<any>{
+
+      return this._http.get(`${this.apiUrl+"/filsC"}`);
+    }
+    getAllfilsCById(id:any):Observable<any>{
+
+      return this._http.get(`${this.apiUrl+"/filsC/"+id}`);
+    }
+
     getAllbacs():Observable<any>{
 
       return this._http.get(`${this.apiUrl+"/bacs"}`);

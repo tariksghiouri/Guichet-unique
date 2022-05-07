@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ApiServiceService } from '../api-service.service';
 
 @Component({
@@ -11,78 +12,101 @@ export class MultistepFormComponent implements OnInit {
   personalDetails!: FormGroup;
   addressDetails!: FormGroup;
   education!: FormGroup;
+  choices!:FormGroup;
   personal_step = false;
   address_step = false;
   education_step = false;
+  choix_step = false;
   accepted!:FormGroup;
   step = 1;
   readData: any;
   diplomes: any;
+  filcandidat: any;
+  fils: any;
   myformData: any = new FormData();
-  constructor(private formBuilder: FormBuilder, private service: ApiServiceService) { }
+  isDiplome=true;
+  selectedDiplome = '';
+
+  
+  constructor(private formBuilder: FormBuilder, private service: ApiServiceService,     private toastr: ToastrService,
+   
+    ) { }
 
   ngOnInit() {
-    this.service.getAllbacs().subscribe((result: { data: any; }) => {
-      // console.log(result);
-      this.readData = result.data;
-    })
+  
     this.service.getAlldips().subscribe((result: { data: any; }) => {
       // console.log(result);
       this.diplomes = result.data;
+    });
+    this.service.getAllfils().subscribe((result: { data: any; }) => {
+      // console.log(result);
+      this.fils = result.data;
     })
+  
+    
 
     this.personalDetails = this.formBuilder.group({
-      nomFr: ['', Validators.required],
-      prenomFr: ['', Validators.required],
-      nomAr: ['', Validators.required],
-      prenomAr: ['', Validators.required],
-      email: ['', Validators.required],
-      phone: ['', Validators.required],
-      cin: ['', <any>[Validators.required, Validators.minLength(10)]],
-      LieuDeNaissance: ['', Validators.required],
-      datenaiss: ['', Validators.required],
-      cne: ['', Validators.required],
-      // nomFr: ['', ],
-      // prenomFr: ['', ],
-      // nomAr: ['', ],
-      // prenomAr: ['',],
-      // email: ['', ],
-      // phone: ['', ],
-      // cin: ['', ],
-      // LieuDeNaissance: ['', ],
-      // datenaiss: ['', ],
-      // cne: ['', ]
+      // nomFr: ['', Validators.required],
+      // prenomFr: ['', Validators.required],
+      // nomAr: ['', Validators.required],
+      // prenomAr: ['', Validators.required],
+      // email: ['', Validators.required],
+      // phone: ['', Validators.required],
+      // cin: ['', <any>[Validators.required, Validators.minLength(10)]],
+      // LieuDeNaissance: ['', Validators.required],
+      // datenaiss: ['', Validators.required],
+      // cne: ['', Validators.required],
+      nomFr: ['', ],
+      prenomFr: ['', ],
+      nomAr: ['', ],
+      prenomAr: ['',],
+      email: ['', ],
+      phone: ['', ],
+      cin: ['', ],
+      LieuDeNaissance: ['', ],
+      datenaiss: ['', ],
+      cne: ['', ]
 
     });
 
     this.addressDetails = this.formBuilder.group({
-      city: ['', Validators.required],
-      address: ['', Validators.required],
-      codePostal: ['', Validators.required],
+      // city: ['', Validators.required],
+      // address: ['', Validators.required],
+      // codePostal: ['', Validators.required],
+      city: ['', ],
+      address: ['', ],
+      codePostal: ['', ],
 
     });
 
     this.education = this.formBuilder.group({
-      // bac: ['', Validators.required],
-      // notebac: ['', Validators.required],
-      // anneebac: ['', Validators.required],
+      bac: ['', Validators.required],
+      notebac: ['', Validators.required],
+      anneebac: ['', Validators.required],
 
-      // diplome: ['', Validators.required],
-      // annediplo: ['', Validators.required],
-      // notediplo: ['', Validators.required],
-      bac: ['', ],
-      notebac: ['', ],
-      anneebac: ['', ],
+      diplome: ['', Validators.required],
+      annediplo: ['', Validators.required],
+      notediplo: ['', Validators.required],
+      // bac: ['', ],
+      // notebac: ['', ],
+      // anneebac: ['', ],
 
-      diplome: ['', ],
-      annediplo: ['', ],
-      notediplo: ['', ],
+      // diplome: ['', ],
+      // filC:['',],
+      // annediplo: ['', ],
+      // notediplo: ['', ],
 
 
     });
     this.accepted= this.formBuilder.group({
       acceptTerms: [false, Validators.requiredTrue]
     });
+    this.choices=this.formBuilder.group({
+
+      filterN1: ['', Validators.required],
+      filterN2: ['', ]
+
+    })
   }
 
   get personal() { return this.personalDetails.controls; }
@@ -91,6 +115,7 @@ export class MultistepFormComponent implements OnInit {
 
   get education_() { return this.education.controls; }
   get f() { return this.accepted.controls; }
+  get choix() { return this.choices.controls; }
   next() {
 
     if (this.step == 1) {
@@ -100,8 +125,18 @@ export class MultistepFormComponent implements OnInit {
     }
 
     else if (this.step == 2) {
+      this.service.getAllbacs().subscribe((result: { data: any; }) => {
+        // console.log(result);
+        this.readData = result.data;
+      })
       this.address_step = true;
       if (this.addressDetails.invalid) { return }
+      this.step++;
+    }
+    else if (this.step == 3) {
+      
+      this.education_step = true;
+      if (this.education.invalid) { return }
       this.step++;
     }
 
@@ -122,64 +157,55 @@ export class MultistepFormComponent implements OnInit {
 
 
 
-  // });
-  // datacan = {
-  //   CIN: this.personalDetails.controls.cin.value,
-  //   CNE: this.addressDetails.controls.cne.value,
-  //   nomFr: this.personalDetails.controls.name.value,
-  //   prenomFr: this.addressDetails.controls.address.value,
-  //   email: this.addressDetails.controls.address.value,
-  //   DateDeNaissance: this.addressDetails.controls.address.value,
-  //   LieuDeNaissance: this.addressDetails.controls.address.value,
-  //   Adresse: this.addressDetails.controls.address.value,
-  //   Tel: this.addressDetails.controls.address.value,
-  //   IntituleBAC: this.addressDetails.controls.address.value,
-  //   DiplomeObtenu: this.addressDetails.controls.address.value,
-  //   IntituleFiliere: this.addressDetails.controls.address.value,
-  //   Etablissement: this.addressDetails.controls.address.value,
-  //   ville: this.addressDetails.controls.address.value,
-  //   Moyenne1année: this.addressDetails.controls.address.value,
-  //   Moyenne2année: this.addressDetails.controls.address.value,
-  //   MoyenneDiplôme: this.addressDetails.controls.address.value,
-  //   AnnéeDiplôme: this.addressDetails.controls.address.value,
-  // };
   submit() {
 
-    if (this.step == 3) {
-      this.education_step = true;
-      if (this.education.invalid) { return }
+    if (this.step == 4) {
+      this.choix_step = true;
+      if (this.choices.invalid) { return }
       //  personalDetails
-      // this.myformData.append("nomFr", this.personalDetails.controls.nomFr.value);
-      // this.myformData.append("prenomFr", this.personalDetails.controls.prenomFr.value);
-      // this.myformData.append("nomAr", this.personalDetails.controls.nomAr.value);
-      // this.myformData.append("prenomAr", this.personalDetails.controls.prenomAr.value);
-      // this.myformData.append("email", this.personalDetails.controls.email.value);
-      // this.myformData.append("phone", this.personalDetails.controls.phone.value);
-      // this.myformData.append("cin", this.personalDetails.controls.cin.value);
-      // this.myformData.append("LieuDeNaissance", this.personalDetails.controls.LieuDeNaissance.value);
-      // this.myformData.append("datenaiss", this.personalDetails.controls.datenaiss.value);
-      // this.myformData.append("cne", this.personalDetails.controls.cne.value);
+      this.myformData.append("nomFr", this.personalDetails.controls.nomFr.value);
+      this.myformData.append("prenomFr", this.personalDetails.controls.prenomFr.value);
+      this.myformData.append("nomAr", this.personalDetails.controls.nomAr.value);
+      this.myformData.append("prenomAr", this.personalDetails.controls.prenomAr.value);
+      this.myformData.append("email", this.personalDetails.controls.email.value);
+      this.myformData.append("phone", this.personalDetails.controls.phone.value);
+      this.myformData.append("cin", this.personalDetails.controls.cin.value);
+      this.myformData.append("LieuDeNaissance", this.personalDetails.controls.LieuDeNaissance.value);
+      this.myformData.append("datenaiss", this.personalDetails.controls.datenaiss.value);
+      this.myformData.append("cne", this.personalDetails.controls.cne.value);
       // addressDetails
       this.myformData.append("address", this.addressDetails.controls.address.value+
-                              ", "+ this.addressDetails.controls.city.value +", "+
+                                ", "+ this.addressDetails.controls.city.value +", "+
                                this.addressDetails.controls.codePostal.value)
                             
+      //education
+      this.myformData.append("bac", this.education.controls.bac.value.id);
+      this.myformData.append("notebac", this.education.controls.notebac.value);
+      this.myformData.append("anneebac", this.education.controls.anneebac.value);
+      this.myformData.append("diplome", this.education.controls.diplome.value.id);
+      this.myformData.append("filC", this.education.controls.filC.value.id);
+      this.myformData.append("annediplo", this.education.controls.annediplo.value);
+      this.myformData.append("notediplo", this.education.controls.notediplo.value);
 
-      // console.log(this.myformData.getAll());
-      console.table(Object.fromEntries(this.myformData))
-      // nomFr: ['', Validators.required],
-      // prenomFr: ['', Validators.required],
-      // nomAr: ['', Validators.required],
-      // prenomAr: ['', Validators.required],
-      // email: ['', Validators.required],
-      // phone: ['', Validators.required],
-      // cin: ['', Validators.required],
-      // LieuDeNaissance: ['', Validators.required],
-      // datenaiss: ['', Validators.required],
-      // cne: ['', Validators.required],
-
-
+      // this.toastr.show(this.choices.controls.filterN1.value);
+      this.toastr.show(Object.fromEntries(this.myformData).toString())
     }
   }
-
+  onDiplomeChange(Diplomevalue: any){
+        
+    if (Diplomevalue!="") {
+      this.service.getAllfilsCById(Diplomevalue).subscribe((result: { data: any; }) => {
+        // console.log(result);
+        this.filcandidat = result.data;
+        this.isDiplome=false;
+      })
+      
+    }else{
+      this.isDiplome=true;
+      this.filcandidat=[];
+    }
+    
+ 
+  }
+  
 }

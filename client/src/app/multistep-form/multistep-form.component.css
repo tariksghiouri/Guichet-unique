@@ -52,7 +52,7 @@ li {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    border: 1px solid #ee0979;
+    border: 1px solid #2b2daa;
     outline-width: 0;
     transition: All 0.5s ease-in;
     -webkit-transition: All 0.5s ease-in;
@@ -63,7 +63,7 @@ li {
 /*buttons*/
 #msform .action-button {
     width: 100px;
-    background: #ee0979;
+    background: #2b2daa;
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -121,14 +121,13 @@ li {
 }
 
 #progressbar li {
-    list-style-type: none;
     color: rgb(0, 0, 0);
     text-transform: uppercase;
     font-size: 9px;
-    width: 33.33%;
-    float: left;
+    width: 25%;
     position: relative;
     letter-spacing: 1px;
+    display: inline-block;
 }
 
 #progressbar li:before {
@@ -167,12 +166,12 @@ li {
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,
 #progressbar li.active:after {
-    background: #ee0979;
+    background: #575aff;
     color: white;
 }
 
 #progressbar li.inactive:before {
-    background: burlywood;
+    background: rgb(118, 146, 189);
     color: #000;
 }
 
@@ -243,5 +242,12 @@ fieldset {
     width: 10px !important;
     margin-left: auto !important;
     margin-right: 5px !important;
+
+}
+#msform .mslabel{
+    text-align:left !important;
+}
+.disabledSelect{
+    color: rgb(170, 170, 170) !important;
 
 }

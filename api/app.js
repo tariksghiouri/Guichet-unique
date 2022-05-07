@@ -18,6 +18,7 @@ var usersRouter = require('./routes/users');
 var bacRouter = require('./routes/bac');
 var diplomesRouter = require('./routes/diplomes');
 var curDateRouter = require('./routes/date');
+var filsCRouter = require('./routes/filsC');
 //database connection
 connection
   .authenticate()
@@ -57,6 +58,7 @@ app.use('/user', usersRouter);
 app.use('/bacs', bacRouter);
 app.use('/diplomes', diplomesRouter);
 app.use('/curDate', curDateRouter);
+app.use('/filsC', filsCRouter);
 
 
 
