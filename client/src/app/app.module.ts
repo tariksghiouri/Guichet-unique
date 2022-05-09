@@ -16,6 +16,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { MultistepFormComponent } from './multistep-form/multistep-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 
 
 
@@ -28,6 +29,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     PagenotfoundComponent,
     MultistepFormComponent,
     NavigationComponent,
+    ThankYouPageComponent,
   ],
   imports: [
     ReactiveFormsModule,

@@ -19,6 +19,8 @@ var bacRouter = require('./routes/bac');
 var diplomesRouter = require('./routes/diplomes');
 var curDateRouter = require('./routes/date');
 var filsCRouter = require('./routes/filsC');
+var filsPostulerRouter=require('./routes/filApostuler');
+var userFormRouter=require('./routes/form');
 //database connection
 connection
   .authenticate()
@@ -59,6 +61,9 @@ app.use('/bacs', bacRouter);
 app.use('/diplomes', diplomesRouter);
 app.use('/curDate', curDateRouter);
 app.use('/filsC', filsCRouter);
+app.use('/filspourpostuler', filsPostulerRouter);
+app.use('/candidatData', userFormRouter);
+
 
 
 

@@ -4,6 +4,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AuthGuard } from './auth/auth.guard';
 import {  MultistepFormComponent} from "./multistep-form/multistep-form.component";
+import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 
 const routes: Routes = [
   {
@@ -12,25 +13,18 @@ const routes: Routes = [
         (m) => m.AuthenticationModule
       ),
   },
-  {
-    path: 'tessst',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'tessst',
-    component:HomepageComponent,
-    canActivate: [AuthGuard],
-  },
+  
   // {
   //   path: 'form',
   //   component:MultistepFormComponent,
   //   canActivate: [AuthGuard],
   // },
+
   
   
   {path:'home',component:HomepageComponent},
   {path:'form',component:MultistepFormComponent},
+  {path:'submitted',component:ThankYouPageComponent},
 
 ];
 

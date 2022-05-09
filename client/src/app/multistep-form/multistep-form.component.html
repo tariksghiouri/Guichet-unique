@@ -1,4 +1,3 @@
-
 <div class="container py-5">
 
     <div class="row">
@@ -9,7 +8,8 @@
                     <li [ngClass]="step>=1 ? 'active ' : 'inactive'">les informations personnelles</li>
                     <li [ngClass]="step>=2 ? 'active' : 'inactive'">parcour universitaire</li>
                     <li [ngClass]="step>=3 ? 'active' : 'inactive'">autres informations</li>
-                    <li [ngClass]="step==4 ? 'active' : 'inactive'">choix de fils</li>
+                    <li [ngClass]="step>=4 ? 'active' : 'inactive'">choix de formation(s)</li>
+                    <li [ngClass]="step==5 ? 'active' : 'inactive'">upload des fiche</li>
                 </ul>
                 <!-- fieldsets -->
                 <fieldset *ngIf="step == 1">
@@ -25,7 +25,8 @@
                         [ngClass]="{ 'is-invalid': personal_step && personal.nomAr.errors }"
                         placeholder="اسم العائلة باللغة العربية " />
                     <div *ngIf="personal_step && personalDetails.controls.nomAr.errors">
-                        <div dir="rtl" class="danger" *ngIf="personal.nomAr.errors?.required"> يرجى ادخال اسم العائلة </div>
+                        <div dir="rtl" class="danger" *ngIf="personal.nomAr.errors?.required"> يرجى ادخال اسم العائلة
+                        </div>
                     </div>
                     <input type="text" formControlName="prenomFr"
                         [ngClass]="{ 'is-invalid': personal_step && personal.prenomFr.errors }"
@@ -38,9 +39,10 @@
                         [ngClass]="{ 'is-invalid': personal_step && personal.prenomAr.errors }"
                         placeholder="الاسم باللغة العربية" />
                     <div *ngIf="personal_step && personalDetails.controls.prenomAr.errors">
-                        <div dir="rtl" class="danger" *ngIf="personal.prenomAr.errors?.required"> يرجى ادخال الاسم </div>
+                        <div dir="rtl" class="danger" *ngIf="personal.prenomAr.errors?.required"> يرجى ادخال الاسم
+                        </div>
 
-                    </div>  
+                    </div>
                     <input type="text" formControlName="email" name="email" placeholder="Email" />
                     <div *ngIf="personal_step && personalDetails.controls.email.errors">
                         <div class="danger" *ngIf="personal.email.errors?.required">l'Email nom est requis</div>
@@ -48,7 +50,8 @@
                     <h3 class="mslabel" for="datenaiss"> date de naissance</h3>
                     <input type="date" formControlName="datenaiss" name="datenaiss" placeholder="date de naissance" />
                     <div *ngIf="personal_step && personalDetails.controls.datenaiss.errors">
-                        <div class="danger" *ngIf="personal.datenaiss.errors?.required">la date de naissance est requis</div>
+                        <div class="danger" *ngIf="personal.datenaiss.errors?.required">la date de naissance est requis
+                        </div>
                     </div>
                     <input type="text" formControlName="cin" name="cin" placeholder="CIN (code d'identite nationale)" />
                     <div *ngIf="personal_step && personalDetails.controls.cin.errors">
@@ -107,15 +110,15 @@
 
 
                     <select formControlName="bac">
-                        <option value="">--choisir le type de votre bac--</option>
+                        <option disabled value="">--choisir le type de votre bac--</option>
                         <option *ngFor="let bac of readData" [ngValue]="bac">
                             {{ bac.Intitule }}
                         </option>
                     </select>
-                    
-                    
-                    
-                    
+
+
+
+
                     <div *ngIf="education_step && education.controls.bac.errors">
                         <div *ngIf="education_.bac.errors?.required">Highest qualification is required</div>
                     </div>
@@ -140,15 +143,22 @@
 
 
                     <select formControlName="diplome" (ngModelChange)="onDiplomeChange($event)">
-                        <option value="">--choisir votre diplome--</option>
+                        <option disabled value="">--choisir votre diplome--</option>
+
                         <option *ngFor="let diplo of diplomes" [value]="diplo.id">
                             {{ diplo.Intitule }}
                         </option>
                     </select>
 
-                    <select [ngClass]="{'disabledSelect' : isDiplome}" formControlName="filC" [attr.disabled]="isDiplome? true : null">
-                        <option  value="">--la filiere du diplome--</option>
-                        <option *ngFor="let filC of filcandidat" [ngValue]="filC">
+                 
+
+                    <select [ngClass]="{'disabledSelect' : isDiplome}"
+                                    formControlName="filC" 
+                                    [attr.disabled]="isDiplome? true : null"
+                                    (ngModelChange)="onFiliereChange($event)" >
+                      
+                        <option disabled value="">--la filiere du diplome--</option>
+                        <option *ngFor="let filC of filcandidat" [value]="filC.id">
                             {{ filC.Intitule }}
                         </option>
                     </select>
@@ -170,15 +180,18 @@
                         <div *ngIf="education_.notediplo.errors?.required">la note du diplome est requis</div>
                     </div>
 
-                    <div >
-                        <input class="Attester" type="checkbox" formControlName="acceptTerms" id="acceptTerms" [ngClass]="{ 'is-invalid': submit && f.acceptTerms.errors }" />
-                        <label for="acceptTerms" class="labels">Attester sur l'honneur l'exactitude des renseignements portés à ce formulaire </label>
-                        <div *ngIf="submit&& f.acceptTerms.errors" class="invalid-feedback">veuillez Attester sur l'honneur l'exactitude des renseignements portés à ce formulaire</div>
+                    <div>
+                        <input class="Attester" type="checkbox" formControlName="acceptTerms" id="acceptTerms"
+                            [ngClass]="{ 'is-invalid': submit && f.acceptTerms.errors }" />
+                        <label for="acceptTerms" class="labels">Attester sur l'honneur l'exactitude des renseignements
+                            portés à ce formulaire </label>
+                        <div *ngIf="submit&& f.acceptTerms.errors" class="invalid-feedback">veuillez Attester sur
+                            l'honneur l'exactitude des renseignements portés à ce formulaire</div>
                     </div>
                     <!-- diplome 1  -->
                     <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
                         value="Previous" />
-                        <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
+                    <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
 
                 </fieldset>
             </form>
@@ -187,31 +200,61 @@
             <form [formGroup]="choices" id="msform">
                 <fieldset *ngIf="step == 4">
                     <h2 class="fs-title">le choix des formations</h2>
-                    <h2  class="mslabel">le Premier choix</h2>
+                    <div *ngIf="peuxpostuler==true">
+
+                        <h2 class="mslabel">le Premier choix</h2>
 
 
-                    <select formControlName="filterN1">
-                        <option value="">--choisir la premiere option--</option>
-                        <option *ngFor="let fil of fils" [ngValue]="fil">
-                            {{ fil.Intitule }}
-                        </option>
-                    </select>
+                        <select formControlName="filterN1" (ngModelChange)="PremierchoixChange($event)">
+                            <option disabled value="">--choisir la premiere option--</option>
+                            <option *ngFor="let fil of filsApostuler" [ngValue]="fil">
+                                {{ fil.Intitule }}
+                            </option>
+                        </select>
 
 
 
-                    <h2 class="mslabel">le deuxieme choix</h2>
+                        <h2 class="mslabel">le deuxieme choix</h2>
 
-                    <select formControlName="filterN2">
-                        <option value="">--choisir deuxieme option--</option>
-                        <option *ngFor="let fil of fils" [ngValue]="fil">
-                            {{ fil.Intitule }}
-                        </option>
-                    </select>
-                    <div *ngIf="choix_step && choices.controls.filterN1.errors">
-                        <div *ngIf="choix.filterN1.errors?.required">******</div>
+                        <select formControlName="filterN2" (ngModelChange)="deuxiemechoixChange($event)">
+                            <option disabled value="">--choisir deuxieme option--</option>
+                            <option *ngFor="let fil of filsApostuler" [ngValue]="fil">
+                                {{ fil.Intitule }}
+                            </option>
+                        </select>
+                        <div *ngIf="choix_step && choices.controls.filterN1.errors">
+                            <div *ngIf="choix.filterN1.errors?.required">******</div>
+                        </div>
+                    </div>
+                    <div *ngIf="!peuxpostuler">
+                        <h2 class="danger">vous ne pouvez pas postuler a aucune filieres </h2>
+                    </div>
+                    <div *ngIf="memechoix==true">
+                        <h5 class="danger">choisir une formation differente </h5>
+                    </div>
+                    <div [ngClass]="{'buttonHolder' : !peuxpostuler}">
+                        <input (click)="previous()" type="button" name="previous"
+                            class="previous action-button-previous" value="Previous" />
                     </div>
 
-                    
+
+                    <input *ngIf="peuxpostuler==true &&  memechoix==false" (click)="next()" type="button" name="next"
+                        class="next action-button" value="Next" />
+
+                </fieldset>
+            </form>
+
+            <form [formGroup]="files" id="msform">
+                <fieldset *ngIf="step == 5">
+                    <h2 class="fs-title">Les documents</h2>
+
+
+                    <label for="file">File</label>
+                    <input formControlName="file1" type="file">
+
+
+
+
                     <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
                         value="Previous" />
                     <input (click)="submit()" type="submit" name="submit" class="submit action-button" value="Submit" />
@@ -221,4 +264,3 @@
         </div>
     </div>
 </div>
-
