@@ -1,113 +1,50 @@
-.entete  {
-    background: white;
+.entete {
+  background: white;
   text-align: center;
-  margin-left:auto;
-  margin-right:auto;
-  width:80%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
   height: 200px;
-  width:500px;
-  }
-.centered{
-	width:90%;
-	margin :auto;
-	text-align: center;
-}
-.sticky{	
-	position: -webkit-sticky; /* Safari */
-	position: sticky !important;
-	top: 0 !important	;
+  width: 500px;
+  margin-top: 5%;
 }
 
-a {text-decoration: none;}
-
-
-.cl-effect-3 li {
-	display: inline-block;
-	padding: 24px 10px;
+.centered {
+  width: 90%;
+  margin: auto;
+  text-align: center;
 }
 
-.cl-effect-3 li a {
-	color: #757575;
-	text-transform: uppercase;
+.hm-gradient {
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
 }
 
-@media only screen and (max-width: 520px) {
-
-	.cl-effect-3 li {
-		padding: 24px 4px;
-	}
-
-	.cl-effect-3 li a {
-		font-size: 14px;
-	}
-
+.navbar .dropdown-menu a:hover {
+  color: #616161 !important;
 }
 
-
-.cl-effect-3 a {
-	position: relative;
-	display: inline-block;
-	margin: 15px 25px;
-	outline: none;
-	color: #fff;
-	text-decoration: none;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	font-weight: 400;
-	text-shadow: 0 0 1px rgba(255, 255, 255, 0.171);
-	font-size: 1.35em;
+.darken-grey-text {
+  color: #2E2E2E;
 }
 
-.cl-effect-3 a:hover,
-.cl-effect-3 a:focus {
-	outline: none;
+.main {
+  margin-right: 0;
+  display: flex;
+
+}
+.main >div{
+  flex: 1; /*grow*/
+  color:#ffffff
+}
+#cnx{
+  margin-top: 20px;
+  margin-left: 7px;
+  background-color: #4696f3; /* Green */
+  border: none;
+  padding: 0 10 0 10;
+  height:30px;
+  color: white;
+  font-size: 16px;
 }
 
 
-
-/* Effect 3: bottom line slides/fades in */
-.cl-effect-3 a {
-	padding: 8px 0;
-}
-
-.cl-effect-3 a::after {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	width: 100%;
-	height: 4px;
-	background: rgba(0,0,0,0.1);
-	content: '';
-	opacity: 0;
-	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
-	-moz-transition: opacity 0.3s, -moz-transform 0.3s;
-	transition: opacity 0.3s, transform 0.3s;
-	-webkit-transform: translateY(10px);
-	-moz-transform: translateY(10px);
-	transform: translateY(10px);
-}
-
-.cl-effect-3 a:hover::after,
-.cl-effect-3 a:focus::after {
-	opacity: 1;
-	-webkit-transform: translateY(0px);
-	-moz-transform: translateY(0px);
-	transform: translateY(0px);
-}
-#icon{
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-
-
-.dark-modal .modal-content {
-    background-color: #292b2c;
-    color: white;
-  }
-  .dark-modal .close {
-    color: white;
-  }
-  .light-blue-backdrop {
-    background-color: #5cb3fd;
-  }

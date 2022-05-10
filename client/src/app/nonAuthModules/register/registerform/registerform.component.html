@@ -1,6 +1,7 @@
 <app-auth-layout>
-  <h3 class="card-title text-center mb-4 text-success">SignUp </h3>
-  <div class="card-text">
+  <div class="card-text" style="    margin-top: 10%">
+    <h2  class="text-center">Creation de compte</h2>
+    <hr> 
     <form [formGroup]="registerFormModal" (ngSubmit)="handleSubmit()" class="my-4  mx-3">
       <app-input type='text' className="form-control form-control-sm" controlName='username'
         [controller]='registerFormModal.controls.username' [formGroup]='registerFormModal' label='User Name'
