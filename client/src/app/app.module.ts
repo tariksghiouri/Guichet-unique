@@ -17,7 +17,7 @@ import { MultistepFormComponent } from './multistep-form/multistep-form.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
-
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 
 
@@ -43,7 +43,12 @@ import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component
     AccordionModule.forRoot(),
     HttpClientModule,
   ],
-  providers: [ApiServiceService,AuthGuard],
+  providers: [
+    ApiServiceService,
+    AuthGuard,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

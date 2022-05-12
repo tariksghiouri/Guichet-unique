@@ -5,7 +5,9 @@ var connection  = require('../connections/connection');
  
 
 router.post('/', (req, res)=> {
-    var userdata=JSON.parse( req.body.object)
+    var userdata=req.body;
+    console.log(userdata);
+    // console.log(use);
     // var CIN = req.body.CIN
     // var CNE = req.CNE
     // var nomFr = req.body.nomFr

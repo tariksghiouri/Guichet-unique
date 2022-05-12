@@ -45,11 +45,11 @@ export class ApiServiceService {
 
 
   sendcandidatData(candidatData: any) {
-    var object =JSON.stringify(candidatData)
-    console.log(object);
-    var jsonObject={object};
+    // var object =JSON.stringify(candidatData)
+    // console.log(object);
+    // var jsonObject={object};
 
-    return this._http.post(`${this.apiUrl + "/candidatData"}`, jsonObject);
+    return this._http.post(`${this.apiUrl + "/candidatData"}`, candidatData);
   }
 
 }

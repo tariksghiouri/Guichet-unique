@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../service/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Request } from '../../../interface/request';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registerform',
@@ -13,7 +14,8 @@ export class RegisterformComponent implements OnInit {
   constructor(
     private Fb: FormBuilder,
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private RouterS: Router
   ) {}
 
   registerFormModal = this.Fb.group({
@@ -26,6 +28,7 @@ export class RegisterformComponent implements OnInit {
   handleSubmit() {
     this.authService
       .registerUser(this.registerFormModal.value)
-      .subscribe((res: any) => this.toastr.success(res.message));
+      .subscribe((res: any) => this.toastr.show(res.message));
+      
   }
 }

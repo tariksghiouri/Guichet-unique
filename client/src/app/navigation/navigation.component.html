@@ -10,6 +10,11 @@
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/home']">Procédures</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/form']">Formulaire d'inscription</a>
+
+      </li>
+
 
 
 
@@ -36,16 +41,17 @@
             </div>
             <div>
               <button id="cnx" class="btn" type="submit" [disabled]="this.loginForm.invalid" >Sign in</button>
+              <input type="button"  value="Sign up" id="cnx" class="btn" [routerLink]="['/auth/register']" />
               
 
 
-           
+          
             </div>
          </div>
            
         </form>
-        <button  class="btn" [routerLink]="['/auth/register']">create</button>
-          <button  class="btn" *ngIf="isLoggedIn" (click)="logout()"> Deconnexion </button>
+        <!-- <button  class="btn" [routerLink]="['/auth/register']">create</button> -->
+          <button  class="btn" *ngIf="isLoggedIn" (click)="logout()">({{userDetials.data.id}} {{userDetials.data.name}} )Deconnexion </button>
 
        
       

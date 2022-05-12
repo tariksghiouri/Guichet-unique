@@ -5,11 +5,19 @@ import { Request } from '../interface/request';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private Http: HttpClient, private RouterS: Router) {}
+  authToken: any;
+  user: any;
+  options: any;
+  constructor(
+    private Http: HttpClient,
+     private RouterS: Router,
+     private jwtHelper:JwtHelperService
+     ) {}
 
   setLocalStorage(request: Request) {
     return (
@@ -93,4 +101,30 @@ export class AuthService {
       })
     );
   }
+
+  loggedIn(){
+    const item = localStorage.getItem('Token');
+    console.log(item);
+    return item != null && !this.jwtHelper.isTokenExpired(item);
+    
+  }
+  storeUserData(token: any) {
+    localStorage.setItem('Token', token);
+    // localStorage.setItem('user', JSON.stringify(user));
+    this.authToken = token;
+    // this.user = user;
+  }
+  createAuthenticationHeaders() {
+    this.loadToken();
+     this.options= {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${this.authToken}`,
+      })
+    };
+  }
+loadToken() {
+    this.authToken = localStorage.getItem('Token');
+  }
+
 }

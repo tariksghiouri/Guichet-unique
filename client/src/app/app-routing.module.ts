@@ -12,13 +12,18 @@ const routes: Routes = [
     loadChildren: () => import('./nonAuthModules/authentication.module').then(
         (m) => m.AuthenticationModule
       ),
+      
   },
   
-  // {
-  //   path: 'form',
-  //   component:MultistepFormComponent,
-  //   canActivate: [AuthGuard],
-  // },
+  {
+    path: 'form',
+    component:MultistepFormComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auth/login',
+    canActivate: [AuthGuard],
+  },
 
   
   

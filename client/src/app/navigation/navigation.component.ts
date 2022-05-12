@@ -18,11 +18,10 @@ export class NavigationComponent implements OnInit {
   isLoggedIn!: boolean;
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
+    password: new FormControl('', [  Validators.required,   Validators.minLength(3),
     ]),
   });
+  userDetials: any;
   constructor(private service: ApiServiceService,
     private modalService: NgbModal,
     public router: Router,
@@ -33,54 +32,26 @@ export class NavigationComponent implements OnInit {
 
   handleSubmit() {
     this.authService.logIn(this.loginForm.value).subscribe((res: any) => {
-      this.toastr.show(res.message);
-      this.authService.getProfile().subscribe((res: any) => {
+     if (res.status==200) {
+        this.authService.storeUserData(res.token);
+        this.router.navigate(['/form']);
+        window.location.reload();
+        this.isLoggedIn=true;
 
+       
+     }else{
+      this.router.navigate(['/home']);
+      // this.toastr.show(res.message);
+      this.isLoggedIn=false;
 
-        localStorage.setItem('userObject', JSON.stringify(res));
+     }
+     
 
+      
 
-        // this.isLoggedIn=false;
-        var compte = JSON.parse(localStorage.getItem('userObject') || '{}');
-        console.log(this.isLoggedIn + "---" + compte.data.name);
-
-        if (compte.data.name == '') {
-          this.isLoggedIn = false;
-        }
-
-        else {
-          this.isLoggedIn = true;
-        }
-
-
-      })
     });
   }
-  ngOnInit(): void {
-
-    var compte = JSON.parse(localStorage.getItem('userObject') || '{}');
-    console.log(this.isLoggedIn + "---" + compte.data.name);
-
-    if (compte.data.name == '') {
-      this.isLoggedIn = false;
-    }
-
-    else {
-      this.isLoggedIn = true;
-    }
-
-
-
-
-    this.service.getCurrentDate().subscribe((result: { data: any; }) => {
-      // console.log(result);
-      this.date = result.data;
-      this.year = String(this.date[0].current_timestamp).substring(0, 4);
-      this.nextyear = Number(this.year) + 1;
-      // console.log(this.authservice.getProfile());
-
-    })
-  }
+  
   openScrollableContent(longContent: any) {
     this.modalService.open(longContent, { scrollable: true, windowClass: "myCustomModalClass" },);
   }
@@ -90,5 +61,33 @@ export class NavigationComponent implements OnInit {
     this.isLoggedIn = false;
     this.router.navigate(['/home']);
   }
+  checkIfloggedIn() {
+    
+    if (localStorage.getItem('Token')!.length<0) {
+      this.isLoggedIn=false;
+      
+    }
+    else{
+      this.isLoggedIn=true;
+      this.authService.getProfile().subscribe((result=>{
+        this.userDetials=result;
+              console.table(this.userDetials.data);
 
+      }));
+        
+      
+    }
+  }
+
+  ngOnInit(): void {
+    this.checkIfloggedIn();
+    this.service.getCurrentDate().subscribe((result: { data: any; }) => {
+      // console.log(result);
+      this.date = result.data;
+      this.year = String(this.date[0].current_timestamp).substring(0, 4);
+      this.nextyear = Number(this.year) + 1;
+      // console.log(this.authservice.getProfile());
+
+    })
+  }
 }

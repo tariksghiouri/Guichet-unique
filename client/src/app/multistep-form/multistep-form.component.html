@@ -73,7 +73,8 @@
                     <div *ngIf="personal_step && personalDetails.controls.phone.errors">
                         <div class="danger" *ngIf="personal.phone.errors?.required">Le telephone est requis</div>
                     </div>
-                    <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
+                    <button (click)="next()" class="btn btn-primary" [disabled]="personal.invalid">Nex</button>
+
                 </fieldset>
             </form>
 
@@ -111,7 +112,7 @@
 
                     <select formControlName="bac">
                         <option disabled value="">--choisir le type de votre bac--</option>
-                        <option *ngFor="let bac of readData" [ngValue]="bac">
+                        <option *ngFor="let bac of bacs$ | async" [ngValue]="bac">
                             {{ bac.Intitule }}
                         </option>
                     </select>
