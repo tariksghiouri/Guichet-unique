@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -42,6 +43,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     ToastrModule.forRoot(), // ToastrModule added
     AccordionModule.forRoot(),
     HttpClientModule,
+    FontAwesomeModule,
   ],
   providers: [
     ApiServiceService,

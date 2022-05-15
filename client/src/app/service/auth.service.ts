@@ -30,7 +30,6 @@ export class AuthService {
     return this.Http.post<Request>(apiUrl + 'login', data).pipe(
       tap((res) => {
         this.setLocalStorage(res);
-        this.RouterS.navigate(['/form']);
       }),
       catchError((err) => {
         const { error } = err;

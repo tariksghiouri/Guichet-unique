@@ -1,6 +1,5 @@
 <app-auth-layout>
 
-  <h3>SignIn </h3>
   <div class="card-text">
     <h2 class="text-center">Connexion</h2>
     <hr>
@@ -14,15 +13,15 @@
       <app-input type='password' className="form-control form-control-sm" controlName='password'
         [controller]='loginForm.controls.password' [formGroup]='loginForm' label='Password'
         errorMgs1='Password is required' errorMgs2='Enter atleast 3 Characters'></app-input>
+      <br>
+        <button type="submit" [disabled]="this.loginForm.invalid"class="btn  btn-block btn-primary my-4 ">Sign in</button>
 
-        <button type="submit" [disabled]="this.loginForm.invalid" class="btn btn-primary btn-block my-4">Sign in</button>
-
-      <div class="info-text text-center">
-        Don't have an account? <a routerLink="/auth/register">Create One</a>
+      <div class="info-text text-center">   Don't have an account? <a routerLink="/auth/register">Create One</a>
       </div>
     </form>
 
   </div>
+  
 
 
 

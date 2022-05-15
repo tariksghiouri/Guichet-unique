@@ -14,21 +14,16 @@ const routes: Routes = [
       ),
       
   },
-  
-  {
-    path: 'form',
-    component:MultistepFormComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'auth/login',
-    canActivate: [AuthGuard],
-  },
+   
+  // {
+  //   path: 'auth/login',
+  //   canActivate: [AuthGuard],
+  // },
 
   
   
-  {path:'home',component:HomepageComponent},
-  {path:'form',component:MultistepFormComponent},
+  {path:'home',component:HomepageComponent },
+  {path:'form',component:MultistepFormComponent, canActivate:[AuthGuard]},
   {path:'submitted',component:ThankYouPageComponent},
 
 ];

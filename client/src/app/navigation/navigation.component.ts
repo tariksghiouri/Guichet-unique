@@ -52,9 +52,7 @@ export class NavigationComponent implements OnInit {
     });
   }
   
-  openScrollableContent(longContent: any) {
-    this.modalService.open(longContent, { scrollable: true, windowClass: "myCustomModalClass" },);
-  }
+  
   logout() {
     localStorage.removeItem("userObject");
     localStorage.removeItem("Token");
@@ -78,16 +76,18 @@ export class NavigationComponent implements OnInit {
       
     }
   }
-
-  ngOnInit(): void {
-    this.checkIfloggedIn();
+  setDate(){
     this.service.getCurrentDate().subscribe((result: { data: any; }) => {
-      // console.log(result);
       this.date = result.data;
       this.year = String(this.date[0].current_timestamp).substring(0, 4);
       this.nextyear = Number(this.year) + 1;
-      // console.log(this.authservice.getProfile());
 
     })
+  }
+
+  ngOnInit(): void {
+    this.setDate()
+    this.checkIfloggedIn();
+ 
   }
 }

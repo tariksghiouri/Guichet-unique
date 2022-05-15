@@ -86,7 +86,7 @@
                     <div *ngIf="address_step && addressDetails.controls.city.errors">
                         <div *ngIf="address.city.errors?.required">City is required</div>
                     </div>
-                    <textarea rows="5" cols="5" formControlName="address" placeholder="address"></textarea>
+                    <input type ="text" placeholder="Adresse" formControlName="address" />
                     <div *ngIf="address_step && addressDetails.controls.address.errors">
                         <div *ngIf="address.address.errors?.required">Address is required</div>
                     </div>
@@ -110,7 +110,7 @@
                     <!-- bac -->
 
 
-                    <select formControlName="bac">
+                    <select formControlName="bac" (ngModelChange)="onBacChange($event)">
                         <option disabled value="">--choisir le type de votre bac--</option>
                         <option *ngFor="let bac of bacs$ | async" [ngValue]="bac">
                             {{ bac.Intitule }}
@@ -146,7 +146,7 @@
                     <select formControlName="diplome" (ngModelChange)="onDiplomeChange($event)">
                         <option disabled value="">--choisir votre diplome--</option>
 
-                        <option *ngFor="let diplo of diplomes" [value]="diplo.id">
+                        <option *ngFor="let diplo of diplomes" [ngValue]="diplo">
                             {{ diplo.Intitule }}
                         </option>
                     </select>
@@ -159,7 +159,7 @@
                                     (ngModelChange)="onFiliereChange($event)" >
                       
                         <option disabled value="">--la filiere du diplome--</option>
-                        <option *ngFor="let filC of filcandidat" [value]="filC.id">
+                        <option *ngFor="let filC of filcandidat" [ngValue]="filC">
                             {{ filC.Intitule }}
                         </option>
                     </select>

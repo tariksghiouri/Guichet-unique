@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top">
+<!-- <nav class="navbar navbar-expand-sm bg-primary navbar-dark fixed-top">
   <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -51,7 +51,7 @@
            
         </form>
         <!-- <button  class="btn" [routerLink]="['/auth/register']">create</button> -->
-          <button  class="btn" *ngIf="isLoggedIn" (click)="logout()">({{userDetials.data.id}} {{userDetials.data.name}} )Deconnexion </button>
+          <!-- <button  class="btn" *ngIf="isLoggedIn" (click)="logout()">({{userDetials.data.id}} {{userDetials.data.name}} )Deconnexion </button>
 
        
       
@@ -59,8 +59,51 @@
 
     </ul>
   </div>
-</nav>
+</nav> -->
 
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0 py-3">
+  <div class="container-xl">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+          <img src="../../assets/Dessin12.jpg" class="h-9" alt="...">
+      </a>
+      <!-- Navbar toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <!-- Nav -->
+          <div class="navbar-nav mx-lg-auto">
+              <a class="nav-item nav-link active" [routerLink]="['/home']"aria-current="page">Accueil</a>
+              <a class="nav-item nav-link" [routerLink]="['/criteres']" >Critères</a>
+              <a class="nav-item nav-link" [routerLink]="['/']">Procédures</a>
+              <a class="nav-item nav-link" [routerLink]="['/form']">Formulaire d'inscription</a>
+          </div>
+          <!-- Right navigation -->
+          <div *ngIf="!isLoggedIn" class="navbar-nav ms-lg-4">
+              <a class="nav-item nav-link" [routerLink]="['/auth/login']">Sign in</a>
+          </div>
+          <!-- Action -->
+          <div *ngIf="!isLoggedIn" class="d-flex align-items-lg-center mt-3 mt-lg-0">
+              <a [routerLink]="['/auth/register']" class="btn btn-sm btn-primary w-full w-lg-auto">
+                  Register
+              </a>
+          </div>
+          
+          <div *ngIf="isLoggedIn" >
+              <a (click)="logout()" class="nav-item nav-link"  >
+                  Logout <i class="fa-regular fa-arrow-right-to-bracket"></i>
+              </a>
+          </div>
+      </div>
+  </div>
+</nav>
 <div *ngIf="router.url != '/auth/login' && router.url != '/auth/register' " class="card mb-3 ">
   <img class="entete" src="../../assets/Dessin12.jpg" alt="Card image cap">
   <div class="card-body">
@@ -70,6 +113,7 @@
     </h1>
   </div>
 </div>
+
 
 <ng-template #longContent let-modal>
   <div class="modal-header">

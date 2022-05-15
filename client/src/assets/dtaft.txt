@@ -1,0 +1,197 @@
+/ / personalDetails / / this.myformData.append(
+  "nomFr",
+  this.personalDetails.controls.nomFr.value
+);
+
+/ / this.myformData.append(
+  "prenomFr",
+  this.personalDetails.controls.prenomFr.value
+);
+
+/ / this.myformData.append(
+  "nomAr",
+  this.personalDetails.controls.nomAr.value
+);
+
+/ / this.myformData.append(
+  "prenomAr",
+  this.personalDetails.controls.prenomAr.value
+);
+
+/ / this.myformData.append(
+  "email",
+  this.personalDetails.controls.email.value
+);
+
+/ / this.myformData.append("Tel", this.personalDetails.controls.phone.value);
+
+/ / this.myformData.append("CIN", this.personalDetails.controls.cin.value);
+
+/ / this.myformData.append(
+  "LieuDeNaissance",
+  this.personalDetails.controls.LieuDeNaissance.value
+);
+
+/ / this.myformData.append(
+  "DateDeNaissance",
+  this.personalDetails.controls.datenaiss.value
+);
+
+/ / this.myformData.append("CNE", this.personalDetails.controls.cne.value);
+
+/ / / / addressDetails this.myformData.append(
+  "Adresse",
+  this.addressDetails.controls.address.value + ", " + this.addressDetails.controls.city.value + ", " + this.addressDetails.controls.codePostal.value
+) / / / / education / / this.myformData.append(
+  "IntituleBAC",
+  this.education.controls.bac.value.id
+);
+
+/ / this.myformData.append("notebac", this.education.controls.notebac.value);
+
+/ / this.myformData.append(
+  "anneebac",
+  this.education.controls.anneebac.value
+);
+
+/ / this.myformData.append(
+  "DiplomeObtenu",
+  this.education.controls.diplome.value
+);
+
+/ / this.myformData.append(
+  "IntituleFiliere",
+  this.education.controls.filC.value
+);
+
+/ / this.myformData.append(
+  "annediplo",
+  this.education.controls.annediplo.value
+);
+
+/ / this.myformData.append(
+  "notediplo",
+  this.education.controls.notediplo.value
+);
+
+/ / / / attestation / / this.myformData.append(
+  "atessterSurhoneur",
+  this.accepted.controls.acceptTerms.value
+);
+
+/ / / / choix / / this.myformData.append(
+  "choix1",
+  this.choices.controls.filterN1.value.id
+);
+
+/ / this.myformData.append(
+  "choix2",
+  this.choices.controls.filterN2.value.id
+);
+
+/ / / / for (var pair of this.myformData.entries()) { / / / / console.log(pair [0] + ', ' + pair [1]);
+
+/ / / / } / / console.table(Object.fromEntries(this.myformData));
+
+/ / / / this.service.sendcandidatData(Object.fromEntries(this.myformData));
+
+/ / const dataC = Object.fromEntries(this.myformData);
+
+/ / this.service.sendcandidatData(dataC).subscribe(
+  data = > { / / console.log(data);
+
+/ / this.router.navigate(['/submitted']);
+
+/ / }
+);
+
+/ / console.log(use);
+
+/ / var CIN = req.body.CIN / / var CNE = req.CNE / / var nomFr = req.body.nomFr / / var prenomFr = req.body.prenomFr;
+
+/ / var email = req.body.email;
+
+/ / var DateDeNaissance = req.body.DateDeNaissance;
+
+/ / var LieuDeNaissance = req.body.LieuDeNaissance;
+
+/ / var Adresse = req.body.Adresse;
+
+/ / var Tel = req.body.Tel;
+
+/ / var IntituleBAC = req.body.IntituleBAC;
+
+/ / var DiplomeObtenu = req.body.DiplomeObtenu;
+
+/ / var IntituleFiliere = req.body.IntituleFiliere;
+
+/ / / / var Etablissement = req.body.etablissement;
+
+/ / / / var ville = req.body.ville;
+
+/ / var Moyenne1année = req.body.Moyenne1année;
+
+/ / var Moyenne2année = req.body.Moyenne1année;
+
+/ / var MoyenneDiplôme = req.body.MoyenneDiplôme;
+
+/ / var AnnéeDiplôme = req.body.AnnéeDiplôme;
+
+/ / var choix1 = req.body.choix1;
+
+/ / var choix2 = req.body.choix2;
+
+INSERT INTO
+  `candidats` (
+    `Numcondidature`,
+    `CIN`,
+    `CNE`,
+    `nomFr`,
+    `nomAr`,
+    `prenomFr`,
+    `prenomAr`,
+    `email`,
+    `DateDeNaissance`,
+    `LieuDeNaissance`,
+    `Adresse`,
+    `Tel`,
+    `IntituleBAC`,
+    `DiplomeObtenu`,
+    `IntituleFiliere`,
+    `Etablissement`,
+    `ville`,
+    `Moyenne1année`,
+    `Moyenne2année`,
+    `MoyenneDiplôme`,
+    `AnnéeDiplôme`,
+    `choix1`,
+    `choix2`,
+    `Photo`
+  )
+VALUES
+  (
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '3',
+    ''
+  );
