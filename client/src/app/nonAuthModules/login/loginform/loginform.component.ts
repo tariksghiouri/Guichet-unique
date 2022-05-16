@@ -16,8 +16,7 @@ export class LoginformComponent implements OnInit {
     private authService: AuthService,
     private toastr: ToastrService,
     private routerS: Router,
-    // private navigationC:NavigationComponent
-  ) {}
+  ) { }
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -27,47 +26,20 @@ export class LoginformComponent implements OnInit {
     ]),
   });
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   showValue() {
     // console.log(this.loginForm);
   }
 
   handleSubmit() {
     this.authService.logIn(this.loginForm.value).subscribe((res: any) => {
-      this.toastr.show(res.message,"login"
-        , {timeOut:1000 , extendedTimeOut:1000});
-     this.routerS.navigate(['/home']);
-            //window.location.reload();
-
-      this.authService.getProfile().subscribe((res: any) => {
-      
-
-        // this.toastr.show(res.data.name);
-      })
-    });
-  }
-
-  // handleSubmit() {
-  //   this.authService.logIn(this.loginForm.value).subscribe((res: any) => {
-  //    if (res.status==200) {
-  //       this.authService.storeUserData(res.token);
-  //       this.routerS.navigate(['/home']);
-  //       window.location.reload();
-  //       this.navigationC.isLoggedIn=true;
-
-       
-  //    }else{
-  //     this.routerS.navigate(['/home']);
-  //     // this.toastr.show(res.message);
-  //     this.navigationC.isLoggedIn=false;
-
-  //    }
+      this.toastr.show(res.message, "login", { timeOut: 1000, extendedTimeOut: 1000 });
+      this.authService.authenticate();
+      this.routerS.navigate(['/form']);
      
+    });
 
-      
-
-  //   });
-  // }
   
+}
   
 }

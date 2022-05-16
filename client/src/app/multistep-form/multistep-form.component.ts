@@ -72,26 +72,26 @@ export class MultistepFormComponent implements OnInit {
       }));
     }
     this.personalDetails = this.formBuilder.group({
-      // nomFr: ['', Validators.required],
-      // prenomFr: ['', Validators.required],
-      // nomAr: ['', Validators.required],
-      // prenomAr: ['', Validators.required],
-      // email: ['', Validators.required],
-      // phone: ['', Validators.required],
-      // cin: ['', <any>[Validators.required, Validators.minLength(10)]],
-      // LieuDeNaissance: ['', Validators.required],
-      // datenaiss: ['', Validators.required],
-      // cne: ['', Validators.required],
-      nomFr: ['',],
-      prenomFr: ['',],
-      nomAr: ['',],
-      prenomAr: ['',],
-      email: ['',],
-      phone: ['',],
-      cin: ['',],
-      LieuDeNaissance: ['',],
-      datenaiss: ['',],
-      cne: ['',]
+      nomFr: ['', Validators.required],
+      prenomFr: ['', Validators.required],
+      nomAr: ['', Validators.required],
+      prenomAr: ['', Validators.required],
+      email: ['', Validators.required],
+      phone: ['', Validators.required],
+      cin: ['', <any>[Validators.required, Validators.minLength(10)]],
+      LieuDeNaissance: ['', Validators.required],
+      datenaiss: ['', Validators.required],
+      cne: ['', Validators.required],
+      // nomFr: ['',],
+      // prenomFr: ['',],
+      // nomAr: ['',],
+      // prenomAr: ['',],
+      // email: ['',],
+      // phone: ['',],
+      // cin: ['',],
+      // LieuDeNaissance: ['',],
+      // datenaiss: ['',],
+      // cne: ['',]
 
     });
 
@@ -106,24 +106,24 @@ export class MultistepFormComponent implements OnInit {
     });
 
     this.education = this.formBuilder.group({
-      // bac: ['', Validators.required],
-      // notebac: ['', Validators.required],
-      // anneebac: ['', Validators.required],
+      bac: ['', Validators.required],
+      notebac: ['', Validators.required],
+      anneebac: ['', Validators.required],
 
-      // diplome: ['', Validators.required],
-      // annediplo: ['', Validators.required],
-      // notediplo: ['', Validators.required],
-      // filC: ['', Validators.required],
+      diplome: ['', Validators.required],
+      annediplo: ['', Validators.required],
+      notediplo: ['', Validators.required],
+      filC: ['', Validators.required],
 
 
-      bac: ['',],
-      notebac: ['',],
-      anneebac: ['',],
+      // bac: ['',],
+      // notebac: ['',],
+      // anneebac: ['',],
 
-      diplome: ['',],
-      filC: ['',],
-      annediplo: ['',],
-      notediplo: ['',],
+      // diplome: ['',],
+      // filC: ['',],
+      // annediplo: ['',],
+      // notediplo: ['',],
 
 
     });

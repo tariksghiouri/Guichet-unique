@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrl } from '../../environments/environment';
 import { Request } from '../interface/request';
 import { map, catchError, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
@@ -13,6 +13,7 @@ export class AuthService {
   authToken: any;
   user: any;
   options: any;
+  authenticated$ = new BehaviorSubject(false) ;
   constructor(
     private Http: HttpClient,
      private RouterS: Router,
@@ -124,6 +125,16 @@ export class AuthService {
   }
 loadToken() {
     this.authToken = localStorage.getItem('Token');
+  }
+
+  
+
+  public authenticate() {
+    this.authenticated$.next(true);
+  }
+
+  public deauthenticate() {
+    this.authenticated$.next(false);
   }
 
 }

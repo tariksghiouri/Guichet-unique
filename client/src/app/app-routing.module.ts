@@ -15,10 +15,10 @@ const routes: Routes = [
       
   },
    
-  // {
-  //   path: 'auth/login',
-  //   canActivate: [AuthGuard],
-  // },
+  {
+    path: 'auth/login',
+    canActivate: [AuthGuard],
+  },
 
   
   
