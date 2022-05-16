@@ -15,7 +15,7 @@ export class NavigationComponent implements OnInit {
   date: any
   year: any
   nextyear: any;
-  isLoggedIn!: boolean;
+  isLoggedIn!:any;
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [  Validators.required,   Validators.minLength(3),
@@ -23,59 +23,39 @@ export class NavigationComponent implements OnInit {
   });
   userDetials: any;
   constructor(private service: ApiServiceService,
-    private modalService: NgbModal,
     public router: Router,
-    private authService: AuthService,
-    private toastr: ToastrService,
+    public authService: AuthService,
   ) { }
 
 
-  handleSubmit() {
-    this.authService.logIn(this.loginForm.value).subscribe((res: any) => {
-     if (res.status==200) {
-        this.authService.storeUserData(res.token);
-        this.router.navigate(['/form']);
-        window.location.reload();
-        this.isLoggedIn=true;
 
-       
-     }else{
-      this.router.navigate(['/home']);
-      // this.toastr.show(res.message);
-      this.isLoggedIn=false;
-
-     }
-     
-
-      
-
-    });
-  }
   
   
   logout() {
+    this.authService.deauthenticate();
     localStorage.removeItem("userObject");
     localStorage.removeItem("Token");
     this.isLoggedIn = false;
     this.router.navigate(['/home']);
+    
   }
   checkIfloggedIn() {
-    
-    if (localStorage.getItem('Token')!.length<0) {
-      this.isLoggedIn=false;
       
-    }
-    else{
-      this.isLoggedIn=true;
-      this.authService.getProfile().subscribe((result=>{
-        this.userDetials=result;
-              console.table(this.userDetials.data);
-
-      }));
+      if (localStorage.getItem('Token')!.length<0) {
+        this.isLoggedIn=false;
         
-      
+      }
+      else{
+        this.isLoggedIn=true;
+        this.authService.getProfile().subscribe((result=>{
+          this.userDetials=result;
+          // console.table(this.userDetials.data);
+
+        }));
+          
+        
+      }
     }
-  }
   setDate(){
     this.service.getCurrentDate().subscribe((result: { data: any; }) => {
       this.date = result.data;
