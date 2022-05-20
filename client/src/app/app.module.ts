@@ -1,56 +1,47 @@
-import { NgModule } from '@angular/core';
+﻿import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomepageComponent } from './homepage/homepage.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ApiServiceService } from './api-service.service';
-import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
-import { SharedModule } from './shared/shared.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ServiceModule } from './service/service.module';
-import { AuthGuard } from './auth/auth.guard';
-import { MultistepFormComponent } from './multistep-form/multistep-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NavigationComponent } from './navigation/navigation.component';
-import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
-import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
+import { AppRoutingModule } from './app-routing.module';
+import { JwtInterceptor, ErrorInterceptor, appInitializer } from './_helpers';
+import { AccountService } from './_services';
+import { AppComponent } from './app.component';
+import { AlertComponent } from './_components';
+import { HomeComponent } from './home';
+import { MultistepFormComponent } from './multistep-form/multistep-form.component';
+import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomepageComponent,
-    PagenotfoundComponent,
-    MultistepFormComponent,
-    NavigationComponent,
-    ThankYouPageComponent,
-  ],
-  imports: [
-    ReactiveFormsModule,
-    BrowserModule,
-    AppRoutingModule,
-    SharedModule,
-    NgbModule,
-    ServiceModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
-    AccordionModule.forRoot(),
-    HttpClientModule,
-    FontAwesomeModule,
-  ],
-  providers: [
-    ApiServiceService,
-    AuthGuard,
-    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService,
-  ],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        AccordionModule.forRoot(),
+
+       
+    ],
+    declarations: [
+         MultistepFormComponent,
+        NavigationComponent,
+        ThankYouPageComponent,
+        AppComponent,
+        AlertComponent,
+        HomeComponent
+    ],
+    providers: [
+        { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+        // provider used to create fake backend
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

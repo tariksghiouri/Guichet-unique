@@ -86,21 +86,17 @@
               <a class="nav-item nav-link" [routerLink]="['/form']">Formulaire d'inscription</a>
           </div>
           <!-- Right navigation -->
-          <div *ngIf="(authService.authenticated$ | async) === false " class="navbar-nav ms-lg-4">
+          <div  class="navbar-nav ms-lg-4">
               <a class="nav-item nav-link" [routerLink]="['/auth/login']">Sign in</a>
           </div>
           <!-- Action -->
-          <div *ngIf="(authService.authenticated$ | async) === false " class="d-flex align-items-lg-center mt-3 mt-lg-0">
+          <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
               <a [routerLink]="['/auth/register']" class="btn btn-sm btn-primary w-full w-lg-auto">
                   Register
               </a>
           </div>
           
-          <div *ngIf="(authService.authenticated$ | async) === true " >
-              <a (click)="logout()" role="button" class="nav-item nav-link"  >
-                ({{userDetials.data.id}} {{userDetials.data.name}} )Deconnexion <i class="fa-regular fa-arrow-right-to-bracket"></i>
-              </a>
-          </div>
+          
       </div>
   </div>
 </nav>

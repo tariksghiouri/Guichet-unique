@@ -1,0 +1,19 @@
+﻿{
+    "database": {
+        "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "",
+        "database": "candidaturelp-ests"
+    },
+    "secret": "myTopsectretTokenString",
+    "emailFrom": "kayleigh.volkman57@ethereal.email",
+    "smtpOptions": {
+        "host": "smtp.ethereal.email",
+        "port": 587,
+        "auth": {
+            "user": "kayleigh.volkman57@ethereal.email",
+            "pass": "r5q3RgVJcpqSxwrhrT"
+        }
+    }
+}

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { ApiServiceService } from '../api-service.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { AuthService } from '../service/auth.service';
 
 
 @Component({
@@ -45,9 +43,7 @@ export class MultistepFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: ApiServiceService,
-    private toastr: ToastrService,
     private router: Router,
-    private authService: AuthService,
 
   ) { }
 
@@ -61,16 +57,7 @@ export class MultistepFormComponent implements OnInit {
 
     })
 
-    if (localStorage.getItem('Token')!.length>0){
-      this.authService.getProfile().subscribe((result=>{
-        console.log(result);
-        this.userDetials= result;
-        console.log(this.userDetials.data.id);
-
-    
-
-      }));
-    }
+   
     this.personalDetails = this.formBuilder.group({
       nomFr: ['', Validators.required],
       prenomFr: ['', Validators.required],
