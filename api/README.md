@@ -1,2 +1,0 @@
-# guichet-unique
-BACK-END
