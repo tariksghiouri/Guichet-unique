@@ -73,7 +73,7 @@
                     <div *ngIf="personal_step && personalDetails.controls.phone.errors">
                         <div class="danger" *ngIf="personal.phone.errors?.required">Le telephone est requis</div>
                     </div>
-                    <button (click)="next()" class="btn btn-primary" [disabled]="personal.invalid">Nex</button>
+                    <button (click)="next()" class="next action-button" [disabled]="personal.invalid">Suivant</button>
 
                 </fieldset>
             </form>
@@ -86,7 +86,7 @@
                     <div *ngIf="address_step && addressDetails.controls.city.errors">
                         <div *ngIf="address.city.errors?.required">City is required</div>
                     </div>
-                    <input type ="text" placeholder="Adresse" formControlName="address" />
+                    <input type="text" placeholder="Adresse" formControlName="address" />
                     <div *ngIf="address_step && addressDetails.controls.address.errors">
                         <div *ngIf="address.address.errors?.required">Address is required</div>
                     </div>
@@ -95,8 +95,8 @@
                         <div *ngIf="address.codePostal.errors?.required">Pincode is required</div>
                     </div>
                     <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
-                        value="Previous" />
-                    <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
+                        value="précédent" />
+                    <input (click)="next()" type="button" name="next" class="next action-button" value="Suivant" />
                 </fieldset>
             </form>
             <!-- education  -->
@@ -151,16 +151,23 @@
                         </option>
                     </select>
 
-                 
 
-                    <select [ngClass]="{'disabledSelect' : isDiplome}"
-                                    formControlName="filC" 
-                                    [attr.disabled]="isDiplome? true : null"
-                                    (ngModelChange)="onFiliereChange($event)" >
-                      
+
+                    <select [ngClass]="{'disabledSelect' : isDiplome}" formControlName="filC"
+                        [attr.disabled]="isDiplome? true : null" (ngModelChange)="onFiliereChange($event)">
+
                         <option disabled value="">--la filiere du diplome--</option>
                         <option *ngFor="let filC of filcandidat" [ngValue]="filC">
                             {{ filC.Intitule }}
+                        </option>
+                    </select>
+                    
+                    <select [ngClass]="{'disabledSelect' : isetablissement}" formControlName="etablissement"
+                        [attr.disabled]="isetablissement? true : null">
+
+                        <option disabled value="">--l'etablissement du diplome--</option>
+                        <option *ngFor="let etablissement of etablissements" [ngValue]="etablissement">
+                            {{ etablissement.Nom }} ({{etablissement.ville}})
                         </option>
                     </select>
 
@@ -248,16 +255,47 @@
             <form [formGroup]="files" id="msform">
                 <fieldset *ngIf="step == 5">
                     <h2 class="fs-title">Les documents</h2>
+                    <div class="row">
+                        <div class="col-8">
+                          <label class="btn btn-default p-0">
+                            <input type="file" multiple (change)="selectFile($event)" />
+                          </label>
+                        </div>
+                       
+                        <div class="col-4">
+                          <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+                            Upload
+                          </button>
+                        </div>
+                      </div>
+                      <div *ngIf="currentFile" class="progress my-3">
+                        <div
+                          class="progress-bar progress-bar-info progress-bar-striped"
+                          role="progressbar"
+                          attr.aria-valuenow="{{ progress }}"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: progress + '%' }"
+                        >
+                          {{ progress }}%
+                        </div>
+                      </div>
+                      <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
+                      <div class="card mt-3">
+                        <div class="card-header">List of Files</div>
+                        <ul
+                          class="list-group list-group-flush"
+                          *ngFor="let file of fileInfos | async"
+                        >
+                          <li class="list-group-item">
+                            <a href="{{ file.url }}">{{ file.name }}</a>
+                          </li>
+                        </ul>
+                      </div>
 
 
-                    <label for="file">File</label>
-                    <input formControlName="file1" type="file">
 
-
-
-
-                    <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
-                        value="Previous" />
+                    <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous" />
                     <input (click)="submit()" type="submit" name="submit" class="submit action-button" value="Submit" />
 
                 </fieldset>

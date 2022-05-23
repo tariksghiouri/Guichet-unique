@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const errorHandler = require('_middleware/error-handler');
+const errorHandler = require('./_middleware/error-handler');
 
 var homeRouter = require('./routes/home');
 var bacRouter = require('./routes/bac');
@@ -13,6 +13,10 @@ var curDateRouter = require('./routes/date');
 var filsCRouter = require('./routes/filsC');
 var filsPostulerRouter=require('./routes/filApostuler');
 var userFormRouter=require('./routes/form');
+const initRoutes = require("./routes/fileRoute");
+const etablissementRoute = require("./routes/EtablissementDeDiplome");
+
+global.__basedir = __dirname;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -30,9 +34,12 @@ app.use('/curDate', curDateRouter);
 app.use('/filsC', filsCRouter);
 app.use('/filspourpostuler', filsPostulerRouter);
 app.use('/candidatData', userFormRouter);
+app.use('/etablissement', etablissementRoute);
+initRoutes(app);
+
 
 // swagger docs route
-app.use('/api-docs', require('_helpers/swagger'));
+app.use('/api-docs', require('./_helpers/swagger'));
 
 // global error handler
 app.use(errorHandler);
