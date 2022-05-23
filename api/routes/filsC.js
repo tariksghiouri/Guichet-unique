@@ -11,7 +11,7 @@ router.get('/:id', function(req, res) {
     //     res.json({ success: false, message: 'pas de filieres' });
     // }
     // else {
-        console.log(req.params.id);
+        // console.log(req.params.id);
    
         const id =Number(req.params.id);
         connection.query('SELECT * FROM filieres WHERE type_diplome=?',[id],function(err,rows)     {

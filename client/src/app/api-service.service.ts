@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http'
 import { Observable } from 'rxjs/internal/Observable';
-import { AlertService } from './_services/';
+import { AccountService, AlertService } from './_services/';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,8 @@ export class ApiServiceService {
 
   constructor(
     private _http: HttpClient,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private accountService: AccountService
   ) { }
 
   apiUrl = "http://localhost:4000";
@@ -52,13 +53,11 @@ export class ApiServiceService {
   }
 
 
-  sendcandidatData(candidatData: any) {
-    // var object =JSON.stringify(candidatData)
-    // console.log(object);
-    // var jsonObject={object};
 
-    return this._http.post(`${this.apiUrl + "/candidatData"}`, candidatData);
+  sendcandidatData(candidatData: any) {
+     return this._http.post(`${this.apiUrl + "/candidatData"}`, candidatData);
   }
+
   upload(file: File, index): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
     if (file.name.split('.').pop() != "pdf") {
@@ -76,6 +75,10 @@ export class ApiServiceService {
   }
   getFiles(): Observable<any> {
     return this._http.get(`${this.apiUrl}/files`);
+  }
+
+  getUserCandudatures(id: any): Observable<any> {
+    return this._http.get(`${this.apiUrl + "/candidat/" + this.accountService.accountValue.id}`);
   }
 
 }

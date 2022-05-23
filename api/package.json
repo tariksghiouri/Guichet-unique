@@ -26,6 +26,8 @@
         "nodemailer": "^6.4.11",
         "rootpath": "^0.1.2",
         "sequelize": "^6.3.4",
+        "sequelize-auto": "^0.8.8",
+        "sqlite3": "^5.0.8",
         "swagger-ui-express": "^4.1.4",
         "yamljs": "^0.3.0"
     },

@@ -15,6 +15,7 @@ var filsPostulerRouter=require('./routes/filApostuler');
 var userFormRouter=require('./routes/form');
 const initRoutes = require("./routes/fileRoute");
 const etablissementRoute = require("./routes/EtablissementDeDiplome");
+const candidatDataRoute = require("./routes/getCandidatData");
 
 global.__basedir = __dirname;
 
@@ -35,6 +36,7 @@ app.use('/filsC', filsCRouter);
 app.use('/filspourpostuler', filsPostulerRouter);
 app.use('/candidatData', userFormRouter);
 app.use('/etablissement', etablissementRoute);
+app.use('/candidat', candidatDataRoute);
 initRoutes(app);
 
 

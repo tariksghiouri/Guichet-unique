@@ -13,7 +13,8 @@ import { HomeComponent } from './home';
 import { MultistepFormComponent } from './multistep-form/multistep-form.component';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { AccordionModule } from 'ngx-bootstrap/accordion';;
+import { ConfirmationComponent } from './confirmation/confirmation.component'
 
 
 
@@ -34,7 +35,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
         AppComponent,
         AlertComponent,
         HomeComponent
-    ],
+,
+        ConfirmationComponent    ],
     providers: [
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

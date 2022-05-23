@@ -49,6 +49,7 @@ router.post('/', (req, res) => {
   var Tel = userdata.personelinfos.phone;
   var IntituleBAC = userdata.education.bac.id;
   var DiplomeObtenu = userdata.education.diplome.id;
+  var Etablissement = userdata.education.etablissement.id;
   var IntituleFiliere = userdata.education.filC.id
   var Moyenne1année = userdata.education.notediplo;
   var Moyenne2année = userdata.education.notediplo;
@@ -57,12 +58,13 @@ router.post('/', (req, res) => {
   var choix1 = userdata.choices.filterN1.id;
   var choix2 = userdata.choices.filterN2.id
 
-  var values =                     [Numcondidature, CIN, CNE, nomFr,nomAr,prenomFr, prenomAr, email, DateDeNaissance, LieuDeNaissance, Adresse, Tel, IntituleBAC, DiplomeObtenu, IntituleFiliere,1             ,1,     Moyenne1année, Moyenne2année,MoyenneDiplôme,AnnéeDiplôme,choix1,choix2]
+  var values =                     [Numcondidature, CIN, CNE, nomFr,nomAr,prenomFr, prenomAr, email, DateDeNaissance, LieuDeNaissance, Adresse, Tel, IntituleBAC, DiplomeObtenu, IntituleFiliere,Etablissement,  1,     Moyenne1année, Moyenne2année,MoyenneDiplôme,AnnéeDiplôme,choix1,choix2]
   var sql = "INSERT INTO candidats (Numcondidature, CIN, CNE, nomFr,nomAr, prenomFr,prenomAr, email, DateDeNaissance, LieuDeNaissance, Adresse, Tel, IntituleBAC, DiplomeObtenu, IntituleFiliere,Etablissement ,ville,Moyenne1année, Moyenne2année, MoyenneDiplôme,AnnéeDiplôme,choix1,choix2) VALUES (?)";
   var sql2 = "INSERT INTO candidats (Numcondidature, CIN) VALUES (?,?)";
 
   connection.query(sql, [values], function (err, res) {
       if (err) {
+        // @ts-ignore
         req.flash('error', err);
     }
     // req.send( res);
