@@ -133,9 +133,9 @@
 
 / / var Moyenne2année = req.body.Moyenne1année;
 
-/ / var MoyenneDiplôme = req.body.MoyenneDiplôme;
+/ / var MoyenneDiplome = req.body.MoyenneDiplome;
 
-/ / var AnnéeDiplôme = req.body.AnnéeDiplôme;
+/ / var AnnéeDiplome = req.body.AnnéeDiplome;
 
 / / var choix1 = req.body.choix1;
 
@@ -162,8 +162,8 @@ INSERT INTO
     `ville`,
     `Moyenne1année`,
     `Moyenne2année`,
-    `MoyenneDiplôme`,
-    `AnnéeDiplôme`,
+    `MoyenneDiplome`,
+    `AnnéeDiplome`,
     `choix1`,
     `choix2`,
     `Photo`

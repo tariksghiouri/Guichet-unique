@@ -14,14 +14,20 @@ export class DetailsComponent implements OnInit {
 
     account = this.accountService.accountValue;
     candidature;
+    noCondidature=true;
 
     ngOnInit(): void {
+
         this.api.getUserCandudatures(this.account.id).subscribe((result: { data: any; }) => {
-            console.log(this.account.id);
-            console.table(result.data)
-            this.candidature = result.data;
+            if(!Object.keys(result.data).length){
+                this.noCondidature=true;
+            }
+            else{
+                this.candidature = result.data;
+                this.noCondidature=false;
+            }
         });
-        console.log(this.candidature );
+        console.log(this.noCondidature );
         
     }
 }

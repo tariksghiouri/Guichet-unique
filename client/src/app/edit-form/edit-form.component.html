@@ -1,39 +1,11 @@
-
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
-
-<section  *ngIf="noCondidature==false"  class="mail-seccess section">
-  <div  class="container">
-    <div class="row">
-      <div class="col-lg-6 offset-lg-3 col-12">
-        <!-- Error Inner -->
-        <div class="success-inner">
-          <h1>
-            <span>vous avez deja rempli le formulaire de candudature </span>
-          </h1>
-          <br>
-          <a href="/profile" class="btn btn-primary btn-lg">voir le profile</a>
-        </div>
-        <!--/ End Error Inner -->
-      </div>
-    </div>
-  </div>
-</section>
-<div *ngIf="noCondidature==true"  class="container py-5">
+<div class="container py-5">
 
     <div class="row">
         <div class="col-md-12 col-md-offset-3">
             <form [formGroup]="personalDetails" id="msform">
                 <!-- progressbar -->
-                <ul id="progressbar">
-                    <li [ngClass]="step>=1 ? 'active ' : 'inactive'">les informations personnelles</li>
-                    <li [ngClass]="step>=2 ? 'active' : 'inactive'">parcour universitaire</li>
-                    <li [ngClass]="step>=3 ? 'active' : 'inactive'">autres informations</li>
-                    <li [ngClass]="step>=4 ? 'active' : 'inactive'">choix de formation(s)</li>
-                    <li [ngClass]="step==5 ? 'active' : 'inactive'">upload des fiche</li>
-                </ul>
-                <!-- fieldsets -->
-                <fieldset *ngIf="step == 1">
+               
+                <fieldset >
                     <h2 class="fs-title">les informations personnelles</h2>
 
                     <input type="text" formControlName="nomFr"
@@ -94,14 +66,9 @@
                     <div *ngIf="personal_step && personalDetails.controls.phone.errors">
                         <div class="danger" *ngIf="personal.phone.errors?.required">Le telephone est requis</div>
                     </div>
-                    <button (click)="next()" class="next action-button" [disabled]="personal.invalid">Suivant</button>
-
-                </fieldset>
-            </form>
 
 
-            <form [formGroup]="addressDetails" id="msform">
-                <fieldset *ngIf="step == 2">
+
                     <h2 class="fs-title">Address Details</h2>
                     <input type="text" formControlName="city" placeholder="City" />
                     <div *ngIf="address_step && addressDetails.controls.city.errors">
@@ -115,14 +82,10 @@
                     <div *ngIf="address_step && addressDetails.controls.codePostal.errors">
                         <div *ngIf="address.codePostal.errors?.required">Pincode is required</div>
                     </div>
-                    <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
-                        value="précédent" />
-                    <input (click)="next()" type="button" name="next" class="next action-button" value="Suivant" />
-                </fieldset>
-            </form>
-            <!-- education  -->
-            <form [formGroup]="education" id="msform">
-                <fieldset *ngIf="step == 3">
+                    
+
+                    
+
                     <h2 class="fs-title">Education</h2>
                     <div class="border-top my-3"></div>
                     <h4>les informations du baccalauréat</h4>
@@ -217,17 +180,12 @@
                         <div *ngIf="submit&& f.acceptTerms.errors" class="invalid-feedback">veuillez Attester sur
                             l'honneur l'exactitude des renseignements portés à ce formulaire</div>
                     </div>
-                    <!-- diplome 1  -->
-                    <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
-                        value="Previous" />
-                    <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
-
-                </fieldset>
-            </form>
+                    
 
 
-            <form [formGroup]="choices" id="msform">
-                <fieldset *ngIf="step == 4">
+                    
+                
+
                     <h2 class="fs-title">le choix des formations</h2>
                     <div *ngIf="peuxpostuler==true">
 
@@ -261,20 +219,14 @@
                     <div *ngIf="memechoix==true">
                         <h5 class="danger">choisir une formation differente </h5>
                     </div>
-                    <div [ngClass]="{'buttonHolder' : !peuxpostuler}">
-                        <input (click)="previous()" type="button" name="previous"
-                            class="previous action-button-previous" value="Previous" />
-                    </div>
+                   
 
 
-                    <input *ngIf="peuxpostuler==true &&  memechoix==false" (click)="next()" type="button" name="next"
-                        class="next action-button" value="Next" />
+                    
 
-                </fieldset>
-            </form>
+          
+                
 
-            <form [formGroup]="files" id="msform">
-                <fieldset *ngIf="step == 5">
                     <h2 class="fs-title">Les documents</h2>
                     <div class="row">
                         <div class="col-8">
@@ -316,7 +268,7 @@
 
 
 
-                    <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    
                     <input (click)="submit()"type="button" name="submit" class="submit action-button" value="Submit" />
 
                 </fieldset>

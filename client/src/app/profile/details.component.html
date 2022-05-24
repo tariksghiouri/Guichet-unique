@@ -1,145 +1,157 @@
-﻿<div class="container">
-    <div class="main-body">
-    
-      
-    
-          <div class="row gutters-sm">
-            <div class="col-md-4 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" alt="photo"  width="150">
-                    <div class="mt-3">
-                      <h4> {{candidature[0].nomFr}} {{candidature[0].prenomFr}}</h4>
-                      <p class="text-secondary mb-1"> <b>CIN</b>: {{candidature[0].CIN}}</p>
-                      <p class="text-muted font-size-sm"><b>CNE</b>:  {{candidature[0].CNE}}</p>
-                      <button class="btn btn-outline-primary">Message</button>
-                    </div>
-                  </div>
-                </div>
+﻿<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+<section  class="mail-seccess section">
+  <div *ngIf='noCondidature==true' class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3 col-12">
+        <!-- Error Inner -->
+        <div class="success-inner">
+          <h1>
+            <span>aucune candudature veuillez remplire le formulaire</span>
+          </h1>
+          <br>
+          <a href="/form" class="btn btn-primary btn-lg">formulaire</a>
+        </div>
+        <!--/ End Error Inner -->
+      </div>
+    </div>
+  </div>
+</section>
+<div *ngIf="candidature[0].Numcondidature" class="container">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" alt="photo" width="150">
+              <div class="mt-3">
+                <h4> {{candidature[0].nomFr}} {{candidature[0].prenomFr}}</h4>
+                <p class="text-secondary mb-1"> <b>CIN</b>: {{candidature[0].CIN}}</p>
+                <p class="text-muted font-size-sm"><b>CNE</b>: {{candidature[0].CNE}}</p>
               </div>
-              <div class="card mt-3">
-             
-              </div>
-            </div>
-          
-            <div class="col-md-8">
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Full Name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{candidature[0].nomFr}} {{candidature[0].prenomFr}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{candidature[0].email}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{candidature[0].Tel}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">LieuDeNaissance</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                     {{candidature[0].LieuDeNaissance}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Address</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{candidature[0].Adresse}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">CIN</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{candidature[0].CIN}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">CNE</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{candidature[0].CNE}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Etablissement</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{candidature[0].Etablissement}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">IntituleFiliere</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{candidature[0].IntituleFiliere}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">choix 1</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{candidature[0].choix1}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">choix1 2</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        {{candidature[0].choix2}}
-                    </div>
-                  </div>
-                  
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <a class="btn btn-info " routerLink="/profile">Edit</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              
-
-
-
             </div>
           </div>
+        </div>
+        <div class="card mt-3">
 
         </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Full Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{candidature[0].nomFr}} {{candidature[0].prenomFr}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{candidature[0].email}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Phone</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{candidature[0].Tel}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">LieuDeNaissance</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{candidature[0].LieuDeNaissance}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Address</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{candidature[0].Adresse}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">CIN</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{candidature[0].CIN}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">CNE</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{candidature[0].CNE}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Etablissement</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{candidature[0].Etablissement}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">IntituleFiliere</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{candidature[0].IntituleFiliere}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">choix 1</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{candidature[0].choix1}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">choix1 2</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{candidature[0].choix2}}
+              </div>
+            </div>
+
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <a class="btn btn-info " routerLink="/edit">Edit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
+  </div>
+</div>

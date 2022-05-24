@@ -6,6 +6,7 @@ import { HomeComponent } from './home';
 import { AuthGuard } from './_helpers';
 import { Role } from './_models';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { EditFormComponent } from './edit-form/edit-form.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -13,12 +14,13 @@ const profileModule = () => import('./profile/profile.module').then(x => x.Profi
 
 const routes: Routes = [
      { path: 'home', component: HomeComponent},
-     { path: 'confirmation', component: ConfirmationComponent},
+     { path: 'confirmation', component: ConfirmationComponent,canActivate: [AuthGuard]},
     { path: 'account', loadChildren: accountModule },
     { path: 'profile', loadChildren: profileModule, canActivate: [AuthGuard] },
     { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
     {path:'form',component:MultistepFormComponent, canActivate:[AuthGuard]},
-    {path:'submitted',component:ThankYouPageComponent},
+    {path:'submitted',component:ThankYouPageComponent,canActivate: [AuthGuard]},
+    {path:'edit',component:EditFormComponent,canActivate: [AuthGuard]},
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
 ];

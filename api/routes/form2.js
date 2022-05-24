@@ -28,8 +28,8 @@
 //             IntituleFiliere: req.body.education.filC.id,
 //             Moyenne1année: req.body.education.notediplo,
 //             Moyenne2année: req.body.education.notediplo,
-//             MoyenneDiplôme: req.body.education.notediplo,
-//             AnnéeDiplôme: req.body.education.annediplo,
+//             MoyenneDiplome: req.body.education.notediplo,
+//             AnnéeDiplome: req.body.education.annediplo,
 //             choix1: req.body.choices.filterN1.id,
 //             choix2: req.body.choices.filterN2.id
 //         });

@@ -1,19 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ApiServiceService } from '../api-service.service';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { AccountService } from '@app/_services';
-
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { ApiServiceService } from '@app/api-service.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-multistep-form',
-  templateUrl: './multistep-form.component.html',
-  styleUrls: ['./multistep-form.component.css']
+  selector: 'app-edit-form',
+  templateUrl: './edit-form.component.html',
+  styleUrls: ['./edit-form.component.less']
 })
-export class MultistepFormComponent implements OnInit {
-  noCondidature=true;
+export class EditFormComponent implements OnInit {
   personalDetails!: FormGroup;
   addressDetails!: FormGroup;
   education!: FormGroup;
@@ -49,110 +45,10 @@ export class MultistepFormComponent implements OnInit {
   message = '';
   fileInfos?: Observable<any>;
   etablissements: any;
+  constructor( private service: ApiServiceService,) { }
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private service: ApiServiceService,
-    private router: Router,
-    private accountService: AccountService
-
-  ) { }
-
-  ngOnInit() {
-
-    this.service.getUserCandudatures(this.userDetials.id).subscribe((result: { data: any; }) => {
-      if(!Object.keys(result.data).length){
-          this.noCondidature=true;
-      }
-      else{
-          this.noCondidature=false;
-      }
-  });
-    this.userDetials=this.accountService.accountValue
-    console.log(this.userDetials.id);
-    
-        this.service.getAllfils().subscribe((result: { data: any; }) => {
-      // console.log(result);
-      this.fils = result.data;
-      // this.fils$.next(result.data);
-
-    })
-
-
-    this.personalDetails = this.formBuilder.group({
-      // nomFr: ['', Validators.required],
-      // prenomFr: ['', Validators.required],
-      // nomAr: ['', Validators.required],
-      // prenomAr: ['', Validators.required],
-      // email: [this.userDetials.email, Validators.required],
-      // phone: ['', Validators.required],
-      // cin: ['', <any>[Validators.required, Validators.minLength(10)]],
-      // LieuDeNaissance: ['', Validators.required],
-      // datenaiss: ['', Validators.required],
-      // cne: ['', Validators.required],
-      nomFr: ['',],
-      prenomFr: ['',],
-      nomAr: ['',],
-      prenomAr: ['',],
-      email: [this.userDetials.email,],
-      phone: ['',],
-      cin: ['',],
-      LieuDeNaissance: ['',],
-      datenaiss: ['',],
-      cne: ['',]
-
-    });
-
-    this.addressDetails = this.formBuilder.group({
-      // city: ['', Validators.required],
-      // address: ['', Validators.required],
-      // codePostal: ['', Validators.required],
-      city: ['',],
-      address: ['',],
-      codePostal: ['',],
-
-    });
-
-    this.education = this.formBuilder.group({
-      // bac: ['', Validators.required],
-      // notebac: ['', Validators.required],
-      // anneebac: ['', Validators.required],
-      // diplome: ['', Validators.required],
-      // annediplo: ['', Validators.required],
-      // notediplo: ['', Validators.required],
-      // filC: ['', Validators.required],
-      // etablissement: ['',Validators.required],
-
-
-
-      bac: ['',],
-      notebac: ['',],
-      anneebac: ['',],
-
-      diplome: ['',],
-      filC: ['',],
-      etablissement: ['',],
-      annediplo: ['',],
-      notediplo: ['',],
-
-
-    });
-    this.accepted = this.formBuilder.group({
-      acceptTerms: [false, Validators.requiredTrue]
-    });
-    this.choices = this.formBuilder.group({
-
-      filterN1: ['', Validators.required],
-      filterN2: ['',]
-
-    })
-    this.files = this.formBuilder.group({
-
-      file1: ['', Validators.required],
-
-    })
+  ngOnInit(): void {
   }
-
   get personal() { return this.personalDetails.controls; }
 
   get address() { return this.addressDetails.controls; }
@@ -161,11 +57,9 @@ export class MultistepFormComponent implements OnInit {
   get f() { return this.accepted.controls; }
   get choix() { return this.choices.controls; }
   get files_() { return this.files.controls; }
-
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
   }
-
   upload(): void {
     this.progress = 0;
     if (this.selectedFiles) {
@@ -199,62 +93,6 @@ export class MultistepFormComponent implements OnInit {
       // this.selectedFiles = undefined;
     }
   }
-
-  next() {
-
-    if (this.step == 1) {
-      this.personal_step = true;
-      if (this.personalDetails.invalid) { return }
-      this.step++
-    }
-
-    else if (this.step == 2) {
-
-      this.service.getAllbacs().subscribe((result: { data: any; }) => {
-        // this.readData = result.data;
-        console.log(result.data);
-
-        this.bacs$.next(result.data);
-
-      })
-      this.service.getAlldips().subscribe((result: { data: any; }) => {
-        // console.log(result);
-        this.diplomes = result.data;
-      });
-      this.address_step = true;
-      if (this.addressDetails.invalid) { return }
-      this.step++;
-    }
-    else if (this.step == 3) {
-
-      this.education_step = true;
-      if (this.education.invalid) { return }
-      this.step++;
-    }
-    else if (this.step == 4) {
-
-      this.choix_step = true;
-      if (this.choices.invalid) { return }
-      this.step++;
-    }
-
-
-  }
-
-  previous() {
-    this.step--
-
-    // if (this.step == 1) {
-    //   this.address_step = false;
-    // }
-    // if (this.step == 2) {
-    //   this.education_step = false;
-    // }
-
-  }
-
-
-
   submit() {
 
     if (this.step == 5) {
@@ -360,6 +198,5 @@ export class MultistepFormComponent implements OnInit {
 
     }
   }
-
 
 }

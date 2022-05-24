@@ -15,7 +15,7 @@ router.get('/:id', function(req, res) {
    
         const id =Number(req.params.id);
         connection.query
-        ('select etablissement.Nom, etablissement.abreviation, villes.Nom AS ville from relationdiplomeetablissement INNER JOIN etablissement ON relationdiplomeetablissement.idEtablissement=etablissement.id INNER JOIN villes ON etablissement.ville_id=villes.id WHERE relationdiplomeetablissement.idDiplome=? ',[id],function(err,rows)     {
+        ('select etablissement.id, etablissement.Nom, etablissement.abreviation, villes.Nom AS ville from relationdiplomeetablissement INNER JOIN etablissement ON relationdiplomeetablissement.idEtablissement=etablissement.id INNER JOIN villes ON etablissement.ville_id=villes.id WHERE relationdiplomeetablissement.idDiplome=? ',[id],function(err,rows)     {
  
         if(err){
          // @ts-ignore

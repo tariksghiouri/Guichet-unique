@@ -15,7 +15,8 @@ import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component
 import { NavigationComponent } from './navigation/navigation.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';;
 import { ConfirmationComponent } from './confirmation/confirmation.component'
-
+;
+import { EditFormComponent } from './edit-form/edit-form.component'
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { ConfirmationComponent } from './confirmation/confirmation.component'
         AlertComponent,
         HomeComponent
 ,
-        ConfirmationComponent    ],
+        ConfirmationComponent ,
+        EditFormComponent   ],
     providers: [
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -55,6 +55,7 @@ export class ApiServiceService {
 
 
   sendcandidatData(candidatData: any) {
+    console.log(candidatData);
      return this._http.post(`${this.apiUrl + "/candidatData"}`, candidatData);
   }
 
