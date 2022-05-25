@@ -18,7 +18,7 @@
     </div>
   </div>
 </section>
-<div *ngIf="candidature[0].Numcondidature" class="container">
+<div *ngIf="candidature" class="container">
   <div class="main-body">
     <div class="row gutters-sm">
       <div class="col-md-4 mb-3">
@@ -42,15 +42,15 @@
       <div class="col-md-8">
         <div class="card mb-3">
           <div class="card-body">
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">Full Name</h6>
               </div>
               <div class="col-sm-9 text-secondary">
                 {{candidature[0].nomFr}} {{candidature[0].prenomFr}}
               </div>
-            </div>
-            <hr>
+            </div> 
+            <hr> -->
             <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">Email</h6>
@@ -98,10 +98,10 @@
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <h6 class="mb-0">CNE</h6>
+                <h6 class="mb-0">bac</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{candidature[0].CNE}}
+                {{IntituleBAC[0].Intitule}}
               </div>
             </div>
             <hr>
@@ -110,7 +110,7 @@
                 <h6 class="mb-0">Etablissement</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{candidature[0].Etablissement}}
+                {{Etablissement[0].Nom}}
               </div>
             </div>
             <hr>
@@ -119,7 +119,7 @@
                 <h6 class="mb-0">IntituleFiliere</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{candidature[0].IntituleFiliere}}
+                {{IntituleFiliere[0].Intitule}}
               </div>
             </div>
             <hr>
@@ -128,23 +128,23 @@
                 <h6 class="mb-0">choix 1</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{candidature[0].choix1}}
+                {{choix1[0].Intitule}}
               </div>
             </div>
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <h6 class="mb-0">choix1 2</h6>
+                <h6 class="mb-0">choix 2</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{candidature[0].choix2}}
+                {{choix2[0].Intitule}}
               </div>
             </div>
 
             <hr>
             <div class="row">
               <div class="col-sm-12">
-                <a class="btn btn-info " routerLink="/edit">Edit</a>
+                <a class="btn btn-info " routerLink="edit">Edit</a>
               </div>
             </div>
           </div>

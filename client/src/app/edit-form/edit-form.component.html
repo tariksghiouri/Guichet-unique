@@ -5,65 +5,64 @@
             <form [formGroup]="personalDetails" id="msform">
                 <!-- progressbar -->
                
-                <fieldset >
                     <h2 class="fs-title">les informations personnelles</h2>
 
                     <input type="text" formControlName="nomFr"
-                        [ngClass]="{ 'is-invalid': personal_step && personal.nomFr.errors }"
+                        [ngClass]="{ 'is-invalid':  personal.nomFr.errors }"
                         placeholder="nom en francais" />
-                    <div *ngIf="personal_step && personalDetails.controls.nomFr.errors">
+                    <div *ngIf=" personalDetails.controls.nomFr.errors">
                         <div class="danger" *ngIf="personal.nomFr.errors?.required">Le nom est requis</div>
                     </div>
                     <input type="text" dir="rtl" class="keyboardInput" formControlName="nomAr"
-                        [ngClass]="{ 'is-invalid': personal_step && personal.nomAr.errors }"
+                        [ngClass]="{ 'is-invalid': personal.nomAr.errors }"
                         placeholder="اسم العائلة باللغة العربية " />
-                    <div *ngIf="personal_step && personalDetails.controls.nomAr.errors">
+                    <div *ngIf="personalDetails.controls.nomAr.errors">
                         <div dir="rtl" class="danger" *ngIf="personal.nomAr.errors?.required"> يرجى ادخال اسم العائلة
                         </div>
                     </div>
                     <input type="text" formControlName="prenomFr"
-                        [ngClass]="{ 'is-invalid': personal_step && personal.prenomFr.errors }"
+                        [ngClass]="{ 'is-invalid': personal.prenomFr.errors }"
                         placeholder="prenom en francais" />
-                    <div *ngIf="personal_step && personalDetails.controls.prenomFr.errors">
+                    <div *ngIf="personalDetails.controls.prenomFr.errors">
                         <div class="danger" *ngIf="personal.prenomFr.errors?.required">Le nom est requis</div>
                     </div>
 
                     <input type="text" dir="rtl" class="keyboardInput" formControlName="prenomAr"
-                        [ngClass]="{ 'is-invalid': personal_step && personal.prenomAr.errors }"
+                        [ngClass]="{ 'is-invalid': personal.prenomAr.errors }"
                         placeholder="الاسم باللغة العربية" />
-                    <div *ngIf="personal_step && personalDetails.controls.prenomAr.errors">
+                    <div *ngIf="personalDetails.controls.prenomAr.errors">
                         <div dir="rtl" class="danger" *ngIf="personal.prenomAr.errors?.required"> يرجى ادخال الاسم
                         </div>
 
                     </div>
                     <input type="text" formControlName="email" name="email" placeholder="Email" [attr.disabled]="true" />
-                    <div *ngIf="personal_step && personalDetails.controls.email.errors">
+                    <div *ngIf="personalDetails.controls.email.errors">
                         <div class="danger" *ngIf="personal.email.errors?.required">l'Email nom est requis</div>
                     </div>
                     <h3 class="mslabel" for="datenaiss"> date de naissance</h3>
                     <input type="date" formControlName="datenaiss" name="datenaiss" placeholder="date de naissance" />
-                    <div *ngIf="personal_step && personalDetails.controls.datenaiss.errors">
+                    <div *ngIf=" personalDetails.controls.datenaiss.errors">
                         <div class="danger" *ngIf="personal.datenaiss.errors?.required">la date de naissance est requis
                         </div>
                     </div>
                     <input type="text" formControlName="cin" name="cin" placeholder="CIN (code d'identite nationale)" />
-                    <div *ngIf="personal_step && personalDetails.controls.cin.errors">
+                    <div *ngIf=" personalDetails.controls.cin.errors">
                         <div class="danger" *ngIf="personal.cin.errors?.required">CIN est requis</div>
                         <div class="danger" *ngIf="personal.cin.hasError('minlength')">Entrez un Cin Valid</div>
                     </div>
                     <input type="text" formControlName="cne" name="cne" placeholder="CNE(code national d'etudiant)" />
-                    <div *ngIf="personal_step && personalDetails.controls.cne.errors">
+                    <div *ngIf=" personalDetails.controls.cne.errors">
                         <div class="danger" *ngIf="personal.cne.errors?.required">CNE est requis</div>
                     </div>
                     <input type="text" formControlName="LieuDeNaissance" name="LieuDeNaissance"
                         placeholder="Lieu De Naissance" />
-                    <div *ngIf="personal_step && personalDetails.controls.LieuDeNaissance.errors">
+                    <div *ngIf="personalDetails.controls.LieuDeNaissance.errors">
                         <div class="danger" *ngIf="personal.LieuDeNaissance.errors?.required">le Lieu De Naissance est
                             requis</div>
                     </div>
 
                     <input type="text" formControlName="phone" name="phone" placeholder="Phone" />
-                    <div *ngIf="personal_step && personalDetails.controls.phone.errors">
+                    <div *ngIf="personalDetails.controls.phone.errors">
                         <div class="danger" *ngIf="personal.phone.errors?.required">Le telephone est requis</div>
                     </div>
 
@@ -71,15 +70,15 @@
 
                     <h2 class="fs-title">Address Details</h2>
                     <input type="text" formControlName="city" placeholder="City" />
-                    <div *ngIf="address_step && addressDetails.controls.city.errors">
+                    <div *ngIf="addressDetails.controls.city.errors">
                         <div *ngIf="address.city.errors?.required">City is required</div>
                     </div>
                     <input type="text" placeholder="Adresse" formControlName="address" />
-                    <div *ngIf="address_step && addressDetails.controls.address.errors">
+                    <div *ngIf="addressDetails.controls.address.errors">
                         <div *ngIf="address.address.errors?.required">Address is required</div>
                     </div>
                     <input type="text" formControlName="codePostal" placeholder="code Postal" />
-                    <div *ngIf="address_step && addressDetails.controls.codePostal.errors">
+                    <div *ngIf="addressDetails.controls.codePostal.errors">
                         <div *ngIf="address.codePostal.errors?.required">Pincode is required</div>
                     </div>
                     
@@ -104,7 +103,7 @@
 
 
 
-                    <div *ngIf="education_step && education.controls.bac.errors">
+                    <div *ngIf="education.controls.bac.errors">
                         <div *ngIf="education_.bac.errors?.required">Highest qualification is required</div>
                     </div>
                     <!-- annee bac -->
@@ -112,12 +111,12 @@
                     <input type="number" name="anneebac" formControlName="anneebac" min="2014" max="2022" step="1"
                         value="2016" />
 
-                    <div *ngIf="education_step && education.controls.anneebac.errors">
+                    <div *ngIf=" education.controls.anneebac.errors">
                         <div *ngIf="education_.anneebac.errors?.required">veuillez enter l'annee de votre bac</div>
                     </div>
 
                     <input type="text" formControlName="notebac" placeholder="note du Baccalauréat" />
-                    <div *ngIf="education_step && education.controls.notebac.errors">
+                    <div *ngIf=" education.controls.notebac.errors">
                         <div *ngIf="education_.notebac.errors?.required">University is required</div>
                     </div>
                     <!--baaac  -->
@@ -155,7 +154,7 @@
                         </option>
                     </select>
 
-                    <div *ngIf="education_step && education.controls.diplome.errors">
+                    <div *ngIf=" education.controls.diplome.errors">
                         <div *ngIf="education_.diplome.errors?.required">nom dipome est requis</div>
                     </div>
 
@@ -163,21 +162,21 @@
                     <input type="number" name="annediplo" formControlName="annediplo" min="2014" max="2022" step="1"
                         value="2016" />
 
-                    <div *ngIf="education_step && education.controls.annediplo.errors">
+                    <div *ngIf=" education.controls.annediplo.errors">
                         <div *ngIf="education_.annediplo.errors?.required">veuillez enter l'annee de votre diplome</div>
                     </div>
 
                     <input type="text" formControlName="notediplo" placeholder="note du Diplome universitaire" />
-                    <div *ngIf="education_step && education.controls.notediplo.errors">
+                    <div *ngIf="education.controls.notediplo.errors">
                         <div *ngIf="education_.notediplo.errors?.required">la note du diplome est requis</div>
                     </div>
 
                     <div>
                         <input class="Attester" type="checkbox" formControlName="acceptTerms" id="acceptTerms"
-                            [ngClass]="{ 'is-invalid': submit && f.acceptTerms.errors }" />
+                            [ngClass]="{ 'is-invalid': submit && personal.cceptTerms.errors }" />
                         <label for="acceptTerms" class="labels">Attester sur l'honneur l'exactitude des renseignements
                             portés à ce formulaire </label>
-                        <div *ngIf="submit&& f.acceptTerms.errors" class="invalid-feedback">veuillez Attester sur
+                        <div *ngIf="submit&& personal.acceptTerms.errors" class="invalid-feedback">veuillez Attester sur
                             l'honneur l'exactitude des renseignements portés à ce formulaire</div>
                     </div>
                     
@@ -271,7 +270,6 @@
                     
                     <input (click)="submit()"type="button" name="submit" class="submit action-button" value="Submit" />
 
-                </fieldset>
             </form>
         </div>
     </div>

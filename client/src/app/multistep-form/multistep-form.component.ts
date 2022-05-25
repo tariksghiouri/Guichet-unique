@@ -60,14 +60,14 @@ export class MultistepFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.service.getUserCandudatures(this.userDetials.id).subscribe((result: { data: any; }) => {
-      if(!Object.keys(result.data).length){
-          this.noCondidature=true;
-      }
-      else{
-          this.noCondidature=false;
-      }
-  });
+  //   this.service.getUserCandudatures(this.userDetials.id).subscribe((result: { data: any; }) => {
+  //     if(!Object.keys(result.data).length){
+  //         this.noCondidature=true;
+  //     }
+  //     else{
+  //         this.noCondidature=false;
+  //     }
+  // });
     this.userDetials=this.accountService.accountValue
     console.log(this.userDetials.id);
     
@@ -302,7 +302,7 @@ export class MultistepFormComponent implements OnInit {
         this.filcandidat = result.data;
         this.isDiplome = false;
       })
-      this.service.getetablissementById(Diplomevalue.id).subscribe((result: { data: any; }) => {
+      this.service.getetablissementByIdDiplome(Diplomevalue.id).subscribe((result: { data: any; }) => {
         console.log(result);
         this.etablissements = result.data;
         this.isetablissement = false;

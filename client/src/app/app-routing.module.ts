@@ -20,7 +20,6 @@ const routes: Routes = [
     { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
     {path:'form',component:MultistepFormComponent, canActivate:[AuthGuard]},
     {path:'submitted',component:ThankYouPageComponent,canActivate: [AuthGuard]},
-    {path:'edit',component:EditFormComponent,canActivate: [AuthGuard]},
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
 ];

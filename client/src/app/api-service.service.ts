@@ -30,10 +30,7 @@ export class ApiServiceService {
 
     return this._http.get(`${this.apiUrl + "/filsC/" + id}`);
   }
-  getetablissementById(id: any): Observable<any> {
-
-    return this._http.get(`${this.apiUrl + "/etablissement/" + id}`);
-  }
+ 
   getfilApotulerById(id: any): Observable<any> {
 
     return this._http.get(`${this.apiUrl + "/filspourpostuler/" + id}`);
@@ -77,9 +74,31 @@ export class ApiServiceService {
   getFiles(): Observable<any> {
     return this._http.get(`${this.apiUrl}/files`);
   }
-
   getUserCandudatures(id: any): Observable<any> {
     return this._http.get(`${this.apiUrl + "/candidat/" + this.accountService.accountValue.id}`);
+  }
+  getBacById(id: any): Observable<any> {
+    return this._http.get(`${this.apiUrl + "/candidat/bac/" + id}`);
+  }
+  getetablissementByIdDiplome(id: any): Observable<any> {
+
+    return this._http.get(`${this.apiUrl + "/etablissement/" + id}`);
+  }
+  getDiplomeObtenuById(id: any): Observable<any> {
+    return this._http.get(`${this.apiUrl + "/candidat/DiplomeObtenu/" +id}`);
+  }
+  geIntituleFilierebyid(id: any): Observable<any> {
+    return this._http.get(`${this.apiUrl + "/candidat/IntituleFiliere/" + id}`);
+  }
+ 
+  getvilleById(id: any): Observable<any> {
+    return this._http.get(`${this.apiUrl + "/candidat/ville/" + id}`);
+  }
+  getchoixById(id: any): Observable<any> {
+    return this._http.get(`${this.apiUrl + "/candidat/choix/" + id}`);
+  }
+  geEtablissementById(id: any): Observable<any> {
+    return this._http.get(`${this.apiUrl + "/candidat/Etablissement/" + id}`);
   }
 
 }

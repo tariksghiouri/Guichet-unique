@@ -1,6 +1,6 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiServiceService } from '@app/api-service.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -15,13 +15,7 @@ export class EditFormComponent implements OnInit {
   education!: FormGroup;
   choices!: FormGroup;
   files!: FormGroup;
-  personal_step = false;
-  address_step = false;
-  education_step = false;
-  choix_step = false;
-  files_step = false;
   accepted!: FormGroup;
-  step = 1;
   peuxpostuler = true;
   readData: any;
   diplomes: any;
@@ -45,18 +39,67 @@ export class EditFormComponent implements OnInit {
   message = '';
   fileInfos?: Observable<any>;
   etablissements: any;
-  constructor( private service: ApiServiceService,) { }
+  constructor( private service: ApiServiceService,    private formBuilder: FormBuilder,
+    ) { }
 
   ngOnInit(): void {
+
+    this.personalDetails = this.formBuilder.group({
+      // nomFr: ['', Validators.required],
+      // prenomFr: ['', Validators.required],
+      // nomAr: ['', Validators.required],
+      // prenomAr: ['', Validators.required],
+      // email: [this.userDetials.email, Validators.required],
+      // phone: ['', Validators.required],
+      // cin: ['', <any>[Validators.required, Validators.minLength(10)]],
+      // LieuDeNaissance: ['', Validators.required],
+      // datenaiss: ['', Validators.required],
+      // cne: ['', Validators.required],
+       // city: ['', Validators.required],
+      // address: ['', Validators.required],
+      // codePostal: ['', Validators.required],
+       // bac: ['', Validators.required],
+      // notebac: ['', Validators.required],
+      // anneebac: ['', Validators.required],
+      // diplome: ['', Validators.required],
+      // annediplo: ['', Validators.required],
+      // notediplo: ['', Validators.required],
+      // filC: ['', Validators.required],
+      // etablissement: ['',Validators.required],
+      nomFr: ['',],
+      prenomFr: ['',],
+      nomAr: ['',],
+      prenomAr: ['',],
+      email: [this.userDetials.email,],
+      phone: ['',],
+      cin: ['',],
+      LieuDeNaissance: ['',],
+      datenaiss: ['',],
+      cne: ['',],
+      city: ['',],
+      address: ['',],
+      codePostal: ['',],
+      bac: ['',],
+      notebac: ['',],
+      anneebac: ['',],
+
+      diplome: ['',],
+      filC: ['',],
+      etablissement: ['',],
+      annediplo: ['',],
+      notediplo: ['',],
+      acceptTerms: [false, Validators.requiredTrue],
+      filterN1: ['', Validators.required],
+      filterN2: ['',],
+      file1: ['', Validators.required],
+
+
+
+    });
+    
   }
   get personal() { return this.personalDetails.controls; }
 
-  get address() { return this.addressDetails.controls; }
-
-  get education_() { return this.education.controls; }
-  get f() { return this.accepted.controls; }
-  get choix() { return this.choices.controls; }
-  get files_() { return this.files.controls; }
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
   }
@@ -95,12 +138,9 @@ export class EditFormComponent implements OnInit {
   }
   submit() {
 
-    if (this.step == 5) {
-      this.choix_step = true;
+ 
       if (this.choices.invalid) { return }
-      // console.table(this.personalDetails.value);
-      // console.table(this.addressDetails.value);
-      // console.table(this.personalDetails.value);
+     
       const data = {
         user: this.userDetials.id,
         personelinfos: this.personalDetails.value,
@@ -112,22 +152,12 @@ export class EditFormComponent implements OnInit {
       }
       console.log(this.userDetials.id);
       
-      console.table(data);
-      this.service.sendcandidatData(data).subscribe(res => {
-
-        console.log(res);
-        
-        // this.router.navigate(['/confirmation']);
-
-
-
-      });
+    
 
 
 
 
-    }
-        // this.router.navigate(['/confirmation'])
+    
 }
   onDiplomeChange(Diplomevalue: any) {
     // console.log(Diplomevalue);
@@ -140,7 +170,7 @@ export class EditFormComponent implements OnInit {
         this.filcandidat = result.data;
         this.isDiplome = false;
       })
-      this.service.getetablissementById(Diplomevalue.id).subscribe((result: { data: any; }) => {
+      this.service.getetablissementByIdDiplome(Diplomevalue.id).subscribe((result: { data: any; }) => {
         console.log(result);
         this.etablissements = result.data;
         this.isetablissement = false;
