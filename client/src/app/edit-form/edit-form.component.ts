@@ -2,7 +2,8 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiServiceService } from '@app/api-service.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { AccountService } from '@app/_services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-form',
@@ -10,13 +11,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
   styleUrls: ['./edit-form.component.less']
 })
 export class EditFormComponent implements OnInit {
-  personalDetails!: FormGroup;
-  addressDetails!: FormGroup;
-  education!: FormGroup;
-  choices!: FormGroup;
-  files!: FormGroup;
-  accepted!: FormGroup;
-  peuxpostuler = true;
+  submitted = false;
+
+  editForm: FormGroup;
   readData: any;
   diplomes: any;
   filcandidat: any;
@@ -30,76 +27,107 @@ export class EditFormComponent implements OnInit {
   premierchoix: any;
   deuxiemechoix: any;
   memechoix: boolean | undefined;
-  bacs$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  bacs: any;
   userDetials: any;
-  // file upload vars
   selectedFiles?: FileList;
   currentFile?: File;
   progress = 0;
   message = '';
   fileInfos?: Observable<any>;
   etablissements: any;
-  constructor( private service: ApiServiceService,    private formBuilder: FormBuilder,
-    ) { }
+  account = this.accountService.accountValue;
+  candidature=[]||null;
+  IntituleBAC: any
+  DiplomeObtenu: any
+  IntituleFiliere: any
+  Etablissement: any
+  ville: any
+  choix1: any
+  choix2: any
+  constructor(private accountService: AccountService, private api: ApiServiceService, private formBuilder: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
 
-    this.personalDetails = this.formBuilder.group({
-      // nomFr: ['', Validators.required],
-      // prenomFr: ['', Validators.required],
-      // nomAr: ['', Validators.required],
-      // prenomAr: ['', Validators.required],
-      // email: [this.userDetials.email, Validators.required],
-      // phone: ['', Validators.required],
-      // cin: ['', <any>[Validators.required, Validators.minLength(10)]],
-      // LieuDeNaissance: ['', Validators.required],
-      // datenaiss: ['', Validators.required],
-      // cne: ['', Validators.required],
-       // city: ['', Validators.required],
-      // address: ['', Validators.required],
-      // codePostal: ['', Validators.required],
-       // bac: ['', Validators.required],
-      // notebac: ['', Validators.required],
-      // anneebac: ['', Validators.required],
-      // diplome: ['', Validators.required],
-      // annediplo: ['', Validators.required],
-      // notediplo: ['', Validators.required],
-      // filC: ['', Validators.required],
-      // etablissement: ['',Validators.required],
-      nomFr: ['',],
-      prenomFr: ['',],
-      nomAr: ['',],
-      prenomAr: ['',],
-      email: [this.userDetials.email,],
-      phone: ['',],
-      cin: ['',],
-      LieuDeNaissance: ['',],
-      datenaiss: ['',],
-      cne: ['',],
-      city: ['',],
-      address: ['',],
-      codePostal: ['',],
-      bac: ['',],
-      notebac: ['',],
-      anneebac: ['',],
 
-      diplome: ['',],
-      filC: ['',],
-      etablissement: ['',],
-      annediplo: ['',],
-      notediplo: ['',],
-      acceptTerms: [false, Validators.requiredTrue],
-      filterN1: ['', Validators.required],
-      filterN2: ['',],
-      file1: ['', Validators.required],
+
+    // this.editForm = this.formBuilder.group(
+    //   {
+    //     title: ['', Validators.required],
+    //     firstName: ['', Validators.required],
+    //     lastName: ['', Validators.required],
+    //     // validates date format yyyy-mm-dd
+    //     dob: [
+    //       '',
+    //       [
+    //         Validators.required,
+    //         Validators.pattern(
+    //           /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/
+    //         ),
+    //       ],
+    //     ],
+    //     email: ['', [Validators.required, Validators.email]],
+    //     password: ['', [Validators.required, Validators.minLength(6)]],
+    //     confirmPassword: ['', Validators.required],
+    //     acceptTerms: [false, Validators.requiredTrue],
+    //   }
+    // );
+
+    this.api.getUserCandudatures(this.account.id).subscribe((result: { data: any; }) => {
+
+        console.log(result.data);
+          
+        this.candidature = result.data;
+        this.api.getBacById(this.candidature[0].IntituleBAC).subscribe((result: { data: any; }) => {
+          this.IntituleBAC = result.data
+
+      });
+        console.log(this.candidature[0].IntituleFiliere);
+        this.editForm = this.formBuilder.group(
+          {
+            numCandidature:[this.account.id,],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            firstNameAr: ['', Validators.required],
+            lastNameAr: ['', Validators.required],
+            dob: ['',Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            telephone: ['', Validators.required],
+            LieuDeNaissance: ['', Validators.required],
+            CIN: ['', Validators.required],
+            CNE: ['', Validators.required],
+            Bac: ['', Validators.required],
+            anneBac: ['', Validators.required],
+            noteBac: ['', Validators.required],
+            diplome: ['', Validators.required],
+            filiereDip: ['', Validators.required],
+            etablissement: ['', Validators.required],
+            MoyenneDiplome: ['', Validators.required],
+            AnneeDiplome: ['', Validators.required],
+            choix1:['', Validators.required],
+            choix2:['', Validators.required],
+            Adresse:['', Validators.required],
+            
+            
+          }
+        );
+
 
 
 
     });
-    
-  }
-  get personal() { return this.personalDetails.controls; }
+    this.api.getAllbacs().subscribe((result: { data: any; }) => {
+      this.bacs = result.data;
 
+    })
+    this.api.getAlldips().subscribe((result: { data: any; }) => {
+      this.diplomes = result.data;
+    });
+
+  }
+  get f() {
+    return this.editForm.controls;
+  }
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
   }
@@ -107,16 +135,16 @@ export class EditFormComponent implements OnInit {
     this.progress = 0;
     if (this.selectedFiles) {
       for (let i = 0; i < this.selectedFiles.length; ++i) {
-        const file: File | null  = this.selectedFiles[i];
+        const file: File | null = this.selectedFiles[i];
         if (file) {
           this.currentFile = file;
-          this.service.upload(this.currentFile, i).subscribe({
+          this.api.upload(this.currentFile, i).subscribe({
             next: (event: any) => {
               if (event.type === HttpEventType.UploadProgress) {
                 this.progress = Math.round(100 * event.loaded / event.total);
               } else if (event instanceof HttpResponse) {
                 this.message = event.body.message;
-                this.fileInfos = this.service.getFiles();
+                this.fileInfos = this.api.getFiles();
               }
             },
             error: (err: any) => {
@@ -131,74 +159,67 @@ export class EditFormComponent implements OnInit {
             }
           });
         }
-    }
-  
+      }
+
       // this.selectedFiles = undefined;
     }
-  }
-  submit() {
+  } 
+  onSubmit() {
+    this.submitted = true;
+    // stop here if form is invalid
+    // if (this.editForm.invalid) {
+    //   return;
+    // }
 
- 
-      if (this.choices.invalid) { return }
-     
-      const data = {
-        user: this.userDetials.id,
-        personelinfos: this.personalDetails.value,
-        address: this.addressDetails.controls.address.value + ", " 
-                  +this.addressDetails.controls.city.value + ", "
-                  +this.addressDetails.controls.codePostal.value,
-        education: this.education.value,
-        choices: this.choices.value
-      }
-      console.log(this.userDetials.id);
+    // display form values on success
+    alert(  JSON.stringify(this.editForm.value, null, 4) );
+    console.log( JSON.stringify(this.editForm.value, null, 4) );
+    this.api.EditcandidatData(this.editForm.value).subscribe(res => {
+
+      console.log(res);
       
-    
+      // this.router.navigate(['/confirmation']);
 
 
 
-
-    
-}
+    });
+  }
+  onReset() {
+    this.submitted = false;
+    this.editForm.reset();
+  }
   onDiplomeChange(Diplomevalue: any) {
     // console.log(Diplomevalue);
     // console.table(Diplomevalue.data);
 
 
     if (Diplomevalue != "") {
-      this.service.getAllfilsCById(Diplomevalue.id).subscribe((result: { data: any; }) => {
+      this.api.getAllfilsCById(Diplomevalue.id).subscribe((result: { data: any; }) => {
         console.log(result);
         this.filcandidat = result.data;
         this.isDiplome = false;
       })
-      this.service.getetablissementByIdDiplome(Diplomevalue.id).subscribe((result: { data: any; }) => {
+      this.api.getetablissementByIdDiplome(Diplomevalue.id).subscribe((result: { data: any; }) => {
         console.log(result);
         this.etablissements = result.data;
-        this.isetablissement = false;
       })
 
-    } else {
-      this.isDiplome = true;
-      this.filcandidat = [];
-      this.isetablissement = true;
-      this.etablissements = [];
-    }
+    } 
 
 
   }
 
   onFiliereChange(Filvalue: any) {
 
-    // console.log(Filvalue);
+     console.log(Filvalue.id);
 
-    this.service.getfilApotulerById(Filvalue.id).subscribe((result: { data: any; }) => {
+    this.api.getfilApotulerById(Filvalue.id).subscribe((result: { data: any; }) => {
       if (result.data.length == 0) {
-        this.peuxpostuler = false;
-        // console.log("emptyyyyyyyyyyyyyyyy");
+        console.log("empty");
 
       }
       else {
         this.filsApostuler = result.data;
-        this.peuxpostuler = true;
         // console.log("not emptyyyyyyyyyyyyyyyy");
 
 

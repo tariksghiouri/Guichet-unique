@@ -8,33 +8,32 @@ router.post('/', (req, res) => {
   var userdata = req.body;
   // id
   console.log(userdata);
+  // // details perso
 
-  // details perso
-
-  console.log(Number(userdata.user));
-  console.log(userdata.personelinfos.nomFr);
-  console.log(userdata.personelinfos.prenomFr);
-  console.log(userdata.personelinfos.nomAr);
-  console.log(userdata.personelinfos.prenomAr);
-  console.log(userdata.personelinfos.email);
-  console.log(userdata.personelinfos.LieuDeNaissance);
-  console.log(userdata.personelinfos.cin);
-  console.log(userdata.personelinfos.cne);
-  console.log(userdata.personelinfos.phone);
-  console.log(userdata.personelinfos.datenaiss);
-  //education
-  console.log(userdata.education.annediplo);
-  console.log(userdata.education.anneebac);
-  console.log(userdata.education.bac.id);
-  console.log(userdata.education.diplome.id);
-  console.log(userdata.education.filC.id);
-  console.log(userdata.education.notebac);
-  console.log(userdata.education.notediplo);
-  // address
-  console.log(userdata.address);
-  // choices
-  console.log(userdata.choices.filterN1.id);
-  console.log(userdata.choices.filterN2.id);
+  // console.log(Number(userdata.user));
+  // console.log(userdata.personelinfos.nomFr);
+  // console.log(userdata.personelinfos.prenomFr);
+  // console.log(userdata.personelinfos.nomAr);
+  // console.log(userdata.personelinfos.prenomAr);
+  // console.log(userdata.personelinfos.email);
+  // console.log(userdata.personelinfos.LieuDeNaissance);
+  // console.log(userdata.personelinfos.cin);
+  // console.log(userdata.personelinfos.cne);
+  // console.log(userdata.personelinfos.phone);
+  // console.log(userdata.personelinfos.datenaiss);
+  // //education
+  // console.log(userdata.education.annediplo);
+  // console.log(userdata.education.anneebac);
+  // console.log(userdata.education.bac.id);
+  // console.log(userdata.education.diplome.id);
+  // console.log(userdata.education.filC.id);
+  // console.log(userdata.education.notebac);
+  // console.log(userdata.education.notediplo);
+  // // address
+  // console.log(userdata.address);
+  // // choices
+  // console.log(userdata.choices.filterN1.id);
+  // console.log(userdata.choices.filterN2.id);
 
   var Numcondidature = userdata.user;
   var CIN = userdata.personelinfos.cin;
@@ -49,28 +48,26 @@ router.post('/', (req, res) => {
   var Adresse = userdata.address;
   var Tel = userdata.personelinfos.phone;
   var IntituleBAC = userdata.education.bac.id;
+  var noteBac = userdata.education.notebac;
+  var Anneebac = userdata.education.anneebac;
   var DiplomeObtenu = userdata.education.diplome.id;
   var Etablissement = userdata.education.etablissement.id;
   var IntituleFiliere = userdata.education.filC.id
-  var Moyenne1annee = userdata.education.notediplo;
-  var Moyenne2annee = userdata.education.notediplo;
+  // var Moyenne1annee = userdata.education.notediplo;
+  // var Moyenne2annee = userdata.education.notediplo;
   var MoyenneDiplome = userdata.education.notediplo;
   var AnneeDiplome = userdata.education.annediplo;
   var choix1 = userdata.choices.filterN1.id;
   var choix2 = userdata.choices.filterN2.id
 
-  var values =                     [Numcondidature, CIN, CNE, nomFr,nomAr,prenomFr, prenomAr, email, DateDeNaissance, LieuDeNaissance, Adresse, Tel, IntituleBAC, DiplomeObtenu, IntituleFiliere,Etablissement,  1,     Moyenne1annee, Moyenne2annee,MoyenneDiplome,AnneeDiplome,choix1,choix2]
-  var sql = "INSERT INTO candidats (Numcondidature, CIN, CNE, nomFr,nomAr, prenomFr,prenomAr, email, DateDeNaissance, LieuDeNaissance, Adresse, Tel, IntituleBAC, DiplomeObtenu, IntituleFiliere,Etablissement ,ville,Moyenne1annee, Moyenne2annee, MoyenneDiplome,AnneeDiplome,choix1,choix2) VALUES (?)";
+  var values =                     [Numcondidature, CIN, CNE, nomFr,nomAr,prenomFr, prenomAr, email, DateDeNaissance, LieuDeNaissance, Adresse, Tel, IntituleBAC,noteBac,Anneebac, DiplomeObtenu, IntituleFiliere,Etablissement,  1   ,MoyenneDiplome,AnneeDiplome,choix1,choix2]
+  var sql = "INSERT INTO candidats (Numcondidature, CIN, CNE, nomFr,nomAr, prenomFr,prenomAr, email, DateDeNaissance, LieuDeNaissance, Adresse, Tel, IntituleBAC,noteBac,Anneebac, DiplomeObtenu, IntituleFiliere,Etablissement ,ville,MoyenneDiplome,AnneeDiplome,choix1,choix2) VALUES (?)";
 
  
   connection.query(sql, [values],function(err, response) {
-    if (err) {
-      // @ts-ignore
-      res.status().send(200);
-        return err.message;
-    } else {
-        console.log('Inserted id: ' + response.insertId);
-    }
+    if (err) throw err;
+    console.log("1 record inserted");
+
 });
 
   

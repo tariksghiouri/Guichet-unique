@@ -55,6 +55,10 @@ export class ApiServiceService {
     console.log(candidatData);
      return this._http.post(`${this.apiUrl + "/candidatData"}`, candidatData);
   }
+  EditcandidatData(candidatData: any) {
+    // console.log(candidatData);
+     return this._http.post(`${this.apiUrl + "/editCandidature"}`, candidatData);
+  }
 
   upload(file: File, index): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
