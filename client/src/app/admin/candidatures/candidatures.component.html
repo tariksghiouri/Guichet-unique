@@ -1,0 +1,36 @@
+<div class="container py-5">
+
+    <h3>la liste des candidats</h3>
+    <form>
+      <div class="form-group form-inline">
+        Rechercher des candidats par CNE :
+          <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm"
+          (input)="search($event.target.value)" />
+      </div>
+    </form>
+    <div class="table-responsive">
+
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col" >Num candidature</th>
+                <th scope="col" >CIN</th>
+                <th scope="col" >nom</th>
+                <th scope="col" >CNE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let candidat of candidats listFilter: searchTerm | slice: (page-1) * pageSize : page * pageSize; index as i">
+                
+                <td>{{ candidat.Numcondidature }}</td>
+                <td>{{ candidat.CIN }}</td>
+                <td>{{ candidat.nomFr }}</td>
+                <td>{{ candidat.CNE }}</td>
+              </tr>
+            </tbody>
+          </table>
+        
+    </div>
+    <!-- <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="5" [boundaryLinks]="true"
+      [pageSize]="pageSize" class="d-flex justify-content-center"></ngb-pagination> -->
+  </div>

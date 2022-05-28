@@ -26,6 +26,7 @@ import { EditFormComponent } from './edit-form/edit-form.component'
         HttpClientModule,
         AppRoutingModule,
         AccordionModule.forRoot(),
+        
 
        
     ],

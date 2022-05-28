@@ -65,8 +65,11 @@ router.post('/', (req, res) => {
 
  
   connection.query(sql, [values],function(err, response) {
-    if (err) throw err;
-    console.log("1 record inserted");
+    if (err) {
+      return res.json({"message":"Impossible d'ajouter' l'enregistrement", "success": false});
+      
+    }
+    return res.json({"message":response.message, "success": true});
 
 });
 

@@ -26,6 +26,10 @@ export class ApiServiceService {
 
     return this._http.get(`${this.apiUrl + "/filsC"}`);
   }
+  getAllCandidats(): Observable<any> {
+
+    return this._http.get(`${this.apiUrl + "/candidat"}`);
+  }
   getAllfilsCById(id: any): Observable<any> {
 
     return this._http.get(`${this.apiUrl + "/filsC/" + id}`);

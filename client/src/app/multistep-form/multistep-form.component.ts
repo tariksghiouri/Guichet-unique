@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiServiceService } from '../api-service.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { AccountService } from '@app/_services';
+import { AccountService, AlertService } from '@app/_services';
 
 
 @Component({
@@ -54,7 +54,8 @@ export class MultistepFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: ApiServiceService,
     private router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private alertService: AlertService
 
   ) { }
 
@@ -275,9 +276,17 @@ export class MultistepFormComponent implements OnInit {
       console.log(this.userDetials.id);
       
       console.table(data);
-      this.service.sendcandidatData(data).subscribe(res => {
+      this.service.sendcandidatData(data).subscribe((res:any) => {
 
-        console.log(res);
+        if (res.success == true) {
+
+          window.scrollTo(0, 0);
+          this.alertService.success("vous avez mis à jour votre application avec succès");
+        }
+        else{
+          window.scrollTo(0, 0);
+          this.alertService.error(res.message);
+        }
         
         // this.router.navigate(['/confirmation']);
 

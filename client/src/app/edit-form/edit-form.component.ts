@@ -2,7 +2,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiServiceService } from '@app/api-service.service';
-import { AccountService } from '@app/_services';
+import { AccountService, AlertService } from '@app/_services';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class EditFormComponent implements OnInit {
   submitted = false;
-
+  DateDeNaissance
   editForm: FormGroup;
   readData: any;
   diplomes: any;
@@ -36,7 +36,7 @@ export class EditFormComponent implements OnInit {
   fileInfos?: Observable<any>;
   etablissements: any;
   account = this.accountService.accountValue;
-  candidature=[]||null;
+  candidature = [] || null;
   IntituleBAC: any
   DiplomeObtenu: any
   IntituleFiliere: any
@@ -44,7 +44,7 @@ export class EditFormComponent implements OnInit {
   ville: any
   choix1: any
   choix2: any
-  constructor(private accountService: AccountService, private api: ApiServiceService, private formBuilder: FormBuilder,
+  constructor(private alertService: AlertService, private accountService: AccountService, private api: ApiServiceService, private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -75,42 +75,43 @@ export class EditFormComponent implements OnInit {
 
     this.api.getUserCandudatures(this.account.id).subscribe((result: { data: any; }) => {
 
-        console.log(result.data);
-          
-        this.candidature = result.data;
-        this.api.getBacById(this.candidature[0].IntituleBAC).subscribe((result: { data: any; }) => {
-          this.IntituleBAC = result.data
+      console.log(result.data);
+
+      this.candidature = result.data;
+      this.DateDeNaissance = this.candidature[0].DateDeNaissance.slice(0, 10);
+      this.api.getBacById(this.candidature[0].IntituleBAC).subscribe((result: { data: any; }) => {
+        this.IntituleBAC = result.data
 
       });
-        console.log(this.candidature[0].IntituleFiliere);
-        this.editForm = this.formBuilder.group(
-          {
-            numCandidature:[this.account.id,],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            firstNameAr: ['', Validators.required],
-            lastNameAr: ['', Validators.required],
-            dob: ['',Validators.required],
-            email: ['', [Validators.required, Validators.email]],
-            telephone: ['', Validators.required],
-            LieuDeNaissance: ['', Validators.required],
-            CIN: ['', Validators.required],
-            CNE: ['', Validators.required],
-            Bac: ['', Validators.required],
-            anneBac: ['', Validators.required],
-            noteBac: ['', Validators.required],
-            diplome: ['', Validators.required],
-            filiereDip: ['', Validators.required],
-            etablissement: ['', Validators.required],
-            MoyenneDiplome: ['', Validators.required],
-            AnneeDiplome: ['', Validators.required],
-            choix1:['', Validators.required],
-            choix2:['', Validators.required],
-            Adresse:['', Validators.required],
-            
-            
-          }
-        );
+      console.log(this.candidature[0].IntituleFiliere);
+      this.editForm = this.formBuilder.group(
+        {
+          numCandidature: [this.account.id,],
+          firstName: ['', Validators.required],
+          lastName: ['', Validators.required],
+          firstNameAr: ['', Validators.required],
+          lastNameAr: ['', Validators.required],
+          dob: ['', Validators.required],
+          email: ['', [Validators.required, Validators.email]],
+          telephone: ['', Validators.required],
+          LieuDeNaissance: ['', Validators.required],
+          CIN: ['', Validators.required],
+          CNE: ['', Validators.required],
+          Bac: ['', Validators.required],
+          anneBac: ['', Validators.required],
+          noteBac: ['', Validators.required],
+          diplome: ['', Validators.required],
+          filiereDip: ['', Validators.required],
+          etablissement: ['', Validators.required],
+          MoyenneDiplome: ['', Validators.required],
+          AnneeDiplome: ['', Validators.required],
+          choix1: ['', Validators.required],
+          choix2: ['', Validators.required],
+          Adresse: ['', Validators.required],
+
+
+        }
+      );
 
 
 
@@ -163,26 +164,36 @@ export class EditFormComponent implements OnInit {
 
       // this.selectedFiles = undefined;
     }
-  } 
+  }
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
-    // if (this.editForm.invalid) {
-    //   return;
-    // }
+    if (this.editForm.invalid) {
+      window.scrollTo(0, 0);
+      this.alertService.error("vous devez remplir tous les champs");
+      return;
+    }
 
     // display form values on success
-    alert(  JSON.stringify(this.editForm.value, null, 4) );
-    console.log( JSON.stringify(this.editForm.value, null, 4) );
-    this.api.EditcandidatData(this.editForm.value).subscribe(res => {
+    // alert(  JSON.stringify(this.editForm.value, null, 4) );
+    // console.log( JSON.stringify(this.editForm.value, null, 4) );
+    this.api.EditcandidatData(this.editForm.value).subscribe((res: any) => {
 
-      console.log(res);
-      
-      // this.router.navigate(['/confirmation']);
+      if (res.success == true) {
+
+        window.scrollTo(0, 0);
+        this.alertService.success("vous avez mis à jour votre application avec succès");
+      }
+      else{
+        window.scrollTo(0, 0);
+        this.alertService.error(res.message);
+      }
 
 
 
     });
+
+
   }
   onReset() {
     this.submitted = false;
@@ -204,14 +215,14 @@ export class EditFormComponent implements OnInit {
         this.etablissements = result.data;
       })
 
-    } 
+    }
 
 
   }
 
   onFiliereChange(Filvalue: any) {
 
-     console.log(Filvalue.id);
+    console.log(Filvalue.id);
 
     this.api.getfilApotulerById(Filvalue.id).subscribe((result: { data: any; }) => {
       if (result.data.length == 0) {

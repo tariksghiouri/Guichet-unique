@@ -70,7 +70,7 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label>Date of Birth</label>
-                        <input type="date" formControlName="dob" class="form-control"
+                        <input type="date" formControlName="dob" class="form-control" [(ngModel)]="DateDeNaissance"
                             [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
                         <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
                             <div *ngIf="f.dob.errors.required">Date of Birth is required</div>
@@ -253,7 +253,7 @@
 
                 <div class="text-center">
                     <button class="btn btn-primary mr-1">Modifier</button>
-                    <button class="btn btn-secondary" type="reset" (click)="onReset()">Annuler</button>
+                    <button class="btn btn-secondary" routerLink="/profile" type="reset" (click)="onReset()">Annuler</button>
                 </div>
             </form>
         </div>
