@@ -17,6 +17,7 @@ var editFormRouter=require('./routes/editForm');
 const initRoutes = require("./routes/fileRoute");
 const etablissementRoute = require("./routes/EtablissementDeDiplome");
 const candidatDataRoute = require("./routes/getCandidatData");
+var cleanDataRoute = require("./routes/cleanCandidatData");
 
 global.__basedir = __dirname;
 
@@ -39,6 +40,7 @@ app.use('/candidatData', userFormRouter);
 app.use('/editCandidature', editFormRouter);
 app.use('/etablissement', etablissementRoute);
 app.use('/candidat', candidatDataRoute);
+app.use('/listcandidat', cleanDataRoute);
 initRoutes(app);
 
 

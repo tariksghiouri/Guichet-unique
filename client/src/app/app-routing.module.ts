@@ -16,9 +16,9 @@ const routes: Routes = [
      { path: 'home', component: HomeComponent},
      { path: 'confirmation', component: ConfirmationComponent,canActivate: [AuthGuard]},
     { path: 'account', loadChildren: accountModule },
-    { path: 'profile', loadChildren: profileModule, canActivate: [AuthGuard] },
+    { path: 'profile', loadChildren: profileModule, canActivate: [AuthGuard],data: { roles: [Role.User] } },
     { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
-    {path:'form',component:MultistepFormComponent, canActivate:[AuthGuard]},
+    {path:'form',component:MultistepFormComponent, canActivate:[AuthGuard],data: { roles: [Role.User] } },
     {path:'submitted',component:ThankYouPageComponent,canActivate: [AuthGuard]},
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }

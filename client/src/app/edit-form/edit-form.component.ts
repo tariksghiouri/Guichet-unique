@@ -174,9 +174,7 @@ export class EditFormComponent implements OnInit {
       return;
     }
 
-    // display form values on success
-    // alert(  JSON.stringify(this.editForm.value, null, 4) );
-    // console.log( JSON.stringify(this.editForm.value, null, 4) );
+ 
     this.api.EditcandidatData(this.editForm.value).subscribe((res: any) => {
 
       if (res.success == true) {

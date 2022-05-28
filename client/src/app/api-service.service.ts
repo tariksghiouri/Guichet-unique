@@ -21,6 +21,10 @@ export class ApiServiceService {
 
     return this._http.get(`${this.apiUrl + "/fils"}`);
   }
+  getCleanCandidatsList(): Observable<any> {
+
+    return this._http.get(`${this.apiUrl + "/listcandidat"}`);
+  }
 
   getAllfilsC(): Observable<any> {
 
