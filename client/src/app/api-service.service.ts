@@ -25,6 +25,10 @@ export class ApiServiceService {
 
     return this._http.get(`${this.apiUrl + "/listcandidat"}`);
   }
+  getdates(): Observable<any> {
+
+    return this._http.get(`${this.apiUrl + "/AnneeUiversitaire"}`);
+  }
 
   getAllfilsC(): Observable<any> {
 

@@ -9,6 +9,7 @@ import { OverviewComponent } from './overview.component';
 import { CandidaturesComponent } from './candidatures/candidatures.component';
 import { ListFilterPipe } from './listFilterPipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LesDatesComponent } from './les-dates/les-dates.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         LayoutComponent,
         OverviewComponent,
         CandidaturesComponent,
-        ListFilterPipe
+        ListFilterPipe,
+        LesDatesComponent
     ]
 })
 export class AdminModule { }

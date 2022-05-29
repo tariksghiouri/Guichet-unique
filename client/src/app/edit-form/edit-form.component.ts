@@ -49,30 +49,6 @@ export class EditFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-
-    // this.editForm = this.formBuilder.group(
-    //   {
-    //     title: ['', Validators.required],
-    //     firstName: ['', Validators.required],
-    //     lastName: ['', Validators.required],
-    //     // validates date format yyyy-mm-dd
-    //     dob: [
-    //       '',
-    //       [
-    //         Validators.required,
-    //         Validators.pattern(
-    //           /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/
-    //         ),
-    //       ],
-    //     ],
-    //     email: ['', [Validators.required, Validators.email]],
-    //     password: ['', [Validators.required, Validators.minLength(6)]],
-    //     confirmPassword: ['', Validators.required],
-    //     acceptTerms: [false, Validators.requiredTrue],
-    //   }
-    // );
-
     this.api.getUserCandudatures(this.account.id).subscribe((result: { data: any; }) => {
 
       console.log(result.data);
@@ -168,11 +144,11 @@ export class EditFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
-    if (this.editForm.invalid) {
-      window.scrollTo(0, 0);
+    // if (this.editForm.invalid) {
+    //   window.scrollTo(0, 0);
       this.alertService.error("vous devez remplir tous les champs");
-      return;
-    }
+      // return;
+    // }
 
  
     this.api.EditcandidatData(this.editForm.value).subscribe((res: any) => {
