@@ -66,6 +66,18 @@ export class LesDatesComponent implements OnInit {
       this.alertService.error("vous devez remplir tous les champs");
       return;
     }
+    this.api.EditDates(this.editdates.value).subscribe((res: any) => {
+
+      if (res.success == true) {
+
+        window.scrollTo(0, 0);
+        this.alertService.success("vous avez mis à jour les dates avec succès");
+      }
+      else{
+        window.scrollTo(0, 0);
+        this.alertService.error(res.message);
+      }
+    })
 
   } 
  public get f() {

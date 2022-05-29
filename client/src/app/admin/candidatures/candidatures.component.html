@@ -31,6 +31,8 @@
           <th scope="col">CIN</th>
           <th scope="col">nom</th>
           <th scope="col">CNE</th>
+          <th scope="col">1ere choix</th>
+          <th scope="col">2eme choix</th>
         </tr>
       </thead>
       <tbody>
@@ -41,6 +43,8 @@
           <td>{{ candidat.CIN }}</td>
           <td>{{ candidat.nomFr }}</td>
           <td>{{ candidat.CNE }}</td>
+          <td>{{ allfils[candidat.choix1] }}</td>
+          <td>{{ allfils[candidat.choix2] }}</td>
         </tr>
       </tbody>
     </table>

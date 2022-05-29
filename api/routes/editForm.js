@@ -62,7 +62,7 @@ router.post('/', (req, res) => {
    
     connection.query(sql.replace(/\n/g, ''), function (err, response) {
       if (err) {
-        return res.json({"message":"Impossible de mettre à jour l'enregistrement", "success": false});
+        return res.json({"message":err, "success": false});
         
       }
       return res.json({"message":response.message, "success": true});

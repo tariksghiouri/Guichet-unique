@@ -37,6 +37,8 @@ export class CandidaturesComponent implements OnInit {
   collectionSize: number;
   candidats;
   allcandidats ;
+  allfils=[];
+
   constructor(private api: ApiServiceService) { }
   downloadCSV(){
     let listdesCandidats: any;
@@ -49,6 +51,10 @@ export class CandidaturesComponent implements OnInit {
 
   }
   ngOnInit(): void {
+   
+   this.getAllchoices();
+   console.log(this.allfils);
+
     this.api.getAllCandidats().subscribe((res: any) => {
       this.collectionSize = res.data.length;
       this.candidats = res.data;
@@ -64,6 +70,7 @@ export class CandidaturesComponent implements OnInit {
     this.candidats = this.allcandidats.filter((val) => val.CNE.toLowerCase().includes(value));
     this.collectionSize = this.candidats.length;
   }
+ 
  
  downloadCSVFromJson = (filename, arrayOfJson) => {
   // convert JSON to CSV
@@ -82,5 +89,13 @@ export class CandidaturesComponent implements OnInit {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-};
+}
+getAllchoices(){
+  this.api.getAllchoices().subscribe((res: any) => {
+         for(var i in res){
+           this.allfils[res[i].id]= res[i].Intitule
+                   }
+         
+  })
+}
 }

@@ -7,7 +7,7 @@ var connection = require('../connections/connection');
 router.post('/', (req, res) => {
   var userdata = req.body;
   // id
-  console.log(userdata);
+  console.log(req);
   // // details perso
 
   // console.log(Number(userdata.user));
@@ -69,7 +69,7 @@ router.post('/', (req, res) => {
       return res.json({"message":"Impossible d'ajouter' l'enregistrement", "success": false});
       
     }
-    return res.json({"message":response.message, "success": true});
+    return res.json({"message":"insere avec sucess", "success": true});
 
 });
 
