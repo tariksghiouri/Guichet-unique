@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { ApiServiceService } from '@app/api-service.service';
 import { Alert } from '@app/_models';
 interface candidat {
@@ -13,14 +14,14 @@ interface candidat {
   DateDeNaissance: string;
   LieuDeNaissance: string;
   Adresse: string;
-  Tel: string; 
-  IntituleBAC: number; 
+  Tel: string;
+  IntituleBAC: number;
   noteBac: number;
-  Anneebac: string; 
+  Anneebac: string;
   DiplomeObtenu: number;
   IntituleFiliere: number;
-  Etablissement: number; 
-  ville: number; 
+  Etablissement: number;
+  ville: number;
   MoyenneDiplome: number;
   AnneeDiplome: string;
   choix1: number;
@@ -31,71 +32,100 @@ interface candidat {
   styleUrls: ['./candidatures.component.less']
 })
 export class CandidaturesComponent implements OnInit {
+  @ViewChild("ngModel") ngModel: NgModel;
+
   searchTerm: string;
   page = 1;
   pageSize = 4;
   collectionSize: number;
   candidats;
-  allcandidats ;
-  allfils=[];
+  allcandidats;
+  allfils = [];
+  allfilsraw;
+  nombreCanidats
 
   constructor(private api: ApiServiceService) { }
-  downloadCSV(){
+  downloadCSV() {
     let listdesCandidats: any;
     this.api.getCleanCandidatsList().subscribe((candidats: any) => {
-      listdesCandidats =candidats;
+      listdesCandidats = candidats;
       this.downloadCSVFromJson('listdesCandidats.csv', listdesCandidats);
 
-      
+
     })
 
   }
+  FiliereSelectChanged(Filvalue: any) {
+    if (Filvalue.target.value == -1) {
+      this.api.getAllCandidats().subscribe((res: any) => {
+        this.collectionSize = res.data.length;
+        this.nombreCanidats = res.data.length;
+        this.candidats = res.data;
+        this.allcandidats = this.candidats;
+    
+  
+      });
+
+    } else {
+      this.api.geListCandidatsparchoixId(Filvalue.target.value).subscribe((candidats: any) => {
+        this.collectionSize = candidats.length;
+        this.nombreCanidats = candidats.length
+        this.candidats = candidats;
+        this.allcandidats = this.candidats;
+      })
+    }
+
+
+
+  }
   ngOnInit(): void {
-   
-   this.getAllchoices();
-   console.log(this.allfils);
+
+    this.getAllchoices();
+    console.log(this.allfils);
 
     this.api.getAllCandidats().subscribe((res: any) => {
       this.collectionSize = res.data.length;
+      this.nombreCanidats = res.data.length;
       this.candidats = res.data;
       this.allcandidats = this.candidats;
-        //  console.table(this.candidats);
-         
-        //  console.log(this.collectionSize);
+      //  console.table(this.candidats);
+
+      //  console.log(this.collectionSize);
 
     });
-    
+
   }
   search(value: string): void {
     this.candidats = this.allcandidats.filter((val) => val.CNE.toLowerCase().includes(value));
     this.collectionSize = this.candidats.length;
   }
- 
- 
- downloadCSVFromJson = (filename, arrayOfJson) => {
-  // convert JSON to CSV
-  const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
-  const header = Object.keys(arrayOfJson[0])
-  let csv = arrayOfJson.map(row => header.map(fieldName => 
-  JSON.stringify(row[fieldName], replacer)).join(','))
-  csv.unshift(header.join(','))
-  csv = csv.join('\r\n')
 
-  // Create link and download
-  var link = document.createElement('a');
-  link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv));
-  link.setAttribute('download', filename);
-  link.style.visibility = 'hidden';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-getAllchoices(){
-  this.api.getAllchoices().subscribe((res: any) => {
-         for(var i in res){
-           this.allfils[res[i].id]= res[i].Intitule
-                   }
-         
-  })
-}
+
+  downloadCSVFromJson = (filename, arrayOfJson) => {
+    // convert JSON to CSV
+    const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
+    const header = Object.keys(arrayOfJson[0])
+    let csv = arrayOfJson.map(row => header.map(fieldName =>
+      JSON.stringify(row[fieldName], replacer)).join(','))
+    csv.unshift(header.join(','))
+    csv = csv.join('\r\n')
+
+    // Create link and download
+    var link = document.createElement('a');
+    link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv));
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+  getAllchoices() {
+    this.api.getAllchoices().subscribe((res: any) => {
+      this.allfilsraw = res
+      for (var i in res) {
+        this.allfils[res[i].id] = res[i].Intitule
+      }
+
+    })
+  }
 }

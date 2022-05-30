@@ -175,6 +175,24 @@ router.get('/Etablissement/:id', function (req, res) {
 
 
 });
+router.get('/CandidatParfiliere/:id', function (req, res) {
+
+    const id = Number(req.params.id);
+    connection.query('SELECT * FROM candidats WHERE choix1=?', [id], function (err, rows) {
+
+        if (err) {
+            return err.message;
+
+
+        } else {
+
+            res.send(rows);
+        }
+
+    });
+
+
+});
 
 
 

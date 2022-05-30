@@ -144,11 +144,11 @@ export class EditFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
-    // if (this.editForm.invalid) {
-    //   window.scrollTo(0, 0);
+    if (this.editForm.invalid) {
+      window.scrollTo(0, 0);
       this.alertService.error("vous devez remplir tous les champs");
-      // return;
-    // }
+      return;
+    }
 
  
     this.api.EditcandidatData(this.editForm.value).subscribe((res: any) => {
@@ -160,7 +160,7 @@ export class EditFormComponent implements OnInit {
       }
       else{
         window.scrollTo(0, 0);
-        this.alertService.error(res.message);
+        // this.alertService.error(res.message);
       }
 
 

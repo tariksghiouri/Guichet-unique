@@ -81,60 +81,60 @@ export class MultistepFormComponent implements OnInit {
 
 
     this.personalDetails = this.formBuilder.group({
-      nomFr: ['', Validators.required],
-      prenomFr: ['', Validators.required],
-      nomAr: ['', Validators.required],
-      prenomAr: ['', Validators.required],
-      email: [this.userDetials.email, Validators.required],
-      phone: ['', Validators.required],
-      cin: ['', <any>[Validators.required, Validators.minLength(10)]],
-      LieuDeNaissance: ['', Validators.required],
-      datenaiss: ['', Validators.required],
-      cne: ['', Validators.required],
-      // nomFr: ['',],
-      // prenomFr: ['',],
-      // nomAr: ['',],
-      // prenomAr: ['',],
-      // email: [this.userDetials.email,],
-      // phone: ['',],
-      // cin: ['',],
-      // LieuDeNaissance: ['',],
-      // datenaiss: ['',],
-      // cne: ['',]
+      // nomFr: ['', Validators.required],
+      // prenomFr: ['', Validators.required],
+      // nomAr: ['', Validators.required],
+      // prenomAr: ['', Validators.required],
+      // email: [this.userDetials.email, Validators.required],
+      // phone: ['', Validators.required],
+      // cin: ['', <any>[Validators.required, Validators.minLength(10)]],
+      // LieuDeNaissance: ['', Validators.required],
+      // datenaiss: ['', Validators.required],
+      // cne: ['', Validators.required],
+      nomFr: ['',],
+      prenomFr: ['',],
+      nomAr: ['',],
+      prenomAr: ['',],
+      email: [this.userDetials.email,],
+      phone: ['',],
+      cin: ['',],
+      LieuDeNaissance: ['',],
+      datenaiss: ['',],
+      cne: ['',]
 
     });
 
     this.addressDetails = this.formBuilder.group({
-       city: ['', Validators.required],
-      address: ['', Validators.required],
-      codePostal: ['', Validators.required],
-      // city: ['',],
-      // address: ['',],
-      // codePostal: ['',],
+      //  city: ['', Validators.required],
+      // address: ['', Validators.required],
+      // codePostal: ['', Validators.required],
+      city: ['',],
+      address: ['',],
+      codePostal: ['',],
 
     });
 
     this.education = this.formBuilder.group({
-      bac: ['', Validators.required],
-      notebac: ['', Validators.required],
-      anneebac: ['', Validators.required],
-      diplome: ['', Validators.required],
-      annediplo: ['', Validators.required],
-      notediplo: ['', Validators.required],
-      filC: ['', Validators.required],
-      etablissement: ['',Validators.required],
+      // bac: ['', Validators.required],
+      // notebac: ['', Validators.required],
+      // anneebac: ['', Validators.required],
+      // diplome: ['', Validators.required],
+      // annediplo: ['', Validators.required],
+      // notediplo: ['', Validators.required],
+      // filC: ['', Validators.required],
+      // etablissement: ['',Validators.required],
 
 
 
-      // bac: ['',],
-      // notebac: ['',],
-      // anneebac: ['',],
+      bac: ['',],
+      notebac: ['',],
+      anneebac: ['',],
 
-      // diplome: ['',],
-      // filC: ['',],
-      // etablissement: ['',],
-      // annediplo: ['',],
-      // notediplo: ['',],
+      diplome: ['',],
+      filC: ['',],
+      etablissement: ['',],
+      annediplo: ['',],
+      notediplo: ['',],
 
 
     });
@@ -282,10 +282,14 @@ export class MultistepFormComponent implements OnInit {
 
           window.scrollTo(0, 0);
           this.alertService.success("vous avez mis à jour votre application avec succès");
+          // this.router.navigate(['/confirmation']);
+          this.router.navigate(['/submitted']);
         }
         else{
           window.scrollTo(0, 0);
           this.alertService.error(res.message);
+        
+
         }
         
         // this.router.navigate(['/confirmation']);

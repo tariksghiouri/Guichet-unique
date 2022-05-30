@@ -1,5 +1,8 @@
 <div class="container py-5">
-
+    <div class="alert alert-info">  
+        <button type="button" class="close" data-dismiss="alert">×</button>  
+        <strong>Note!</strong> si vous ne voulez rien changer cliquez sur annuler!
+    </div> 
     <div class="row">
         <div class="col-md-12 col-md-offset-3" id="msform">
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
@@ -130,8 +133,7 @@
 
                     <div class="form-group col">
                         <label>Bac</label>
-                        <select formControlName="Bac" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.Bac.errors }">
+                        <select formControlName="Bac" class="form-control"   [ngClass]="{ 'is-invalid': submitted && f.Bac.errors }">
                             <option *ngFor="let bac of bacs" [ngValue]="bac"> {{ bac.Intitule }}</option>
                         </select>
                         <div *ngIf="submitted && f.Bac.errors" class="invalid-feedback">

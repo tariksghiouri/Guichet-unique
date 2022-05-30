@@ -116,6 +116,9 @@ export class ApiServiceService {
   geEtablissementById(id: any): Observable<any> {
     return this._http.get(`${this.apiUrl + "/candidat/Etablissement/" + id}`);
   }
+  geListCandidatsparchoixId(id: any): Observable<any> {
+    return this._http.get(`${this.apiUrl + "/candidat/CandidatParfiliere/" + id}`);
+  }
   EditDates(newDates: any) {
     // console.log(candidatData);
      return this._http.post(`${this.apiUrl + "/AnneeUiversitaire/edit"}`, newDates);
