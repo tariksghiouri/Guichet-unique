@@ -13,12 +13,14 @@ import { AccountService, AlertService } from '@app/_services';
   styleUrls: ['./multistep-form.component.css']
 })
 export class MultistepFormComponent implements OnInit {
-  noCondidature=true;
+
+  noCondidature = true;
   personalDetails!: FormGroup;
   addressDetails!: FormGroup;
   education!: FormGroup;
   choices!: FormGroup;
   files!: FormGroup;
+  secondCanidature!: FormGroup;
   personal_step = false;
   address_step = false;
   education_step = false;
@@ -49,6 +51,21 @@ export class MultistepFormComponent implements OnInit {
   message = '';
   fileInfos?: Observable<any>;
   etablissements: any;
+  numberOfcandidatures: any;
+  SecondFormSubmitted = false;
+  //second Candidatures DAATA vars
+  DateDeNaissance: any;
+  SecondBacs:any
+  Seconddiplomes
+  SecondFildiplome
+  SecondEtablissement
+  SecondfilsApostuler
+  Secondpeuxpostuler: boolean;
+  Secondfilcandidat: any;
+  Secondetablissements: any;
+  //  SecondSecondChoice
+
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,19 +77,64 @@ export class MultistepFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userDetials = this.accountService.accountValue
+    this.service.getAllbacs().subscribe((result: { data: any; }) => {
+      this.SecondBacs = result.data;
+      
 
-  //   this.service.getUserCandudatures(this.userDetials.id).subscribe((result: { data: any; }) => {
-  //     if(!Object.keys(result.data).length){
-  //         this.noCondidature=true;
-  //     }
-  //     else{
-  //         this.noCondidature=false;
-  //     }
-  // });
-    this.userDetials=this.accountService.accountValue
-    console.log(this.userDetials.id);
-    
-        this.service.getAllfils().subscribe((result: { data: any; }) => {
+    })
+    this.service.getAlldips().subscribe((result: { data: any; }) => {
+      // console.log(result);
+      this.Seconddiplomes = result.data;
+    });
+    this.service.getUserCandudatures(this.userDetials.id).subscribe((result: { data: any; }) => {
+
+      let oldCandidature = result.data;
+      let DateDeNaissance = oldCandidature[0].DateDeNaissance.slice(0, 10);
+
+      this.secondCanidature = this.formBuilder.group(
+        {
+          IdCompte: [this.userDetials.id],
+          firstName: [oldCandidature[0].prenomFr, Validators.required],
+          lastName: [oldCandidature[0].nomFr, Validators.required],
+          firstNameAr: [oldCandidature[0].prenomAr, Validators.required],
+          lastNameAr: [oldCandidature[0].nomAr, Validators.required],
+          dob: [DateDeNaissance, Validators.required],
+          email: [oldCandidature[0].email, Validators.required],
+          telephone: [oldCandidature[0].Tel, Validators.required],
+          LieuDeNaissance: [oldCandidature[0].LieuDeNaissance, Validators.required],
+          CIN: [oldCandidature[0].CIN, Validators.required],
+          CNE: [oldCandidature[0].CNE, Validators.required],
+          Adresse: [oldCandidature[0].Adresse, Validators.required],
+          Bac: ['', Validators.required],
+          anneBac: ['', Validators.required],
+          noteBac: ['', Validators.required],
+          diplome: ['', Validators.required],
+          filiereDip: ['', Validators.required],
+          etablissement: ['', Validators.required],
+          MoyenneDiplome: ['', Validators.required],
+          AnneeDiplome: ['', Validators.required],
+          choix1: ['', Validators.required],
+          choix2: ['', Validators.required],
+
+
+        }
+      );
+
+
+
+
+    });
+
+    this.service.getNumberOfCandidatures(this.userDetials.id).subscribe((result: { data: any; }) => {
+      console.log(result[0].numberOfcandidatures);
+      this.numberOfcandidatures = result[0].numberOfcandidatures;
+
+    });
+
+
+
+    this.service.getAllfils().subscribe((result: { data: any; }) => {
       // console.log(result);
       this.fils = result.data;
       // this.fils$.next(result.data);
@@ -81,60 +143,60 @@ export class MultistepFormComponent implements OnInit {
 
 
     this.personalDetails = this.formBuilder.group({
-      // nomFr: ['', Validators.required],
-      // prenomFr: ['', Validators.required],
-      // nomAr: ['', Validators.required],
-      // prenomAr: ['', Validators.required],
-      // email: [this.userDetials.email, Validators.required],
-      // phone: ['', Validators.required],
-      // cin: ['', <any>[Validators.required, Validators.minLength(10)]],
-      // LieuDeNaissance: ['', Validators.required],
-      // datenaiss: ['', Validators.required],
-      // cne: ['', Validators.required],
-      nomFr: ['',],
-      prenomFr: ['',],
-      nomAr: ['',],
-      prenomAr: ['',],
-      email: [this.userDetials.email,],
-      phone: ['',],
-      cin: ['',],
-      LieuDeNaissance: ['',],
-      datenaiss: ['',],
-      cne: ['',]
+      nomFr: ['', Validators.required],
+      prenomFr: ['', Validators.required],
+      nomAr: ['', Validators.required],
+      prenomAr: ['', Validators.required],
+      email: [this.userDetials.email, Validators.required],
+      phone: ['', Validators.required],
+      cin: ['', <any>[Validators.required, Validators.minLength(10)]],
+      LieuDeNaissance: ['', Validators.required],
+      datenaiss: ['', Validators.required],
+      cne: ['', Validators.required],
+      // nomFr: ['',],
+      // prenomFr: ['',],
+      // nomAr: ['',],
+      // prenomAr: ['',],
+      // email: [this.userDetials.email,],
+      // phone: ['',],
+      // cin: ['',],
+      // LieuDeNaissance: ['',],
+      // datenaiss: ['',],
+      // cne: ['',]
 
     });
 
     this.addressDetails = this.formBuilder.group({
-      //  city: ['', Validators.required],
-      // address: ['', Validators.required],
-      // codePostal: ['', Validators.required],
-      city: ['',],
-      address: ['',],
-      codePostal: ['',],
+       city: ['', Validators.required],
+      address: ['', Validators.required],
+      codePostal: ['', Validators.required],
+      // city: ['',],
+      // address: ['',],
+      // codePostal: ['',],
 
     });
 
     this.education = this.formBuilder.group({
-      // bac: ['', Validators.required],
-      // notebac: ['', Validators.required],
-      // anneebac: ['', Validators.required],
-      // diplome: ['', Validators.required],
-      // annediplo: ['', Validators.required],
-      // notediplo: ['', Validators.required],
-      // filC: ['', Validators.required],
-      // etablissement: ['',Validators.required],
+      bac: ['', Validators.required],
+      notebac: ['', Validators.required],
+      anneebac: ['', Validators.required],
+      diplome: ['', Validators.required],
+      annediplo: ['', Validators.required],
+      notediplo: ['', Validators.required],
+      filC: ['', Validators.required],
+      etablissement: ['',Validators.required],
 
 
 
-      bac: ['',],
-      notebac: ['',],
-      anneebac: ['',],
+      // bac: ['',],
+      // notebac: ['',],
+      // anneebac: ['',],
 
-      diplome: ['',],
-      filC: ['',],
-      etablissement: ['',],
-      annediplo: ['',],
-      notediplo: ['',],
+      // diplome: ['',],
+      // filC: ['',],
+      // etablissement: ['',],
+      // annediplo: ['',],
+      // notediplo: ['',],
 
 
     });
@@ -152,6 +214,11 @@ export class MultistepFormComponent implements OnInit {
       file1: ['', Validators.required],
 
     })
+
+
+
+
+
   }
 
   get personal() { return this.personalDetails.controls; }
@@ -166,12 +233,29 @@ export class MultistepFormComponent implements OnInit {
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
   }
+  onSecondCandidatureSubmit() {
+    console.log(this.secondCanidature.value);
+
+    this.SecondFormSubmitted = true;
+    // stop here if form is invalid
+    if (this.secondCanidature.invalid) {
+      window.scrollTo(0, 0);
+      this.alertService.error("vous devez remplir tous les champs");
+      return;
+    }
+    else{
+      this.service.sendSecondcandidatData(this.secondCanidature.value).subscribe((result: { data: any})=>{
+        console.log(result);
+        
+      })
+    }
+  }
 
   upload(): void {
     this.progress = 0;
     if (this.selectedFiles) {
       for (let i = 0; i < this.selectedFiles.length; ++i) {
-        const file: File | null  = this.selectedFiles[i];
+        const file: File | null = this.selectedFiles[i];
         if (file) {
           this.currentFile = file;
           this.service.upload(this.currentFile, i).subscribe({
@@ -195,8 +279,8 @@ export class MultistepFormComponent implements OnInit {
             }
           });
         }
-    }
-  
+      }
+
       // this.selectedFiles = undefined;
     }
   }
@@ -267,16 +351,16 @@ export class MultistepFormComponent implements OnInit {
       const data = {
         user: this.userDetials.id,
         personelinfos: this.personalDetails.value,
-        address: this.addressDetails.controls.address.value + ", " 
-                  +this.addressDetails.controls.city.value + ", "
-                  +this.addressDetails.controls.codePostal.value,
+        address: this.addressDetails.controls.address.value + ", "
+          + this.addressDetails.controls.city.value + ", "
+          + this.addressDetails.controls.codePostal.value,
         education: this.education.value,
         choices: this.choices.value
       }
       console.log(this.userDetials.id);
-      
+
       console.table(data);
-      this.service.sendcandidatData(data).subscribe((res:any) => {
+      this.service.sendcandidatData(data).subscribe((res: any) => {
 
         if (res.success == true) {
 
@@ -285,13 +369,13 @@ export class MultistepFormComponent implements OnInit {
           // this.router.navigate(['/confirmation']);
           this.router.navigate(['/submitted']);
         }
-        else{
+        else {
           window.scrollTo(0, 0);
           this.alertService.error(res.message);
-        
+
 
         }
-        
+
         // this.router.navigate(['/confirmation']);
 
 
@@ -302,12 +386,9 @@ export class MultistepFormComponent implements OnInit {
 
 
     }
-        // this.router.navigate(['/confirmation'])
-}
+    // this.router.navigate(['/confirmation'])
+  }
   onDiplomeChange(Diplomevalue: any) {
-    // console.log(Diplomevalue);
-    // console.table(Diplomevalue.data);
-
 
     if (Diplomevalue != "") {
       this.service.getAllfilsCById(Diplomevalue.id).subscribe((result: { data: any; }) => {
@@ -330,6 +411,28 @@ export class MultistepFormComponent implements OnInit {
 
 
   }
+  onSecondDiplomeChange(Diplomevalue: any) {
+
+    if (Diplomevalue != "") {
+      this.service.getAllfilsCById(Diplomevalue.id).subscribe((result: { data: any; }) => {
+        this.Secondfilcandidat = result.data;
+        // this.isDiplome = false;
+      })
+      this.service.getetablissementByIdDiplome(Diplomevalue.id).subscribe((result: { data: any; }) => {
+        console.log(result);
+        this.Secondetablissements = result.data;
+        // this.isetablissement = false;
+      })
+
+    } else {
+      // this.isDiplome = true;
+      this.Secondfilcandidat = [];
+      // this.isetablissement = true;
+      this.Secondetablissements = [];
+    }
+
+
+  }
 
   onFiliereChange(Filvalue: any) {
 
@@ -344,6 +447,26 @@ export class MultistepFormComponent implements OnInit {
       else {
         this.filsApostuler = result.data;
         this.peuxpostuler = true;
+        // console.log("not emptyyyyyyyyyyyyyyyy");
+
+
+
+      }
+    })
+
+
+  }
+  onSecondFiliereChange(Filvalue: any) {
+
+
+    this.service.getfilApotulerById(Filvalue.id).subscribe((result: { data: any; }) => {
+      if (result.data.length == 0) {
+        this.Secondpeuxpostuler = false;
+
+      }
+      else {
+        this.SecondfilsApostuler = result.data;
+        this.Secondpeuxpostuler = true;
         // console.log("not emptyyyyyyyyyyyyyyyy");
 
 

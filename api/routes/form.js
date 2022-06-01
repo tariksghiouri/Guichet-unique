@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
   // console.log(userdata.choices.filterN1.id);
   // console.log(userdata.choices.filterN2.id);
 
-  var Numcondidature = userdata.user;
+  var IdCompte = userdata.user;
   var CIN = userdata.personelinfos.cin;
   var CNE = userdata.personelinfos.cne;
   var nomFr = userdata.personelinfos.nomFr;
@@ -60,8 +60,9 @@ router.post('/', (req, res) => {
   var choix1 = userdata.choices.filterN1.id;
   var choix2 = userdata.choices.filterN2.id
 
-  var values =                     [Numcondidature, CIN, CNE, nomFr,nomAr,prenomFr, prenomAr, email, DateDeNaissance, LieuDeNaissance, Adresse, Tel, IntituleBAC,noteBac,Anneebac, DiplomeObtenu, IntituleFiliere,Etablissement,  1   ,MoyenneDiplome,AnneeDiplome,choix1,choix2]
-  var sql = "INSERT INTO candidats (Numcondidature, CIN, CNE, nomFr,nomAr, prenomFr,prenomAr, email, DateDeNaissance, LieuDeNaissance, Adresse, Tel, IntituleBAC,noteBac,Anneebac, DiplomeObtenu, IntituleFiliere,Etablissement ,ville,MoyenneDiplome,AnneeDiplome,choix1,choix2) VALUES (?)";
+  
+  var values =[IdCompte, CIN, CNE, nomFr,nomAr,prenomFr, prenomAr, email, DateDeNaissance, LieuDeNaissance, Adresse, Tel, IntituleBAC,noteBac,Anneebac, DiplomeObtenu, IntituleFiliere,Etablissement,  1   ,MoyenneDiplome,AnneeDiplome,choix1,choix2]
+  var sql = "INSERT INTO candidats (IdCompte, CIN, CNE, nomFr,nomAr, prenomFr,prenomAr, email, DateDeNaissance, LieuDeNaissance, Adresse, Tel, IntituleBAC,noteBac,Anneebac, DiplomeObtenu, IntituleFiliere,Etablissement ,ville,MoyenneDiplome,AnneeDiplome,choix1,choix2) VALUES (?)";
 
  
   connection.query(sql, [values],function(err, response) {
@@ -75,6 +76,22 @@ router.post('/', (req, res) => {
 
   
 });
+router.get('/:CNE', (req, res) => {
+  const CNE =Number(req.params.CNE);
+  var sql2=`SELECT COUNT(*) as numberOfcandidatures FROM candidats WHERE IdCompte=?  `;
+
+  connection.query(sql2,[CNE],function(err, response) {
+    if (err) {
+      throw err;
+      
+    }else{
+      res.send(response);
+  
+  
+    }
+  
+  });
+})
 
 
 module.exports = router;

@@ -62,7 +62,7 @@ export class EditFormComponent implements OnInit {
       console.log(this.candidature[0].IntituleFiliere);
       this.editForm = this.formBuilder.group(
         {
-          numCandidature: [this.account.id,],
+          IdCompte: [this.account.id,],
           firstName: ['', Validators.required],
           lastName: ['', Validators.required],
           firstNameAr: ['', Validators.required],
@@ -72,9 +72,9 @@ export class EditFormComponent implements OnInit {
           telephone: ['', Validators.required],
           LieuDeNaissance: ['', Validators.required],
           CIN: ['', Validators.required],
-          CNE: ['', Validators.required],
+          CNE: [this.candidature[0].CNE, ],
           Bac: ['', Validators.required],
-          anneBac: ['', Validators.required],
+          anneBac: [this.candidature[0].Anneebac, Validators.required],
           noteBac: ['', Validators.required],
           diplome: ['', Validators.required],
           filiereDip: ['', Validators.required],
@@ -88,6 +88,7 @@ export class EditFormComponent implements OnInit {
 
         }
       );
+
 
 
 
@@ -142,6 +143,8 @@ export class EditFormComponent implements OnInit {
     }
   }
   onSubmit() {
+    console.log(this.editForm.value);
+    
     this.submitted = true;
     // stop here if form is invalid
     if (this.editForm.invalid) {

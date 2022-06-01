@@ -6,8 +6,7 @@ var connection = require('../connections/connection');
 
 router.post('/', (req, res) => {
   var userdata = req.body;
-
-  if (isdatavalid(userdata)){
+    const IdCompte= userdata.IdCompte;  
     const CIN = userdata.CIN;
     const CNE = userdata.CNE;
     const nomFr = userdata.firstName;
@@ -30,62 +29,34 @@ router.post('/', (req, res) => {
     const choix1 = userdata.choix1.id;
     const choix2 = userdata.choix2.id
   
-    const sql = `UPDATE
-    candidats
-    SET
-    CIN ="${CIN}" ,
-    nomFr ="${nomFr}",
-    nomAr = "${nomAr}",
-    prenomFr = "${prenomFr}",
-    prenomAr = "${prenomAr}",
-    email = "${email}",
-    DateDeNaissance ="${DateDeNaissance}",
-    LieuDeNaissance ="${LieuDeNaissance}",
-    Adresse ="${Adresse}",
-    Tel ="${Tel}",
-    IntituleBAC =${IntituleBAC},
-    noteBac =${noteBac},
-    DiplomeObtenu =${DiplomeObtenu},
-    IntituleFiliere =${IntituleFiliere},
-    Etablissement =${Etablissement},
-    ville =1,
-    MoyenneDiplome =${MoyenneDiplome},
-    AnneeDiplome ="${AnneeDiplome}",
-    choix1 =${choix1},
-    choix2 =${choix2}
-    WHERE
-   candidats.CNE = ${userdata.IdCompte} AND candidats.Anneebac=${Anneebac}`;
+    var sql = `
+    INSERT INTO candidats 
+    (IdCompte, CIN, CNE, nomFr,nomAr,
+         prenomFr,prenomAr, email, DateDeNaissance,
+          LieuDeNaissance, Adresse, Tel, IntituleBAC,
+          noteBac,Anneebac,ville,
+           DiplomeObtenu, IntituleFiliere,Etablissement,
+           MoyenneDiplome,
+           AnneeDiplome,choix1,choix2) 
+           VALUES (?)`;
   
-  
+  var values =[IdCompte, CIN, CNE, nomFr,nomAr,prenomFr, prenomAr, email,
+     DateDeNaissance, LieuDeNaissance, Adresse, Tel,
+      IntituleBAC,noteBac,Anneebac,1, DiplomeObtenu,
+      IntituleFiliere,Etablissement ,MoyenneDiplome,AnneeDiplome,choix1,choix2]
    
-    connection.query(sql.replace(/\n/g, ''), function (err, response) {
+    connection.query(sql.replace(/\n/g, ''),[values], function (err, response) {
       if (err) {
+        throw err
         return res.json({"message":err, "success": false});
         
       }
       return res.json({"message":response.message, "success": true});
     });
-  }else{
-    return res.json({"message":"baaad", "success": false});
-  }
+ 
    
  
 });
 
 
 module.exports = router;
-
-function isdatavalid(userdata) {
-  //all data is valid 
-//   for (const data in userdata){
-//     if (data===undefined) {
-//       return false;
-      
-//     }
-   
-//  }
-
-
-
-  return true;
-}

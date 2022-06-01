@@ -37,7 +37,7 @@ li {
 /*inputs*/
 #msform input,
 #msform textarea,
-#msform select {
+#msform .f1select {
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 0px;

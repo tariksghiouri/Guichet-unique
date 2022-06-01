@@ -1,5 +1,5 @@
 
-<div   class="container py-5">
+<div *ngIf="numberOfcandidatures==0" class="container py-5">
 
     <div class="row">
         <div class="col-md-12 col-md-offset-3">
@@ -111,7 +111,7 @@
                     <!-- bac -->
 
 
-                    <select formControlName="bac" (ngModelChange)="onBacChange($event)">
+                    <select class="f1select" formControlName="bac" (ngModelChange)="onBacChange($event)">
                         <option disabled value="">--choisir le type de votre bac--</option>
                         <option *ngFor="let bac of bacs$ | async" [ngValue]="bac">
                             {{ bac.Intitule }}
@@ -144,7 +144,7 @@
                     <!--diplome 1  -->
 
 
-                    <select formControlName="diplome" (ngModelChange)="onDiplomeChange($event)">
+                    <select  class="f1select"  formControlName="diplome" (ngModelChange)="onDiplomeChange($event)">
                         <option disabled value="">--choisir votre diplome--</option>
 
                         <option *ngFor="let diplo of diplomes" [ngValue]="diplo">
@@ -154,7 +154,7 @@
 
 
 
-                    <select [ngClass]="{'disabledSelect' : isDiplome}" formControlName="filC"
+                    <select  class="f1select"  [ngClass]="{'disabledSelect' : isDiplome}" formControlName="filC"
                         [attr.disabled]="isDiplome? true : null" (ngModelChange)="onFiliereChange($event)">
 
                         <option disabled value="">--la filiere du diplome--</option>
@@ -163,7 +163,7 @@
                         </option>
                     </select>
                     
-                    <select [ngClass]="{'disabledSelect' : isetablissement}" formControlName="etablissement"
+                    <select  class="f1select"  [ngClass]="{'disabledSelect' : isetablissement}" formControlName="etablissement"
                         [attr.disabled]="isetablissement? true : null">
 
                         <option disabled value="">--l'etablissement du diplome--</option>
@@ -172,7 +172,7 @@
                         </option>
                     </select>
 
-                    <div *ngIf="education_step && education.controls.diplome.errors">
+                    <div  class="f1select"  *ngIf="education_step && education.controls.diplome.errors">
                         <div *ngIf="education_.diplome.errors?.required">nom dipome est requis</div>
                     </div>
 
@@ -214,7 +214,7 @@
                         <h2 class="mslabel">le Premier choix</h2>
 
 
-                        <select formControlName="filterN1" (ngModelChange)="PremierchoixChange($event)">
+                        <select  class="f1select"  formControlName="filterN1" (ngModelChange)="PremierchoixChange($event)">
                             <option disabled value="">--choisir la premiere option--</option>
                             <option *ngFor="let fil of filsApostuler" [ngValue]="fil">
                                 {{ fil.Intitule }}
@@ -225,7 +225,7 @@
 
                         <h2 class="mslabel">le deuxieme choix</h2>
 
-                        <select formControlName="filterN2" (ngModelChange)="deuxiemechoixChange($event)">
+                        <select  class="f1select"  formControlName="filterN2" (ngModelChange)="deuxiemechoixChange($event)">
                             <option disabled value="">--choisir deuxieme option--</option>
                             <option *ngFor="let fil of filsApostuler" [ngValue]="fil">
                                 {{ fil.Intitule }}
@@ -303,4 +303,174 @@
             </form>
         </div>
     </div>
+</div>
+
+
+
+<div *ngIf="numberOfcandidatures==1" class="container py-5">
+
+        <div class="alert alert-info text-center">  
+            <button type="button" class="close" data-dismiss="alert">×</button>  
+            <strong>Note!</strong> ceci est votre deuxième candidature
+            vous ne pouvez que changer les Informations de votre education <br/>
+            la nouvelle candidature sera envoyée avec les informations que vous avez soumises dans l'ancienne candidature        </div> 
+        <div class="row">
+            <div class="col-md-12 col-md-offset-3" id="msform">
+                <form [formGroup]="secondCanidature" (ngSubmit)="onSecondCandidatureSubmit()">
+
+                    <h4>les informations du bac</h4>
+                    <div class="border-top my-3"></div>
+                    <div class="form-row">
+    
+                        <div class="form-group col">
+                            <label>Bac</label>
+                            <select formControlName="Bac" class="form-control"   [ngClass]="{ 'is-invalid': submitted && f.Bac.errors }">
+                                <option *ngFor="let Bac of SecondBacs" [ngValue]="Bac">
+                                    {{ Bac.Intitule }}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.Bac.errors" class="invalid-feedback">
+                                <div *ngIf="f.Bac.errors.required">Email is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>annee Bac</label>
+                            <input type="text" formControlName="anneBac" 
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.anneBac.errors }" />
+                            <div *ngIf="submitted && f.anneBac.errors" class="invalid-feedback">
+                                <div *ngIf="f.anneBac.errors.required">Email is required</div>
+                            </div>
+                        </div>
+    
+                        <div class="form-group col">
+                            <label>Note Bac</label>
+                            <input type="text" formControlName="noteBac" 
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.noteBac.errors }" />
+                            <div *ngIf="submitted && f.noteBac.errors" class="invalid-feedback">
+                                <div *ngIf="f.noteBac.errors.required">Email is required</div>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div class="border-top my-3"></div>
+                    <h4>les informations du diplome bac+2</h4>
+                    <div class="border-top my-3"></div>
+    
+                    <div class="form-row">
+    
+                        <div class="form-group col">
+                            <label>diplome</label>
+                            <select formControlName="diplome" class="form-control" (ngModelChange)="onSecondDiplomeChange($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.diplome.errors }">
+                                <option *ngFor="let diplome of Seconddiplomes" [ngValue]="diplome"> {{ diplome.Intitule }}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.diplome.errors" class="invalid-feedback">
+                                <div *ngIf="f.diplome.errors.required">Email is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>filiere Diplome</label>
+                            <select formControlName="filiereDip" class="form-control"
+                                (ngModelChange)="onSecondFiliereChange($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f.filiereDip.errors }">
+                                <option *ngFor="let filiereDip of Secondfilcandidat" [ngValue]="filiereDip"> {{
+                                    filiereDip.Intitule }}</option>
+                            </select>
+                            <div *ngIf="submitted && f.filiereDip.errors" class="invalid-feedback">
+                                <div *ngIf="f.filiereDip.errors.required">Email is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>etablissement</label>
+                            <select formControlName="etablissement" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.etablissement.errors }">
+                                <option *ngFor="let etablissement of Secondetablissements" [ngValue]="etablissement"> {{
+                                    etablissement.Nom }} ({{etablissement.ville}})</option>
+                            </select>
+                            <div *ngIf="submitted && f.etablissement.errors" class="invalid-feedback">
+                                <div *ngIf="f.etablissement.errors.required">Email is required</div>
+                            </div>
+                        </div>
+    
+    
+    
+    
+                    </div>
+    
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label>Moyenne de Diplome</label>
+                            <input type="text" formControlName="MoyenneDiplome" 
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.MoyenneDiplome.errors }" />
+                            <div *ngIf="submitted && f.MoyenneDiplome.errors" class="invalid-feedback">
+                                <div *ngIf="f.MoyenneDiplome.errors.required">Email is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Annee Diplome</label>
+                            <input type="text" formControlName="AnneeDiplome" 
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.AnneeDiplome.errors }" />
+                            <div *ngIf="submitted && f.AnneeDiplome.errors" class="invalid-feedback">
+                                <div *ngIf="f.AnneeDiplome.errors.required">Email is required</div>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <h4>mes choix</h4>
+                    <div class="border-top my-3"></div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label>choix1</label>
+                            <select formControlName="choix1" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.choix1.errors }">
+                                <option *ngFor="let choix1 of SecondfilsApostuler" [ngValue]="choix1"> {{ choix1.Intitule }}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.choix1.errors" class="invalid-feedback">
+                                <div *ngIf="f.choix1.errors.required">Email is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>choix 2 </label>
+                            <select formControlName="choix2" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.choix2.errors }">
+                                <option *ngFor="let choix2 of SecondfilsApostuler" [ngValue]="choix2"> {{ choix2.Intitule }}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.choix2.errors" class="invalid-feedback">
+                                <div *ngIf="f.choix2.errors.required">Email is required</div>
+                            </div>
+                        </div>
+    
+    
+                    </div>
+    
+                    <div class="text-center">
+                        <button class="btn btn-primary mr-1">Modifier</button>
+                        <button class="btn btn-secondary" routerLink="/profile" type="reset" (click)="onReset()">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<div *ngIf="numberOfcandidatures==2" class="container py-5">
+
+    <section  class="mail-seccess section">
+        <div *ngIf='noCondidature==true' class="container">
+          <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-12">
+              <!-- Error Inner -->
+              <div class="success-inner">
+                <h1>
+                  <span>Aucune candudature veuillez remplire le formulaire</span>
+                </h1>
+                <br>
+                <a routerLink="/form" class="btn btn-primary btn-lg">formulaire</a>
+              </div>
+              <!--/ End Error Inner -->
+            </div>
+          </div>
+        </div>
+      </section>
 </div>

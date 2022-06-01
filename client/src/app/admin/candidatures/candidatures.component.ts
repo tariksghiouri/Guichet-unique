@@ -3,7 +3,7 @@ import { NgModel } from '@angular/forms';
 import { ApiServiceService } from '@app/api-service.service';
 import { Alert } from '@app/_models';
 interface candidat {
-  Numcondidature: number;
+  IdCompte: number;
   CIN: string;
   CNE: string;
   nomFr: string;
@@ -43,19 +43,34 @@ export class CandidaturesComponent implements OnInit {
   allfils = [];
   allfilsraw;
   nombreCanidats
+  selectedChoix
+  selectedfilname="toutLesCandidats";
 
   constructor(private api: ApiServiceService) { }
   downloadCSV() {
     let listdesCandidats: any;
-    this.api.getCleanCandidatsList().subscribe((candidats: any) => {
+    this.api.getCleanCandidatsList(this.selectedChoix).subscribe((candidats: any) => {
       listdesCandidats = candidats;
-      this.downloadCSVFromJson('listdesCandidats.csv', listdesCandidats);
+      
+     
+        this.downloadCSVFromJson(this.selectedfilname+'.csv', listdesCandidats);
+      
 
 
     })
 
   }
   FiliereSelectChanged(Filvalue: any) {
+    this.selectedfilname=this.allfils[Filvalue.target.value];
+    if(Filvalue.target.value!=-1){
+      this.selectedChoix=Filvalue.target.value;
+
+    }
+    else{
+      this.selectedChoix=NaN;
+      this.selectedfilname="toutLesCandidats";
+    }
+
     if (Filvalue.target.value == -1) {
       this.api.getAllCandidats().subscribe((res: any) => {
         this.collectionSize = res.data.length;

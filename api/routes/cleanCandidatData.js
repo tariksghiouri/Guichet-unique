@@ -5,12 +5,12 @@ var connection = require('../connections/connection');
 
 
 // @ts-ignore
-router.get('/', function (req, res) {
-    const sql=`
+router.get('/:id?', function (req, res) {
+    const id =Number(req.params.id);
+    const conditions =  `where candidats.choix1=${id} or candidats.choix2=${id} `;
     
-    `;
-    connection.query(`select 
-	Numcondidature,    CIN,    CNE,    nomFr,    nomAr,    prenomFr,    prenomAr,
+    var sql=`select 
+	IdCompte,    CIN,    CNE,    nomFr,    nomAr,    prenomFr,    prenomAr,
     email,    DateDeNaissance,    LieuDeNaissance,    Adresse,    Tel,    
     bac.Intitule as bac,    noteBac,    			Anneebac, 
     diplome.Intitule as DiplomeObtenu,
@@ -35,7 +35,12 @@ router.get('/', function (req, res) {
     filieredestination as filieredestination1  on candidats.choix1=filieredestination1.id
     INNER JOIN
     filieredestination as filieredestination2 on candidats.choix2=filieredestination2.id        
-    `, function (err, rows) {
+    `
+    if(id){
+        sql+=conditions
+    }
+    // console.log(sql);
+    connection.query(sql, function (err, rows) {
 
         if (err) console.log(err);
          else {

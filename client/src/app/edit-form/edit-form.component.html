@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-row">
 
-                    <div class="form-group col-6">
+                    <div class="form-group col">
                         <label>CIN</label>
                         <input type="text" formControlName="CIN" [(ngModel)]="candidature[0].CIN" class="form-control"
                             [ngClass]="{ 'is-invalid': submitted && f.CIN.errors }" />
@@ -56,21 +56,6 @@
                             <div *ngIf="f.CIN.errors.required">First Name is required</div>
                         </div>
                     </div>
-                    <div class="form-group col-6">
-                        <label>CNE</label>
-                        <input type="text" formControlName="CNE" [(ngModel)]="candidature[0].CNE" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.CNE.errors }" />
-                        <div *ngIf="submitted && f.CNE.errors" class="invalid-feedback">
-                            <div *ngIf="f.CNE.errors.required">Last Name is required</div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-                <div class="form-row">
                     <div class="form-group col">
                         <label>Date of Birth</label>
                         <input type="date" formControlName="dob" class="form-control" [(ngModel)]="DateDeNaissance"
@@ -79,6 +64,18 @@
                             <div *ngIf="f.dob.errors.required">Date of Birth is required</div>
                         </div>
                     </div>
+                    <!-- <div class="form-group col-6">
+                        <label>CNE : {{candidature[0].CNE}}</label>
+                       
+                    </div> -->
+                </div>
+
+
+
+
+
+                <div class="form-row">
+                 
                     <div class="form-group col">
                         <label>Email</label>
                         <input type="text" formControlName="email" [(ngModel)]="candidature[0].email"
@@ -140,17 +137,17 @@
                             <div *ngIf="f.Bac.errors.required">Email is required</div>
                         </div>
                     </div>
-                    <div class="form-group col">
+                    <!-- <div class="form-group col">
                         <label>annee Bac</label>
                         <input type="text" formControlName="anneBac" [(ngModel)]="candidature[0].Anneebac"
                             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.anneBac.errors }" />
                         <div *ngIf="submitted && f.anneBac.errors" class="invalid-feedback">
                             <div *ngIf="f.anneBac.errors.required">Email is required</div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group col">
-                        <label>annee Bac</label>
+                        <label>Note Bac</label>
                         <input type="text" formControlName="noteBac" [(ngModel)]="candidature[0].noteBac"
                             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.noteBac.errors }" />
                         <div *ngIf="submitted && f.noteBac.errors" class="invalid-feedback">

@@ -143,7 +143,7 @@
 
 INSERT INTO
   `candidats` (
-    `Numcondidature`,
+    `IdCompte`,
     `CIN`,
     `CNE`,
     `nomFr`,

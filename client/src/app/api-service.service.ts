@@ -21,9 +21,9 @@ export class ApiServiceService {
 
     return this._http.get(`${this.apiUrl + "/fils"}`);
   }
-  getCleanCandidatsList(): Observable<any> {
+  getCleanCandidatsList(id:any): Observable<any> {
 
-    return this._http.get(`${this.apiUrl + "/listcandidat"}`);
+    return this._http.get(`${this.apiUrl + "/listcandidat/"}`+ id);
   }
   getdates(): Observable<any> {
 
@@ -127,4 +127,12 @@ export class ApiServiceService {
     return this._http.get(`${this.apiUrl}/AllChoices`);
   }
 
+
+  getNumberOfCandidatures(id: any): Observable<any> {
+    return this._http.get(`${this.apiUrl + "/candidatData/" + id}`);
+  }
+  sendSecondcandidatData(candidatData: any) {
+    console.log(candidatData);
+     return this._http.post(`${this.apiUrl + "/SecondcandidatData"}`, candidatData);
+  }
 }

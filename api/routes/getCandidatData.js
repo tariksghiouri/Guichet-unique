@@ -32,7 +32,7 @@ router.get('/:id', function (req, res) {
     // console.log(req.params.id);
 
     const id = Number(req.params.id);
-    connection.query('SELECT * FROM candidats WHERE Numcondidature=?', [id], function (err, rows) {
+    connection.query('SELECT * FROM candidats WHERE IdCompte=?', [id], function (err, rows) {
 
         if (err) {
             // @ts-ignore
@@ -178,7 +178,7 @@ router.get('/Etablissement/:id', function (req, res) {
 router.get('/CandidatParfiliere/:id', function (req, res) {
 
     const id = Number(req.params.id);
-    connection.query('SELECT * FROM candidats WHERE choix1=?', [id], function (err, rows) {
+    connection.query('SELECT * FROM candidats WHERE choix1=? or choix2=?', [id,id], function (err, rows) {
 
         if (err) {
             return err.message;

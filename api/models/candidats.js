@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('candidats', {
-    'Numcondidature': {
+    'IdCompte': {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
