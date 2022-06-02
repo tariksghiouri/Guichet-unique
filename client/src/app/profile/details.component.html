@@ -1,5 +1,4 @@
-﻿<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
+﻿<div class="container py-5">
 <section  class="mail-seccess section">
   <div *ngIf='noCondidature==true' class="container">
     <div class="row">
@@ -17,7 +16,20 @@
     </div>
   </div>
 </section>
-<div *ngIf="candidature" class="container">
+
+<div *ngIf='!noCondidature' class="container py-2 col-3">
+  <h3>Mes Candidatures</h3>
+  <select class="mySelect" (change)="OncandidatureChange($event)" >
+    <option disabled selected> Selectionner une Candidature</option>  
+    <option *ngFor="let Onecandidature  of candidature;let i = index" [value]=Onecandidature.NumcondidatureReel>
+        candidature numner: {{i+1}}</option>
+  </select>
+
+
+</div>
+    <div class="border-top my-3"></div>
+
+<div *ngIf="candidature && candidatureSelected" class="container">
   <div class="main-body">
     <div class="row gutters-sm">
       <div class="col-md-4 mb-3">
@@ -26,9 +38,9 @@
             <div class="d-flex flex-column align-items-center text-center">
               <img src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png" alt="photo" width="150">
               <div class="mt-3">
-                <h4> {{candidature[0].nomFr}} {{candidature[0].prenomFr}}</h4>
-                <p class="text-secondary mb-1"> <b>CIN</b>: {{candidature[0].CIN}}</p>
-                <p class="text-muted font-size-sm"><b>CNE</b>: {{candidature[0].CNE}}</p>
+                <h4> {{oneCandidature[0].nomFr}} {{oneCandidature[0].prenomFr}}</h4>
+                <p class="text-secondary mb-1"> <b>CIN</b>: {{oneCandidature[0].CIN}}</p>
+                <p class="text-muted font-size-sm"><b>CNE</b>: {{oneCandidature[0].CNE}}</p>
                 <p class="text-muted font-size-sm"><b>Numero de candidature</b>: {{account.id}}</p>
               </div>
             </div>
@@ -47,55 +59,55 @@
                 <h6 class="mb-0">Full Name</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{candidature[0].nomFr}} {{candidature[0].prenomFr}}
+                {{oneCandidature[0].nomFr}} {{oneCandidature[0].prenomFr}}
               </div>
             </div> 
             <hr> -->
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">Email</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{candidature[0].email}}
+                {{oneCandidature[0].email}}
               </div>
             </div>
-            <hr>
-            <div class="row">
+            <hr> -->
+            <!-- <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">Phone</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{candidature[0].Tel}}
+                {{oneCandidature[0].Tel}}
               </div>
-            </div>
-            <hr>
+            </div> -->
+            <!-- <hr>
             <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">LieuDeNaissance</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{candidature[0].LieuDeNaissance}}
+                {{oneCandidature[0].LieuDeNaissance}}
               </div>
-            </div>
-            <hr>
+            </div> -->
+            <!-- <hr>
             <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">Address</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{candidature[0].Adresse}}
+                {{oneCandidature[0].Adresse}}
               </div>
-            </div>
-            <hr>
-            <div class="row">
+            </div> -->
+            <!-- <hr> -->
+            <!-- <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">CIN</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{candidature[0].CIN}}
+                {{oneCandidature[0].CIN}}
               </div>
-            </div>
-            <hr>
+            </div> -->
+            <!-- <hr> -->
             <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">bac</h6>
@@ -107,12 +119,21 @@
             <hr>
             <div class="row">
               <div class="col-sm-3">
+                <h6 class="mb-0">Annee bac</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{oneCandidature[0].Anneebac}}
+              </div>
+            </div>
+            <!-- <hr> -->
+            <!-- <div class="row">
+              <div class="col-sm-3">
                 <h6 class="mb-0">Etablissement</h6>
               </div>
               <div class="col-sm-9 text-secondary">
                 {{Etablissement[0].Nom}}
               </div>
-            </div>
+            </div> -->
             <hr>
             <div class="row">
               <div class="col-sm-3">
@@ -154,4 +175,5 @@
     </div>
 
   </div>
+</div>
 </div>

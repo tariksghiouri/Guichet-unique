@@ -1,136 +1,36 @@
-<div class="container py-5">
-    <div class="alert alert-info">  
-        <button type="button" class="close" data-dismiss="alert">×</button>  
-        <strong>Note!</strong> si vous ne voulez rien changer cliquez sur annuler!
-    </div> 
+<div class="container py-4">
+
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Note!</strong> Selectionner une candidature pour la modifier
+    </div>
+</div>
+<div class="container py-2">
+    <h3>Mes Candidatures</h3>
+    <select class="mySelect" (change)="OncandidatureChange($event)">
+        <option disabled selected> Selectionner une Candidature</option>
+        <option *ngFor="let Onecandidature  of candidature;let i = index" [value]=Onecandidature.NumcondidatureReel>
+            candidature numner: {{i+1}}</option>
+    </select>
+
+
+</div>
+<div *ngIf="candidatureSelected" class="container py-5">
+
+
+    <div class="border-top my-3"></div>
     <div class="row">
         <div class="col-md-12 col-md-offset-3" id="msform">
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-                <h4>les informations personnelles</h4>
-                <div class="border-top my-3"></div>
-                <div class="form-row">
-
-                    <div class="form-group col-6">
-                        <label>First Name</label>
-                        <input type="text" formControlName="firstName" [(ngModel)]="candidature[0].prenomFr"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                            <div *ngIf="f.firstName.errors.required">First Name is required</div>
-                        </div>
-                    </div>
-                    <div class="form-group col-6">
-                        <label>Last Name</label>
-                        <input type="text" formControlName="lastName" [(ngModel)]="candidature[0].nomFr"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-
-                    <div class="form-group col-6">
-                        <label>First Name Ar</label>
-                        <input type="text" formControlName="firstNameAr" [(ngModel)]="candidature[0].prenomAr"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstNameAr.errors }" />
-                        <div *ngIf="submitted && f.firstNameAr.errors" class="invalid-feedback">
-                            <div *ngIf="f.firstNameAr.errors.required">First Name is required</div>
-                        </div>
-                    </div>
-                    <div class="form-group col-6">
-                        <label>Last Name Ar</label>
-                        <input type="text" formControlName="lastNameAr" [(ngModel)]="candidature[0].nomAr"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastNameAr.errors }" />
-                        <div *ngIf="submitted && f.lastNameAr.errors" class="invalid-feedback">
-                            <div *ngIf="f.lastNameAr.errors.required">Last Name is required</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-
-                    <div class="form-group col">
-                        <label>CIN</label>
-                        <input type="text" formControlName="CIN" [(ngModel)]="candidature[0].CIN" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.CIN.errors }" />
-                        <div *ngIf="submitted && f.CIN.errors" class="invalid-feedback">
-                            <div *ngIf="f.CIN.errors.required">First Name is required</div>
-                        </div>
-                    </div>
-                    <div class="form-group col">
-                        <label>Date of Birth</label>
-                        <input type="date" formControlName="dob" class="form-control" [(ngModel)]="DateDeNaissance"
-                            [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
-                        <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
-                            <div *ngIf="f.dob.errors.required">Date of Birth is required</div>
-                        </div>
-                    </div>
-                    <!-- <div class="form-group col-6">
-                        <label>CNE : {{candidature[0].CNE}}</label>
-                       
-                    </div> -->
-                </div>
-
-
-
-
-
-                <div class="form-row">
-                 
-                    <div class="form-group col">
-                        <label>Email</label>
-                        <input type="text" formControlName="email" [(ngModel)]="candidature[0].email"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
-                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                            <div *ngIf="f.email.errors.required">Email is required</div>
-                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                        </div>
-                    </div>
-                    <div class="form-group col">
-                        <label>Lieu De Naissance</label>
-                        <input type="text" formControlName="LieuDeNaissance"
-                            [(ngModel)]="candidature[0].LieuDeNaissance" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.LieuDeNaissance.errors }" />
-                        <div *ngIf="submitted && f.LieuDeNaissance.errors" class="invalid-feedback">
-                            <div *ngIf="f.LieuDeNaissance.errors.required">Email is required</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-
-                    <div class="form-group col">
-                        <label>telephone</label>
-                        <input type="text" formControlName="telephone" [(ngModel)]="candidature[0].Tel"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
-                        <div *ngIf="submitted && f.telephone.errors" class="invalid-feedback">
-                            <div *ngIf="f.telephone.errors.required">Email is required</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-top my-3"></div>
-                <h4>Adresses</h4>
-                <div class="border-top my-3"></div>
-                <div class="form-row">
-
-                    <div class="form-group col">
-                        <label>Adresse</label>
-                        <textarea type="text" formControlName="Adresse" [(ngModel)]="candidature[0].Adresse"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Adresse.errors }"></textarea>
-                        <div *ngIf="submitted && f.Adresse.errors" class="invalid-feedback">
-                            <div *ngIf="f.Adresse.errors.required">First Name is required</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="border-top my-3"></div>
+                
                 <h4>les informations du bac</h4>
                 <div class="border-top my-3"></div>
                 <div class="form-row">
 
                     <div class="form-group col">
                         <label>Bac</label>
-                        <select formControlName="Bac" class="form-control"   [ngClass]="{ 'is-invalid': submitted && f.Bac.errors }">
+                        <select formControlName="Bac" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.Bac.errors }">
                             <option *ngFor="let bac of bacs" [ngValue]="bac"> {{ bac.Intitule }}</option>
                         </select>
                         <div *ngIf="submitted && f.Bac.errors" class="invalid-feedback">
@@ -227,6 +127,7 @@
                     <div class="form-group col">
                         <label>choix1</label>
                         <select formControlName="choix1" class="form-control"
+                            (ngModelChange)="PremierchoixChange($event)"
                             [ngClass]="{ 'is-invalid': submitted && f.choix1.errors }">
                             <option *ngFor="let choix1 of filsApostuler" [ngValue]="choix1"> {{ choix1.Intitule }}
                             </option>
@@ -238,6 +139,7 @@
                     <div class="form-group col">
                         <label>choix 2 </label>
                         <select formControlName="choix2" class="form-control"
+                            (ngModelChange)="deuxiemechoixChange($event)"
                             [ngClass]="{ 'is-invalid': submitted && f.choix2.errors }">
                             <option *ngFor="let choix2 of filsApostuler" [ngValue]="choix2"> {{ choix2.Intitule }}
                             </option>
@@ -250,9 +152,22 @@
 
                 </div>
 
+                <div class="form-row">
+                    <div class="form-group col"></div>
+
+                    <div class="form-group col">
+                        <div *ngIf="memechoix==true">
+                            <p class="danger">choisir une formation differente </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
                 <div class="text-center">
-                    <button class="btn btn-primary mr-1">Modifier</button>
-                    <button class="btn btn-secondary" routerLink="/profile" type="reset" (click)="onReset()">Annuler</button>
+                    <button class="btn btn-primary mr-1" [disabled]="memechoix">Modifier</button>
+                    <button class="btn btn-secondary" routerLink="/profile" type="reset"
+                        (click)="onReset()">Annuler</button>
                 </div>
             </form>
         </div>

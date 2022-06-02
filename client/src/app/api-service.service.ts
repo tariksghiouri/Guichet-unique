@@ -90,8 +90,11 @@ export class ApiServiceService {
   getFiles(): Observable<any> {
     return this._http.get(`${this.apiUrl}/files`);
   }
-  getUserCandudatures(id: any): Observable<any> {
+  getUserCandudatures(): Observable<any> {
     return this._http.get(`${this.apiUrl + "/candidat/" + this.accountService.accountValue.id}`);
+  }
+  getUserCandudatureByRealNumero(RealNumero: any): Observable<any> {
+    return this._http.get(`${this.apiUrl + "/candidat/unique/" + RealNumero}`);
   }
   getBacById(id: any): Observable<any> {
     return this._http.get(`${this.apiUrl + "/candidat/bac/" + id}`);

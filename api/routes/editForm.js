@@ -8,6 +8,7 @@ router.post('/', (req, res) => {
   var userdata = req.body;
 
   if (isdatavalid(userdata)){
+    const NumcondidatureReel=userdata.NumcondidatureReel
     const CIN = userdata.CIN;
     const CNE = userdata.CNE;
     const nomFr = userdata.firstName;
@@ -54,7 +55,7 @@ router.post('/', (req, res) => {
     choix1 =${choix1},
     choix2 =${choix2}
     WHERE
-   candidats.CNE = ${userdata.IdCompte} AND candidats.Anneebac=${Anneebac}`;
+   candidats.NumcondidatureReel = ${NumcondidatureReel}`;
   
   
    

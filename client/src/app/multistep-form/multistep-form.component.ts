@@ -87,7 +87,7 @@ export class MultistepFormComponent implements OnInit {
       // console.log(result);
       this.Seconddiplomes = result.data;
     });
-    this.service.getUserCandudatures(this.userDetials.id).subscribe((result: { data: any; }) => {
+    this.service.getUserCandudatures().subscribe((result: { data: any; }) => {
 
       let oldCandidature = result.data;
       let DateDeNaissance = oldCandidature[0].DateDeNaissance.slice(0, 10);

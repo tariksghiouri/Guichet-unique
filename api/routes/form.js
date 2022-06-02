@@ -7,7 +7,7 @@ var connection = require('../connections/connection');
 router.post('/', (req, res) => {
   var userdata = req.body;
   // id
-  console.log(req);
+  console.log(req.body);
   // // details perso
 
   // console.log(Number(userdata.user));

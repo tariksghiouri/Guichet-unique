@@ -48,6 +48,27 @@ router.get('/:id', function (req, res) {
 
 
 });
+router.get('/unique/:id', function (req, res) {
+
+
+
+    const id = Number(req.params.id);
+    connection.query('SELECT * FROM candidats WHERE NumcondidatureReel=?', [id], function (err, rows) {
+
+        if (err) {
+            // @ts-ignore
+            return err.message;
+
+
+        } else {
+
+            res.send({ data: rows });
+        }
+
+    });
+
+
+});
 
 router.get('/bac/:id', function (req, res) {
 

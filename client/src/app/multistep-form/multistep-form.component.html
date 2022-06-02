@@ -422,7 +422,7 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label>choix1</label>
-                            <select formControlName="choix1" class="form-control"
+                            <select formControlName="choix1" class="form-control" (ngModelChange)="PremierchoixChange($event)"
                                 [ngClass]="{ 'is-invalid': submitted && f.choix1.errors }">
                                 <option *ngFor="let choix1 of SecondfilsApostuler" [ngValue]="choix1"> {{ choix1.Intitule }}
                                 </option>
@@ -433,7 +433,7 @@
                         </div>
                         <div class="form-group col">
                             <label>choix 2 </label>
-                            <select formControlName="choix2" class="form-control"
+                            <select formControlName="choix2" class="form-control" (ngModelChange)="deuxiemechoixChange($event)"
                                 [ngClass]="{ 'is-invalid': submitted && f.choix2.errors }">
                                 <option *ngFor="let choix2 of SecondfilsApostuler" [ngValue]="choix2"> {{ choix2.Intitule }}
                                 </option>
@@ -445,9 +445,20 @@
     
     
                     </div>
+                    <div class="form-row">
+                        <div class="form-group col"></div>
+    
+                        <div class="form-group col">
+                            <div *ngIf="memechoix==true">
+                                <p class="danger">choisir une formation differente </p>
+                            </div>
+                        </div>
+    
+    
+                    </div>
     
                     <div class="text-center">
-                        <button class="btn btn-primary mr-1">Modifier</button>
+                        <button class="btn btn-primary mr-1" [disabled]="memechoix">Ajouter une candidature</button>
                         <button class="btn btn-secondary" routerLink="/profile" type="reset" (click)="onReset()">Annuler</button>
                     </div>
                 </form>
@@ -456,21 +467,19 @@
     </div>
 <div *ngIf="numberOfcandidatures==2" class="container py-5">
 
-    <section  class="mail-seccess section">
+    <section  class="section">
         <div *ngIf='noCondidature==true' class="container">
           <div class="row">
-            <div class="col-lg-6 offset-lg-3 col-12">
               <!-- Error Inner -->
               <div class="success-inner">
                 <h1>
-                  <span>Aucune candudature veuillez remplire le formulaire</span>
+                  <span>vous avez 2 applications liées à votre profil que vous ne pouvez modifier que maintenant</span>
                 </h1>
                 <br>
-                <a routerLink="/form" class="btn btn-primary btn-lg">formulaire</a>
+                <a routerLink="/profile" class="btn btn-primary btn-lg">formulaire</a>
               </div>
               <!--/ End Error Inner -->
             </div>
           </div>
-        </div>
       </section>
 </div>

@@ -33,7 +33,8 @@ li {
 #msform fieldset:not(:first-of-type) {
     display: none;
 }
-
+.section{
+     text-align: center !important;}
 /*inputs*/
 #msform input,
 #msform textarea,

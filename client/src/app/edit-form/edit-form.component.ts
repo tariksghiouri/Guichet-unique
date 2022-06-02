@@ -44,25 +44,24 @@ export class EditFormComponent implements OnInit {
   ville: any
   choix1: any
   choix2: any
+  oneCandidature: any;
+  selectedCandidature: any;
+  candidatureSelected: boolean;
   constructor(private alertService: AlertService, private accountService: AccountService, private api: ApiServiceService, private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
 
-    this.api.getUserCandudatures(this.account.id).subscribe((result: { data: any; }) => {
+    this.api.getUserCandudatures().subscribe((result: { data: any; }) => {
 
       console.log(result.data);
 
       this.candidature = result.data;
-      this.DateDeNaissance = this.candidature[0].DateDeNaissance.slice(0, 10);
-      this.api.getBacById(this.candidature[0].IntituleBAC).subscribe((result: { data: any; }) => {
-        this.IntituleBAC = result.data
-
-      });
+     
       console.log(this.candidature[0].IntituleFiliere);
       this.editForm = this.formBuilder.group(
         {
-          IdCompte: [this.account.id,],
+          NumcondidatureReel: ['',],
           firstName: ['', Validators.required],
           lastName: ['', Validators.required],
           firstNameAr: ['', Validators.required],
@@ -106,42 +105,8 @@ export class EditFormComponent implements OnInit {
   get f() {
     return this.editForm.controls;
   }
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
-  }
-  upload(): void {
-    this.progress = 0;
-    if (this.selectedFiles) {
-      for (let i = 0; i < this.selectedFiles.length; ++i) {
-        const file: File | null = this.selectedFiles[i];
-        if (file) {
-          this.currentFile = file;
-          this.api.upload(this.currentFile, i).subscribe({
-            next: (event: any) => {
-              if (event.type === HttpEventType.UploadProgress) {
-                this.progress = Math.round(100 * event.loaded / event.total);
-              } else if (event instanceof HttpResponse) {
-                this.message = event.body.message;
-                this.fileInfos = this.api.getFiles();
-              }
-            },
-            error: (err: any) => {
-              console.log(err);
-              this.progress = 0;
-              if (err.error && err.error.message) {
-                this.message = err.error.message;
-              } else {
-                this.message = 'Could not upload the file!';
-              }
-              this.currentFile = undefined;
-            }
-          });
-        }
-      }
 
-      // this.selectedFiles = undefined;
-    }
-  }
+ 
   onSubmit() {
     console.log(this.editForm.value);
     
@@ -177,7 +142,7 @@ export class EditFormComponent implements OnInit {
     this.editForm.reset();
   }
   onDiplomeChange(Diplomevalue: any) {
-    // console.log(Diplomevalue);
+    console.log(Diplomevalue.id);
     // console.table(Diplomevalue.data);
 
 
@@ -230,12 +195,56 @@ export class EditFormComponent implements OnInit {
   deuxiemechoixChange(deuxiemechoix: any) {
     if (this.premierchoix == deuxiemechoix.id) {
       this.memechoix = true;
+      
 
     }
     else {
       this.memechoix = false;
+      
 
     }
   }
+  OncandidatureChange(canValue) {
+    
+    this.selectedCandidature = canValue.target.value;
+    this.editForm.patchValue({
+      NumcondidatureReel: Number(this.selectedCandidature),
+    });
+    this.candidatureSelected = true
+    console.log(this.selectedCandidature);
 
+
+    this.api.getUserCandudatureByRealNumero(this.selectedCandidature).subscribe((result: { data: any; }) => {
+
+        this.oneCandidature = result.data
+        this.DateDeNaissance = this.oneCandidature[0].DateDeNaissance.slice(0, 10);
+        this.api.geIntituleFilierebyid(this.oneCandidature[0].IntituleFiliere).subscribe((result: { data: any; }) => {
+            this.IntituleFiliere = result.data
+            console.log(this.IntituleFiliere);
+
+        });
+        this.api.getBacById(this.oneCandidature[0].IntituleBAC).subscribe((result: { data: any; }) => {
+            this.IntituleBAC = result.data
+
+        });
+        this.api.getchoixById(this.oneCandidature[0].choix1).subscribe((result: { data: any; }) => {
+            this.choix1 = result.data
+
+        });
+        this.api.getchoixById(this.oneCandidature[0].choix2).subscribe((result: { data: any; }) => {
+            this.choix2 = result.data
+
+        });
+        this.api.geEtablissementById(this.oneCandidature[0].Etablissement).subscribe((result: { data: any; }) => {
+            this.Etablissement = result.data
+
+        });
+
+
+
+    });
+
+   
+
+}
 }
