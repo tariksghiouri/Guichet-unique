@@ -17,6 +17,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';;
 import { ConfirmationComponent } from './confirmation/confirmation.component'
 ;
 import { EditFormComponent } from './edit-form/edit-form.component'
+import {DatePipe} from '@angular/common';
+
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import { EditFormComponent } from './edit-form/edit-form.component'
         ConfirmationComponent ,
         EditFormComponent   ],
     providers: [
+        DatePipe,
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

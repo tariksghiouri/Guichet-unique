@@ -1,34 +1,50 @@
-﻿<div class="homepage">
-
-    <div>
-      <h1>l'Ecole Supérieure de Technologie lance un appel à candidature pour les filières licences professionnelles
-        suivantes :
-      </h1>
-      <table class=" table-bordered table is-striped is-bordered mt-2 is-fullwidth">
-        <thead>
-          <tr>
-            <th>departement</th>
-            <th>Intitule</th>
-            <th>Responsable</th>
-            <th>email</th>
-            <th>capacite</th>
-  
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let fil of readData">
-            <td >{{fil.NomDept}}</td>
-            <td>{{fil.Intitule}}</td>
-            <td>{{fil.NomComplet}}</td>
-            <!-- <a href="mailto:{{fil.email}}"><td>{{fil.email}}</td></a> -->
-            <td>{{fil.email}}</td>
-  
-            <td>{{fil.capaciteMax}}</td>
-          </tr>
-        </tbody>
-      </table>
+﻿  <div >
+    <div class="row">
+      <div class="col-sm">
+        <a routerLink="/form"><h4>Critères</h4></a>
+      </div>
+      <div class="col-sm">
+        <a routerLink="/form"><h4>Procédures</h4></a>
+      </div>
+      <div class="col-sm">
+        <a routerLink="/form"><h4>Procédures</h4></a>
+      </div>
     </div>
-  
-    
-  
   </div>
+  <div class="homepage">
+  <br>
+
+  <br>
+  <div>
+    <h1 class="title">l'Ecole Supérieure de Technologie lance un appel à candidature pour les filières licences
+      professionnelles
+      suivantes :
+    </h1>
+    <table class="table align-middle mb-0 bg-white table-bordered border-primary">
+      <thead>
+        <tr>
+          <th>departement</th>
+          <th>Intitule</th>
+          <th>Responsable</th>
+          <th>email</th>
+          <th>capacite</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fil of readData">
+          <td>{{fil.NomDept}}</td>
+          <td>{{fil.Intitule}}</td>
+          <td>{{fil.NomComplet}}</td>
+          <!-- <a href="mailto:{{fil.email}}"><td>{{fil.email}}</td></a> -->
+          <td>{{fil.email}}</td>
+
+          <td>{{fil.capaciteMax}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+</div>

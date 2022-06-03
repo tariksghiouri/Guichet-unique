@@ -244,8 +244,20 @@ export class MultistepFormComponent implements OnInit {
       return;
     }
     else{
-      this.service.sendSecondcandidatData(this.secondCanidature.value).subscribe((result: { data: any})=>{
-        console.log(result);
+      this.service.sendSecondcandidatData(this.secondCanidature.value).subscribe((result:any)=>{
+        if (result.success == true) {
+
+          window.scrollTo(0, 0);
+          this.alertService.success("vous Ajouter votre Deuxieme application avec succès voir => <b> <a [routerLink]='/profile/mesCandidatures'> profile</a></b>");
+          // this.router.navigate(['/confirmation']);
+          this.router.navigate(['/submitted']);
+        }
+        else {
+          window.scrollTo(0, 0);
+          this.alertService.error(result.message);
+
+
+        }
         
       })
     }
@@ -365,9 +377,9 @@ export class MultistepFormComponent implements OnInit {
         if (res.success == true) {
 
           window.scrollTo(0, 0);
-          this.alertService.success("vous avez mis à jour votre application avec succès");
+          this.alertService.success("vous Ajouter votre Premiere application avec succès <a [routerLink]='/profile'> profile</a>");
           // this.router.navigate(['/confirmation']);
-          this.router.navigate(['/submitted']);
+          // this.router.navigate(['/submitted']);
         }
         else {
           window.scrollTo(0, 0);

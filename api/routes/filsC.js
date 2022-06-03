@@ -15,11 +15,10 @@ router.get('/:id', function(req, res) {
    
         const id =Number(req.params.id);
         connection.query('SELECT * FROM filieres WHERE type_diplome=?',[id],function(err,rows)     {
- 
-        if(err){
-         req.flash('error', err); 
-          
-        }else{
+            if (err) {
+                return res.json({ "message": err, "success": false });
+    
+            }else{
             
             res.send({data:rows});
         }

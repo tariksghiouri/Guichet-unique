@@ -14,6 +14,7 @@ export class PersonalInfoEditComponent implements OnInit {
   editForm!: FormGroup;
   account = this.accountService.accountValue;
   DateDeNaissance: any;
+  noCondidature: boolean;
 
   constructor(private api: ApiServiceService, 
     private formBuilder: FormBuilder
@@ -21,17 +22,23 @@ export class PersonalInfoEditComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+   
     this.api.getUserCandudatures().subscribe((result: { data: any; }) => {
-
+      if (!Object.keys(result.data).length) {
+        this.noCondidature = true;
+    }
+    else {
+      this.noCondidature = false
       console.log(result.data);
       this.candidature = result.data[0];
       console.log(this.candidature);
-     this.DateDeNaissance = this.candidature.DateDeNaissance.slice(0, 10);
+      this.DateDeNaissance = this.candidature.DateDeNaissance.slice(0, 10);
+    }
     })
 
     this.editForm = this.formBuilder.group(
       {
-        // IdCompte: [this.account.id,],
+        IdCompte: [this.account.id,],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         firstNameAr: ['', Validators.required],
@@ -55,6 +62,7 @@ export class PersonalInfoEditComponent implements OnInit {
   onSubmit(){
     this.editForm.patchValue({
       CNE: this.candidature.CNE,
+      
     });
     console.log(this.editForm.value);
     
@@ -65,6 +73,19 @@ export class PersonalInfoEditComponent implements OnInit {
       this.alertService.error("vous devez remplir tous les champs");
       return;
     }
+    this.api.editPersonal(this.editForm.value).subscribe((res: any)=>{
+      console.log(res);
+      if (res.success) {
+
+      window.scrollTo(0, 0);
+      this.alertService.success("vous avez modifier vos informations avec succès");
+      }
+      else{
+        window.scrollTo(0, 0);
+        this.alertService.error("Une erreur est survenue");
+      }
+      
+    })
   }
   onReset(){}
 

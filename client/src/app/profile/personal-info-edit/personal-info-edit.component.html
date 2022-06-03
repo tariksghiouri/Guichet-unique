@@ -1,5 +1,23 @@
 <div class="container py-4">
-    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+    <section  class="mail-seccess section">
+        <div *ngIf='noCondidature' class="container">
+          <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-12">
+              <!-- Error Inner -->
+              <div class="success-inner">
+                <h1>
+                  <span>Aucune candudature veuillez remplire le formulaire</span>
+                </h1>
+                <br>
+                <a routerLink="/form" class="btn btn-primary btn-lg">formulaire</a>
+              </div>
+              <!--/ End Error Inner -->
+            </div>
+          </div>
+        </div>
+      </section>
+    <form *ngIf='!noCondidature' [formGroup]="editForm" (ngSubmit)="onSubmit()">
 
         <h4>les informations personnelles</h4>
                         <div class="border-top my-3"></div>

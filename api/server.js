@@ -21,6 +21,7 @@ var cleanDataRoute = require("./routes/cleanCandidatData");
 var AnneeUiversitaireRoute = require("./routes/AnneeUiversitaire");
 var choicesRouter = require("./routes/allChoices");
 var secondcandidatRoute = require("./routes/Secondform");
+var editPersonalRoute = require("./routes/personalInfoEdit");
 
 global.__basedir = __dirname;
 
@@ -47,6 +48,7 @@ app.use('/listcandidat', cleanDataRoute);
 app.use('/AnneeUiversitaire', AnneeUiversitaireRoute);
 app.use('/AllChoices', choicesRouter);
 app.use('/SecondcandidatData', secondcandidatRoute);
+app.use('/editPersonal', editPersonalRoute);
 initRoutes(app);
 
 

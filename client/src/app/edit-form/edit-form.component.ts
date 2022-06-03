@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiServiceService } from '@app/api-service.service';
 import { AccountService, AlertService } from '@app/_services';
 import { Observable } from 'rxjs';
+import { TimeService } from '@app/_services';
 
 @Component({
   selector: 'app-edit-form',
@@ -47,11 +48,15 @@ export class EditFormComponent implements OnInit {
   oneCandidature: any;
   selectedCandidature: any;
   candidatureSelected: boolean;
-  constructor(private alertService: AlertService, private accountService: AccountService, private api: ApiServiceService, private formBuilder: FormBuilder,
+  constructor(private alertService: AlertService,
+     private accountService: AccountService, 
+     private api: ApiServiceService,
+      private formBuilder: FormBuilder,
+      private time:TimeService
   ) { }
 
   ngOnInit(): void {
-
+    this.time.isTimeUp()
     this.api.getUserCandudatures().subscribe((result: { data: any; }) => {
 
       console.log(result.data);
@@ -62,18 +67,7 @@ export class EditFormComponent implements OnInit {
       this.editForm = this.formBuilder.group(
         {
           NumcondidatureReel: ['',],
-          firstName: ['', Validators.required],
-          lastName: ['', Validators.required],
-          firstNameAr: ['', Validators.required],
-          lastNameAr: ['', Validators.required],
-          dob: ['', Validators.required],
-          email: ['', [Validators.required, Validators.email]],
-          telephone: ['', Validators.required],
-          LieuDeNaissance: ['', Validators.required],
-          CIN: ['', Validators.required],
-          CNE: [this.candidature[0].CNE, ],
           Bac: ['', Validators.required],
-          anneBac: [this.candidature[0].Anneebac, Validators.required],
           noteBac: ['', Validators.required],
           diplome: ['', Validators.required],
           filiereDip: ['', Validators.required],
@@ -82,8 +76,6 @@ export class EditFormComponent implements OnInit {
           AnneeDiplome: ['', Validators.required],
           choix1: ['', Validators.required],
           choix2: ['', Validators.required],
-          Adresse: ['', Validators.required],
-
 
         }
       );
@@ -108,6 +100,11 @@ export class EditFormComponent implements OnInit {
 
  
   onSubmit() {
+    if (!this.time.timIsUp) {
+      window.scrollTo(0, 0);
+      this.alertService.error("you caaaaaan't");
+      return;
+    }
     console.log(this.editForm.value);
     
     this.submitted = true;

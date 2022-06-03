@@ -138,4 +138,9 @@ export class ApiServiceService {
     console.log(candidatData);
      return this._http.post(`${this.apiUrl + "/SecondcandidatData"}`, candidatData);
   }
+  editPersonal(candidatData: any) {
+    // console.log(candidatData);
+     return this._http.post(`${this.apiUrl + "/editPersonal"}`, candidatData);
+  }
+
 }

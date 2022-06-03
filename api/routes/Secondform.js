@@ -47,11 +47,10 @@ router.post('/', (req, res) => {
    
     connection.query(sql.replace(/\n/g, ''),[values], function (err, response) {
       if (err) {
-        throw err
-        return res.json({"message":err, "success": false});
-        
-      }
-      return res.json({"message":response.message, "success": true});
+        return res.json({ "message": err, "success": false });
+
+    }
+    return res.json({ "message": response.message, "success": true });
     });
  
    
