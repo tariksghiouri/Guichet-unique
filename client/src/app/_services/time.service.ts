@@ -12,7 +12,7 @@ export class TimeService {
   currDate: any;
   dateDebut: any;
   dateFin: any;
-  public timIsUp: boolean;
+  public timIsUp: boolean=false;
 
 
   constructor(

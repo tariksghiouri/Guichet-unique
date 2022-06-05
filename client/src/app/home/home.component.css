@@ -2,14 +2,17 @@
 .homepage{
 	width:90%;
 	margin :auto;
+
 }
 .title{ text-align: center}
 .row{
 	height:110%;
+	width:100%;
 	text-align: center;
 	padding-top:1%;
 	background-color: rgb(221, 221, 221);
-	padding:0
+	padding:0;
+	overflow:hidden
 	
 }
 .row a{
@@ -20,3 +23,9 @@ padding-left: 0;
 padding-right: 0;
 
 }
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+	height: 1%
+ }

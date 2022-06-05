@@ -1,11 +1,11 @@
 {
     "name": "node-mysql-signup-verification-api",
     "version": "1.0.0",
-    "description": "NodeJS + MySQL API for Email Sign Up with Verification, Authentication & Forgot Password",
+    "description": "guichet unique",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cornflourblue/node-mysql-signup-verification-api.git"
+        "url": "https://github.com/tariksghiouri/guichet-unique.git"
     },
     "scripts": {
         "start": "node ./server.js",
