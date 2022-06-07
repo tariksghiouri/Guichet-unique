@@ -52,7 +52,7 @@ export class EditFormComponent implements OnInit {
      private accountService: AccountService, 
      private api: ApiServiceService,
       private formBuilder: FormBuilder,
-      private time:TimeService
+      public time:TimeService
   ) { }
 
   ngOnInit(): void {
@@ -100,11 +100,11 @@ export class EditFormComponent implements OnInit {
 
  
   onSubmit() {
-    if (!this.time.timIsUp) {
-      window.scrollTo(0, 0);
-      this.alertService.error("you caaaaaan't");
-      return;
-    }
+    // if (!this.time.ilResteDutemps) {
+    //   window.scrollTo(0, 0);
+    //   this.alertService.error("you caaaaaan't");
+    //   return;
+    // }
     console.log(this.editForm.value);
     
     this.submitted = true;

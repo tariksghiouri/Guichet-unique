@@ -6,6 +6,8 @@ import { HomeComponent } from './home';
 import { AuthGuard,TimeGuard } from './_helpers';
 import { Role } from './_models';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { CriteresComponent } from './criteres/criteres.component';
+import { ProcedureComponent } from './procedure/procedure.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -19,6 +21,8 @@ const routes: Routes = [
     { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
     {path:'form',component:MultistepFormComponent, canActivate:[AuthGuard],data: { roles: [Role.User] } },
     {path:'submitted',component:ThankYouPageComponent,canActivate: [AuthGuard]},
+    {path:'criteres',component:CriteresComponent},
+    {path:'procedure',component:ProcedureComponent},
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
 ];

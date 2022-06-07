@@ -1,146 +1,152 @@
-<div class="container py-4">
+    <div class="container py-4">
 
-    <section  class="mail-seccess section">
-        <div *ngIf='noCondidature' class="container">
-          <div class="row">
-            <div class="col-lg-6 offset-lg-3 col-12">
-              <!-- Error Inner -->
-              <div class="success-inner">
-                <h1>
-                  <span>Aucune candudature veuillez remplire le formulaire</span>
-                </h1>
-                <br>
-                <a routerLink="/form" class="btn btn-primary btn-lg">formulaire</a>
-              </div>
-              <!--/ End Error Inner -->
+        <section  class="mail-seccess section">
+            <div *ngIf='noCondidature' class="container">
+                <div class="card text-center">
+                    <div class="card-body">
+                      <h5 class="card-title">Aucune candudature</h5>
+                      <p class="card-text">vous n'avez fourni aucune information, veuillez remplir le formulaire</p>
+                      <a routerLink="/form" class="btn btn-primary">formulaire</a>
+                    </div>
+                  
+                  </div>
             </div>
-          </div>
-        </div>
-      </section>
-    <form *ngIf='!noCondidature' [formGroup]="editForm" (ngSubmit)="onSubmit()">
+          </section>
+        <form *ngIf='!noCondidature' [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    
+            <h4>les informations personnelles</h4>
+                            <div class="border-top my-3"></div>
+                            <div class="form-row">
+            
+                                <div class="form-group col-6">
+                                    <label>First Name</label>
+                                    <input type="text" formControlName="firstName" [(ngModel)]="candidature.prenomFr" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
+                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                        <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>Last Name</label>
+                                    <input type="text" formControlName="lastName" [(ngModel)]="candidature.nomFr" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
+                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                        <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+            
+                                <div class="form-group col-6">
+                                    <label>First Name Ar</label>
+                                    <input type="text" formControlName="firstNameAr" [(ngModel)]="candidature.prenomAr" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
+                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstNameAr.errors }" />
+                                    <div *ngIf="submitted && f.firstNameAr.errors" class="invalid-feedback">
+                                        <div *ngIf="f.firstNameAr.errors.required">First Name is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>Last Name Ar</label>
+                                    <input type="text" formControlName="lastNameAr" [(ngModel)]="candidature.nomAr" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
+                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastNameAr.errors }" />
+                                    <div *ngIf="submitted && f.lastNameAr.errors" class="invalid-feedback">
+                                        <div *ngIf="f.lastNameAr.errors.required">Last Name is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+            
+                                <div class="form-group col">
+                                    <label>CIN</label>
+                                    <input type="text" formControlName="CIN" [(ngModel)]="candidature.CIN" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
+                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.CIN.errors }" />
+                                    <div *ngIf="submitted && f.CIN.errors" class="invalid-feedback">
+                                        <div *ngIf="f.CIN.errors.required">First Name is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col">
+                                    <label>Date of Birth</label>
+                                    <input type="date" formControlName="dob" class="form-control" [(ngModel)]="DateDeNaissance" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
+                                        [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
+                                    <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                                        <div *ngIf="f.dob.errors.required">Date of Birth is required</div>
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group col-6">
+                                    <label>CNE : {{candidature.CNE}}</label>
+                                   
+                                </div> -->
+                            </div>
+            
+            
+            
+            
+            
+                            <div class="form-row">
+            
+                                <div class="form-group col">
+                                    <label>Email</label>
+                                    <input type="text" formControlName="email" [(ngModel)]="candidature.email" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
+                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required">Email is required</div>
+                                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col">
+                                    <label>Lieu De Naissance</label>
+                                    <input type="text" formControlName="LieuDeNaissance" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
+                                        [(ngModel)]="candidature.LieuDeNaissance" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.LieuDeNaissance.errors }" />
+                                    <div *ngIf="submitted && f.LieuDeNaissance.errors" class="invalid-feedback">
+                                        <div *ngIf="f.LieuDeNaissance.errors.required">Email is required</div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="form-row">
+            
+                                <div class="form-group col">
+                                    <label>telephone</label>
+                                    <input type="text" formControlName="telephone" [(ngModel)]="candidature.Tel" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
+                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
+                                    <div *ngIf="submitted && f.telephone.errors" class="invalid-feedback">
+                                        <div *ngIf="f.telephone.errors.required">Email is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-top my-3"></div>
+                            <h4>Adresses</h4>
+                            <div class="border-top my-3"></div>
+                            <div class="form-row">
+            
+                                <div class="form-group col">
+                                    <label>Adresse</label>
+                                    <textarea type="text" formControlName="Adresse" [(ngModel)]="candidature.Adresse" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
+                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Adresse.errors }"></textarea>
+                                    <div *ngIf="submitted && f.Adresse.errors" class="invalid-feedback">
+                                        <div *ngIf="f.Adresse.errors.required">First Name is required</div>
+                                    </div>
+                                </div>
+            
+                            </div>
+            
+                            <div class="border-top my-3"></div>
+                            <div *ngIf="this.time.ilResteDutemps; else Pasdutemps">
+                                <div class="text-center">
+                                    <button class="btn btn-primary mr-1" >Modifier</button>
+                                    <button class="btn btn-secondary" routerLink="/profile" type="reset"
+                                        (click)="onReset()">Annuler</button>
+                                </div>   
+                            </div>
+                            <ng-template #Pasdutemps>
+                                <div class="container py-4">
+                            
+                                <div class="alert alert-primary" role="alert">
+                                    vous ne pouvez pas modifier maintenant les Candidatures sont fermées
+                                  </div>
+                                  </div>
+                            </ng-template>
+                        </form>
+    </div>
 
-        <h4>les informations personnelles</h4>
-                        <div class="border-top my-3"></div>
-                        <div class="form-row">
-        
-                            <div class="form-group col-6">
-                                <label>First Name</label>
-                                <input type="text" formControlName="firstName" [(ngModel)]="candidature.prenomFr"
-                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-                                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
-                                </div>
-                            </div>
-                            <div class="form-group col-6">
-                                <label>Last Name</label>
-                                <input type="text" formControlName="lastName" [(ngModel)]="candidature.nomFr"
-                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-                                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-        
-                            <div class="form-group col-6">
-                                <label>First Name Ar</label>
-                                <input type="text" formControlName="firstNameAr" [(ngModel)]="candidature.prenomAr"
-                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstNameAr.errors }" />
-                                <div *ngIf="submitted && f.firstNameAr.errors" class="invalid-feedback">
-                                    <div *ngIf="f.firstNameAr.errors.required">First Name is required</div>
-                                </div>
-                            </div>
-                            <div class="form-group col-6">
-                                <label>Last Name Ar</label>
-                                <input type="text" formControlName="lastNameAr" [(ngModel)]="candidature.nomAr"
-                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastNameAr.errors }" />
-                                <div *ngIf="submitted && f.lastNameAr.errors" class="invalid-feedback">
-                                    <div *ngIf="f.lastNameAr.errors.required">Last Name is required</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-        
-                            <div class="form-group col">
-                                <label>CIN</label>
-                                <input type="text" formControlName="CIN" [(ngModel)]="candidature.CIN"
-                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.CIN.errors }" />
-                                <div *ngIf="submitted && f.CIN.errors" class="invalid-feedback">
-                                    <div *ngIf="f.CIN.errors.required">First Name is required</div>
-                                </div>
-                            </div>
-                            <div class="form-group col">
-                                <label>Date of Birth</label>
-                                <input type="date" formControlName="dob" class="form-control" [(ngModel)]="DateDeNaissance"
-                                    [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
-                                <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
-                                    <div *ngIf="f.dob.errors.required">Date of Birth is required</div>
-                                </div>
-                            </div>
-                            <!-- <div class="form-group col-6">
-                                <label>CNE : {{candidature.CNE}}</label>
-                               
-                            </div> -->
-                        </div>
-        
-        
-        
-        
-        
-                        <div class="form-row">
-        
-                            <div class="form-group col">
-                                <label>Email</label>
-                                <input type="text" formControlName="email" [(ngModel)]="candidature.email"
-                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
-                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                    <div *ngIf="f.email.errors.required">Email is required</div>
-                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                                </div>
-                            </div>
-                            <div class="form-group col">
-                                <label>Lieu De Naissance</label>
-                                <input type="text" formControlName="LieuDeNaissance"
-                                    [(ngModel)]="candidature.LieuDeNaissance" class="form-control"
-                                    [ngClass]="{ 'is-invalid': submitted && f.LieuDeNaissance.errors }" />
-                                <div *ngIf="submitted && f.LieuDeNaissance.errors" class="invalid-feedback">
-                                    <div *ngIf="f.LieuDeNaissance.errors.required">Email is required</div>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="form-row">
-        
-                            <div class="form-group col">
-                                <label>telephone</label>
-                                <input type="text" formControlName="telephone" [(ngModel)]="candidature.Tel"
-                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
-                                <div *ngIf="submitted && f.telephone.errors" class="invalid-feedback">
-                                    <div *ngIf="f.telephone.errors.required">Email is required</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="border-top my-3"></div>
-                        <h4>Adresses</h4>
-                        <div class="border-top my-3"></div>
-                        <div class="form-row">
-        
-                            <div class="form-group col">
-                                <label>Adresse</label>
-                                <textarea type="text" formControlName="Adresse" [(ngModel)]="candidature.Adresse"
-                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Adresse.errors }"></textarea>
-                                <div *ngIf="submitted && f.Adresse.errors" class="invalid-feedback">
-                                    <div *ngIf="f.Adresse.errors.required">First Name is required</div>
-                                </div>
-                            </div>
-        
-                        </div>
-        
-                        <div class="border-top my-3"></div>
-                        <div class="text-center">
-                            <button class="btn btn-primary mr-1" >Modifier</button>
-                            <button class="btn btn-secondary" routerLink="/profile" type="reset"
-                                (click)="onReset()">Annuler</button>
-                        </div>    
-                    </form>
-</div>

@@ -9,9 +9,9 @@ router.post('/', (req, res) => {
 
     const IdCompte = userdata.IdCompte
     const CIN = userdata.CIN;
-    const nomFr = userdata.firstName;
+    const nomFr = userdata.lastName;
     const nomAr = userdata.lastNameAr;
-    const prenomFr = userdata.lastName;
+    const prenomFr = userdata.firstName;
     const prenomAr = userdata.firstNameAr;
     const email = userdata.email;
     const DateDeNaissance = userdata.dob;

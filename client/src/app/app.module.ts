@@ -17,8 +17,10 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';;
 import { ConfirmationComponent } from './confirmation/confirmation.component'
 ;
 import { EditFormComponent } from './edit-form/edit-form.component'
-import {DatePipe} from '@angular/common';
-
+import {DatePipe} from '@angular/common';;
+import { CriteresComponent } from './criteres/criteres.component'
+;
+import { ProcedureComponent } from './procedure/procedure.component'
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import {DatePipe} from '@angular/common';
         HomeComponent
 ,
         ConfirmationComponent ,
-        EditFormComponent   ],
+        EditFormComponent ,
+        CriteresComponent ,
+        ProcedureComponent ],
     providers: [
         DatePipe,
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },

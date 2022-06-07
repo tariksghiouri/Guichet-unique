@@ -1,482 +1,493 @@
 
-<div *ngIf="numberOfcandidatures==0" class="container py-5">
+<div *ngIf="this.time.ilResteDutemps; else Pasdutemps">
 
-    <div class="row">
-        <div class="col-md-12 col-md-offset-3">
-            <form [formGroup]="personalDetails" id="msform">
-                <!-- progressbar -->
-                <ul id="progressbar">
-                    <li [ngClass]="step>=1 ? 'active ' : 'inactive'">les informations personnelles</li>
-                    <li [ngClass]="step>=2 ? 'active' : 'inactive'">parcour universitaire</li>
-                    <li [ngClass]="step>=3 ? 'active' : 'inactive'">autres informations</li>
-                    <li [ngClass]="step>=4 ? 'active' : 'inactive'">choix de formation(s)</li>
-                    <li [ngClass]="step==5 ? 'active' : 'inactive'">upload des fiche</li>
-                </ul>
-                <!-- fieldsets -->
-                <fieldset *ngIf="step == 1">
-                    <h2 class="fs-title">les informations personnelles</h2>
+    <div *ngIf="numberOfcandidatures==0" class="container py-5">
 
-                    <input type="text" formControlName="nomFr"
-                        [ngClass]="{ 'is-invalid': personal_step && personal.nomFr.errors }"
-                        placeholder="nom en francais" />
-                    <div *ngIf="personal_step && personalDetails.controls.nomFr.errors">
-                        <div class="danger" *ngIf="personal.nomFr.errors?.required">Le nom est requis</div>
-                    </div>
-                    <input type="text" dir="rtl" class="keyboardInput" formControlName="nomAr"
-                        [ngClass]="{ 'is-invalid': personal_step && personal.nomAr.errors }"
-                        placeholder="اسم العائلة باللغة العربية " />
-                    <div *ngIf="personal_step && personalDetails.controls.nomAr.errors">
-                        <div dir="rtl" class="danger" *ngIf="personal.nomAr.errors?.required"> يرجى ادخال اسم العائلة
-                        </div>
-                    </div>
-                    <input type="text" formControlName="prenomFr"
-                        [ngClass]="{ 'is-invalid': personal_step && personal.prenomFr.errors }"
-                        placeholder="prenom en francais" />
-                    <div *ngIf="personal_step && personalDetails.controls.prenomFr.errors">
-                        <div class="danger" *ngIf="personal.prenomFr.errors?.required">Le nom est requis</div>
-                    </div>
-
-                    <input type="text" dir="rtl" class="keyboardInput" formControlName="prenomAr"
-                        [ngClass]="{ 'is-invalid': personal_step && personal.prenomAr.errors }"
-                        placeholder="الاسم باللغة العربية" />
-                    <div *ngIf="personal_step && personalDetails.controls.prenomAr.errors">
-                        <div dir="rtl" class="danger" *ngIf="personal.prenomAr.errors?.required"> يرجى ادخال الاسم
-                        </div>
-
-                    </div>
-                    <input type="text" formControlName="email" name="email" placeholder="Email" [attr.disabled]="true" />
-                    <div *ngIf="personal_step && personalDetails.controls.email.errors">
-                        <div class="danger" *ngIf="personal.email.errors?.required">l'Email nom est requis</div>
-                    </div>
-                    <h3 class="mslabel" for="datenaiss"> date de naissance</h3>
-                    <input type="date" formControlName="datenaiss" name="datenaiss" placeholder="date de naissance" />
-                    <div *ngIf="personal_step && personalDetails.controls.datenaiss.errors">
-                        <div class="danger" *ngIf="personal.datenaiss.errors?.required">la date de naissance est requis
-                        </div>
-                    </div>
-                    <input type="text" formControlName="cin" name="cin" placeholder="CIN (code d'identite nationale)" />
-                    <div *ngIf="personal_step && personalDetails.controls.cin.errors">
-                        <div class="danger" *ngIf="personal.cin.errors?.required">CIN est requis</div>
-                        <div class="danger" *ngIf="personal.cin.hasError('minlength')">Entrez un Cin Valid</div>
-                    </div>
-                    <input type="text" formControlName="cne" name="cne" placeholder="CNE(code national d'etudiant)" />
-                    <div *ngIf="personal_step && personalDetails.controls.cne.errors">
-                        <div class="danger" *ngIf="personal.cne.errors?.required">CNE est requis</div>
-                    </div>
-                    <input type="text" formControlName="LieuDeNaissance" name="LieuDeNaissance"
-                        placeholder="Lieu De Naissance" />
-                    <div *ngIf="personal_step && personalDetails.controls.LieuDeNaissance.errors">
-                        <div class="danger" *ngIf="personal.LieuDeNaissance.errors?.required">le Lieu De Naissance est
-                            requis</div>
-                    </div>
-
-                    <input type="text" formControlName="phone" name="phone" placeholder="Phone" />
-                    <div *ngIf="personal_step && personalDetails.controls.phone.errors">
-                        <div class="danger" *ngIf="personal.phone.errors?.required">Le telephone est requis</div>
-                    </div>
-                    <button (click)="next()" class="next action-button" [disabled]="personal.invalid">Suivant</button>
-
-                </fieldset>
-            </form>
-
-
-            <form [formGroup]="addressDetails" id="msform">
-                <fieldset *ngIf="step == 2">
-                    <h2 class="fs-title">Address Details</h2>
-                    <input type="text" formControlName="city" placeholder="City" />
-                    <div *ngIf="address_step && addressDetails.controls.city.errors">
-                        <div *ngIf="address.city.errors?.required">City is required</div>
-                    </div>
-                    <input type="text" placeholder="Adresse" formControlName="address" />
-                    <div *ngIf="address_step && addressDetails.controls.address.errors">
-                        <div *ngIf="address.address.errors?.required">Address is required</div>
-                    </div>
-                    <input type="text" formControlName="codePostal" placeholder="code Postal" />
-                    <div *ngIf="address_step && addressDetails.controls.codePostal.errors">
-                        <div *ngIf="address.codePostal.errors?.required">Pincode is required</div>
-                    </div>
-                    <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
-                        value="précédent" />
-                    <input (click)="next()" type="button" name="next" class="next action-button" value="Suivant" />
-                </fieldset>
-            </form>
-            <!-- education  -->
-            <form [formGroup]="education" id="msform">
-                <fieldset *ngIf="step == 3">
-                    <h2 class="fs-title">Education</h2>
-                    <div class="border-top my-3"></div>
-                    <h4>les informations du baccalauréat</h4>
-                    <div class="border-top my-3"></div>
-                    <!--baaac  -->
-                    <!-- bac -->
-
-
-                    <select class="f1select" formControlName="bac" (ngModelChange)="onBacChange($event)">
-                        <option disabled value="">--choisir le type de votre bac--</option>
-                        <option *ngFor="let bac of bacs$ | async" [ngValue]="bac">
-                            {{ bac.Intitule }}
-                        </option>
-                    </select>
-
-
-
-
-                    <div *ngIf="education_step && education.controls.bac.errors">
-                        <div *ngIf="education_.bac.errors?.required">Highest qualification is required</div>
-                    </div>
-                    <!-- annee bac -->
-                    <label class="labels" for="anneebac">Anne du Baccalauréat</label>
-                    <input type="number" name="anneebac" formControlName="anneebac" min="2014" max="2022" step="1"
-                        value="2016" />
-
-                    <div *ngIf="education_step && education.controls.anneebac.errors">
-                        <div *ngIf="education_.anneebac.errors?.required">veuillez enter l'annee de votre bac</div>
-                    </div>
-
-                    <input type="text" formControlName="notebac" placeholder="note du Baccalauréat" />
-                    <div *ngIf="education_step && education.controls.notebac.errors">
-                        <div *ngIf="education_.notebac.errors?.required">University is required</div>
-                    </div>
-                    <!--baaac  -->
-                    <div class="border-top my-3"></div>
-                    <h4>les informations du diplome bac+2</h4>
-
-                    <!--diplome 1  -->
-
-
-                    <select  class="f1select"  formControlName="diplome" (ngModelChange)="onDiplomeChange($event)">
-                        <option disabled value="">--choisir votre diplome--</option>
-
-                        <option *ngFor="let diplo of diplomes" [ngValue]="diplo">
-                            {{ diplo.Intitule }}
-                        </option>
-                    </select>
-
-
-
-                    <select  class="f1select"  [ngClass]="{'disabledSelect' : isDiplome}" formControlName="filC"
-                        [attr.disabled]="isDiplome? true : null" (ngModelChange)="onFiliereChange($event)">
-
-                        <option disabled value="">--la filiere du diplome--</option>
-                        <option *ngFor="let filC of filcandidat" [ngValue]="filC">
-                            {{ filC.Intitule }}
-                        </option>
-                    </select>
-                    
-                    <select  class="f1select"  [ngClass]="{'disabledSelect' : isetablissement}" formControlName="etablissement"
-                        [attr.disabled]="isetablissement? true : null">
-
-                        <option disabled value="">--l'etablissement du diplome--</option>
-                        <option *ngFor="let etablissement of etablissements" [ngValue]="etablissement">
-                            {{ etablissement.Nom }} ({{etablissement.ville}})
-                        </option>
-                    </select>
-
-                    <div  class="f1select"  *ngIf="education_step && education.controls.diplome.errors">
-                        <div *ngIf="education_.diplome.errors?.required">nom dipome est requis</div>
-                    </div>
-
-                    <label class="labels" for="annediplo">Anneé d'obtention du diplome</label>
-                    <input type="number" name="annediplo" formControlName="annediplo" min="2014" max="2022" step="1"
-                        value="2016" />
-
-                    <div *ngIf="education_step && education.controls.annediplo.errors">
-                        <div *ngIf="education_.annediplo.errors?.required">veuillez enter l'annee de votre diplome</div>
-                    </div>
-
-                    <input type="text" formControlName="notediplo" placeholder="note du Diplome universitaire" />
-                    <div *ngIf="education_step && education.controls.notediplo.errors">
-                        <div *ngIf="education_.notediplo.errors?.required">la note du diplome est requis</div>
-                    </div>
-
-                    <div>
-                        <input class="Attester" type="checkbox" formControlName="acceptTerms" id="acceptTerms"
-                            [ngClass]="{ 'is-invalid': submit && f.acceptTerms.errors }" />
-                        <label for="acceptTerms" class="labels">Attester sur l'honneur l'exactitude des renseignements
-                            portés à ce formulaire </label>
-                        <div *ngIf="submit&& f.acceptTerms.errors" class="invalid-feedback">veuillez Attester sur
-                            l'honneur l'exactitude des renseignements portés à ce formulaire</div>
-                    </div>
-                    <!-- diplome 1  -->
-                    <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
-                        value="Previous" />
-                    <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
-
-                </fieldset>
-            </form>
-
-
-            <form [formGroup]="choices" id="msform">
-                <fieldset *ngIf="step == 4">
-                    <h2 class="fs-title">le choix des formations</h2>
-                    <div *ngIf="peuxpostuler==true">
-
-                        <h2 class="mslabel">le Premier choix</h2>
-
-
-                        <select  class="f1select"  formControlName="filterN1" (ngModelChange)="PremierchoixChange($event)">
-                            <option disabled value="">--choisir la premiere option--</option>
-                            <option *ngFor="let fil of filsApostuler" [ngValue]="fil">
-                                {{ fil.Intitule }}
-                            </option>
-                        </select>
-
-
-
-                        <h2 class="mslabel">le deuxieme choix</h2>
-
-                        <select  class="f1select"  formControlName="filterN2" (ngModelChange)="deuxiemechoixChange($event)">
-                            <option disabled value="">--choisir deuxieme option--</option>
-                            <option *ngFor="let fil of filsApostuler" [ngValue]="fil">
-                                {{ fil.Intitule }}
-                            </option>
-                        </select>
-                        <div *ngIf="choix_step && choices.controls.filterN1.errors">
-                            <div *ngIf="choix.filterN1.errors?.required">******</div>
-                        </div>
-                    </div>
-                    <div *ngIf="!peuxpostuler">
-                        <h2 class="danger">vous ne pouvez pas postuler a aucune filieres </h2>
-                    </div>
-                    <div *ngIf="memechoix==true">
-                        <h5 class="danger">choisir une formation differente </h5>
-                    </div>
-                    <div [ngClass]="{'buttonHolder' : !peuxpostuler}">
-                        <input (click)="previous()" type="button" name="previous"
-                            class="previous action-button-previous" value="Previous" />
-                    </div>
-
-
-                    <input *ngIf="peuxpostuler==true &&  memechoix==false" (click)="next()" type="button" name="next"
-                        class="next action-button" value="Next" />
-
-                </fieldset>
-            </form>
-
-            <form [formGroup]="files" id="msform">
-                <fieldset *ngIf="step == 5">
-                    <h2 class="fs-title">Les documents</h2>
-                    <div class="row">
-                        <div class="col-8">
-                          <label class="btn btn-default p-0">
-                            <input type="file" multiple (change)="selectFile($event)" />
-                          </label>
-                        </div>
-                       
-                        <div class="col-4">
-                          <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
-                            Upload
-                          </button>
-                        </div>
-                      </div>
-                      <div *ngIf="currentFile" class="progress my-3">
-                        <div
-                          class="progress-bar progress-bar-info progress-bar-striped"
-                          role="progressbar"
-                          attr.aria-valuenow="{{ progress }}"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                          [ngStyle]="{ width: progress + '%' }"
-                        >
-                          {{ progress }}%
-                        </div>
-                      </div>
-                      <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
-                      <div class="card mt-3">
-                        <div class="card-header">List of Files</div>
-                        <ul
-                          class="list-group list-group-flush"
-                          *ngFor="let file of fileInfos | async"
-                        >
-                          <li class="list-group-item">
-                            <a href="{{ file.url }}">{{ file.name }}</a>
-                          </li>
-                        </ul>
-                      </div>
-
-
-
-                    <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                    <input (click)="submit()"type="button" name="submit" class="submit action-button" value="Submit" />
-
-                </fieldset>
-            </form>
-        </div>
-    </div>
-</div>
-<div *ngIf="numberOfcandidatures==1" class="container py-5">
-
-        <div class="alert alert-info text-center">  
-            <button type="button" class="close" data-dismiss="alert">×</button>  
-            <strong>Note!</strong> ceci est votre deuxième candidature
-            vous ne pouvez que changer les Informations de votre education <br/>
-            la nouvelle candidature sera envoyée avec les informations que vous avez soumises dans l'ancienne candidature        </div> 
         <div class="row">
-            <div class="col-md-12 col-md-offset-3" id="msform">
-                <form [formGroup]="secondCanidature" (ngSubmit)="onSecondCandidatureSubmit()">
-
-                    <h4>les informations du bac</h4>
-                    <div class="border-top my-3"></div>
-                    <div class="form-row">
+            <div class="col-md-12 col-md-offset-3">
+                <form [formGroup]="personalDetails" id="msform">
+                    <!-- progressbar -->
+                    <ul id="progressbar">
+                        <li [ngClass]="step>=1 ? 'active ' : 'inactive'">les informations personnelles</li>
+                        <li [ngClass]="step>=2 ? 'active' : 'inactive'">parcour universitaire</li>
+                        <li [ngClass]="step>=3 ? 'active' : 'inactive'">autres informations</li>
+                        <li [ngClass]="step>=4 ? 'active' : 'inactive'">choix de formation(s)</li>
+                        <li [ngClass]="step==5 ? 'active' : 'inactive'">upload des fiche</li>
+                    </ul>
+                    <!-- fieldsets -->
+                    <fieldset *ngIf="step == 1">
+                        <h2 class="fs-title">les informations personnelles</h2>
     
-                        <div class="form-group col">
-                            <label>Bac</label>
-                            <select formControlName="Bac" class="form-control"   [ngClass]="{ 'is-invalid': submitted && f.Bac.errors }">
-                                <option *ngFor="let Bac of SecondBacs" [ngValue]="Bac">
-                                    {{ Bac.Intitule }}
+                        <input type="text" formControlName="nomFr"
+                            [ngClass]="{ 'is-invalid': personal_step && personal.nomFr.errors }"
+                            placeholder="nom en francais" />
+                        <div *ngIf="personal_step && personalDetails.controls.nomFr.errors">
+                            <div class="danger" *ngIf="personal.nomFr.errors?.required">Le nom est requis</div>
+                        </div>
+                        <input type="text" dir="rtl" class="keyboardInput" formControlName="nomAr"
+                            [ngClass]="{ 'is-invalid': personal_step && personal.nomAr.errors }"
+                            placeholder="اسم العائلة باللغة العربية " />
+                        <div *ngIf="personal_step && personalDetails.controls.nomAr.errors">
+                            <div dir="rtl" class="danger" *ngIf="personal.nomAr.errors?.required"> يرجى ادخال اسم العائلة
+                            </div>
+                        </div>
+                        <input type="text" formControlName="prenomFr"
+                            [ngClass]="{ 'is-invalid': personal_step && personal.prenomFr.errors }"
+                            placeholder="prenom en francais" />
+                        <div *ngIf="personal_step && personalDetails.controls.prenomFr.errors">
+                            <div class="danger" *ngIf="personal.prenomFr.errors?.required">Le nom est requis</div>
+                        </div>
+    
+                        <input type="text" dir="rtl" class="keyboardInput" formControlName="prenomAr"
+                            [ngClass]="{ 'is-invalid': personal_step && personal.prenomAr.errors }"
+                            placeholder="الاسم باللغة العربية" />
+                        <div *ngIf="personal_step && personalDetails.controls.prenomAr.errors">
+                            <div dir="rtl" class="danger" *ngIf="personal.prenomAr.errors?.required"> يرجى ادخال الاسم
+                            </div>
+    
+                        </div>
+                        <input type="text" formControlName="email" name="email" placeholder="Email" [attr.disabled]="true" />
+                        <div *ngIf="personal_step && personalDetails.controls.email.errors">
+                            <div class="danger" *ngIf="personal.email.errors?.required">l'Email nom est requis</div>
+                        </div>
+                        <h3 class="mslabel" for="datenaiss"> date de naissance</h3>
+                        <input type="date" formControlName="datenaiss" name="datenaiss" placeholder="date de naissance" />
+                        <div *ngIf="personal_step && personalDetails.controls.datenaiss.errors">
+                            <div class="danger" *ngIf="personal.datenaiss.errors?.required">la date de naissance est requis
+                            </div>
+                        </div>
+                        <input type="text" formControlName="cin" name="cin" placeholder="CIN (code d'identite nationale)" />
+                        <div *ngIf="personal_step && personalDetails.controls.cin.errors">
+                            <div class="danger" *ngIf="personal.cin.errors?.required">CIN est requis</div>
+                            <div class="danger" *ngIf="personal.cin.hasError('minlength')">Entrez un Cin Valid</div>
+                        </div>
+                        <input type="text" formControlName="cne" name="cne" placeholder="CNE(code national d'etudiant)" />
+                        <div *ngIf="personal_step && personalDetails.controls.cne.errors">
+                            <div class="danger" *ngIf="personal.cne.errors?.required">CNE est requis</div>
+                        </div>
+                        <input type="text" formControlName="LieuDeNaissance" name="LieuDeNaissance"
+                            placeholder="Lieu De Naissance" />
+                        <div *ngIf="personal_step && personalDetails.controls.LieuDeNaissance.errors">
+                            <div class="danger" *ngIf="personal.LieuDeNaissance.errors?.required">le Lieu De Naissance est
+                                requis</div>
+                        </div>
+    
+                        <input type="text" formControlName="phone" name="phone" placeholder="Phone" />
+                        <div *ngIf="personal_step && personalDetails.controls.phone.errors">
+                            <div class="danger" *ngIf="personal.phone.errors?.required">Le telephone est requis</div>
+                        </div>
+                        <button (click)="next()" class="next action-button" [disabled]="personal.invalid">Suivant</button>
+    
+                    </fieldset>
+                </form>
+    
+    
+                <form [formGroup]="addressDetails" id="msform">
+                    <fieldset *ngIf="step == 2">
+                        <h2 class="fs-title">Address Details</h2>
+                        <input type="text" formControlName="city" placeholder="City" />
+                        <div *ngIf="address_step && addressDetails.controls.city.errors">
+                            <div *ngIf="address.city.errors?.required">City is required</div>
+                        </div>
+                        <input type="text" placeholder="Adresse" formControlName="address" />
+                        <div *ngIf="address_step && addressDetails.controls.address.errors">
+                            <div *ngIf="address.address.errors?.required">Address is required</div>
+                        </div>
+                        <input type="text" formControlName="codePostal" placeholder="code Postal" />
+                        <div *ngIf="address_step && addressDetails.controls.codePostal.errors">
+                            <div *ngIf="address.codePostal.errors?.required">Pincode is required</div>
+                        </div>
+                        <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
+                            value="précédent" />
+                        <input (click)="next()" type="button" name="next" class="next action-button" value="Suivant" />
+                    </fieldset>
+                </form>
+                <!-- education  -->
+                <form [formGroup]="education" id="msform">
+                    <fieldset *ngIf="step == 3">
+                        <h2 class="fs-title">Education</h2>
+                        <div class="border-top my-3"></div>
+                        <h4>les informations du baccalauréat</h4>
+                        <div class="border-top my-3"></div>
+                        <!--baaac  -->
+                        <!-- bac -->
+    
+    
+                        <select class="f1select" formControlName="bac" (ngModelChange)="onBacChange($event)">
+                            <option disabled value="">--choisir le type de votre bac--</option>
+                            <option *ngFor="let bac of bacs$ | async" [ngValue]="bac">
+                                {{ bac.Intitule }}
+                            </option>
+                        </select>
+    
+    
+    
+    
+                        <div *ngIf="education_step && education.controls.bac.errors">
+                            <div *ngIf="education_.bac.errors?.required">Highest qualification is required</div>
+                        </div>
+                        <!-- annee bac -->
+                        <label class="labels" for="anneebac">Anne du Baccalauréat</label>
+                        <input type="number" name="anneebac" formControlName="anneebac" min="2014" max="2022" step="1"
+                            value="2016" />
+    
+                        <div *ngIf="education_step && education.controls.anneebac.errors">
+                            <div *ngIf="education_.anneebac.errors?.required">veuillez enter l'annee de votre bac</div>
+                        </div>
+    
+                        <input type="text" formControlName="notebac" placeholder="note du Baccalauréat" />
+                        <div *ngIf="education_step && education.controls.notebac.errors">
+                            <div *ngIf="education_.notebac.errors?.required">University is required</div>
+                        </div>
+                        <!--baaac  -->
+                        <div class="border-top my-3"></div>
+                        <h4>les informations du diplome bac+2</h4>
+    
+                        <!--diplome 1  -->
+    
+    
+                        <select  class="f1select"  formControlName="diplome" (ngModelChange)="onDiplomeChange($event)">
+                            <option disabled value="">--choisir votre diplome--</option>
+    
+                            <option *ngFor="let diplo of diplomes" [ngValue]="diplo">
+                                {{ diplo.Intitule }}
+                            </option>
+                        </select>
+    
+    
+    
+                        <select  class="f1select"  [ngClass]="{'disabledSelect' : isDiplome}" formControlName="filC"
+                            [attr.disabled]="isDiplome? true : null" (ngModelChange)="onFiliereChange($event)">
+    
+                            <option disabled value="">--la filiere du diplome--</option>
+                            <option *ngFor="let filC of filcandidat" [ngValue]="filC">
+                                {{ filC.Intitule }}
+                            </option>
+                        </select>
+                        
+                        <select  class="f1select"  [ngClass]="{'disabledSelect' : isetablissement}" formControlName="etablissement"
+                            [attr.disabled]="isetablissement? true : null">
+    
+                            <option disabled value="">--l'etablissement du diplome--</option>
+                            <option *ngFor="let etablissement of etablissements" [ngValue]="etablissement">
+                                {{ etablissement.Nom }} ({{etablissement.ville}})
+                            </option>
+                        </select>
+    
+                        <div  class="f1select"  *ngIf="education_step && education.controls.diplome.errors">
+                            <div *ngIf="education_.diplome.errors?.required">nom dipome est requis</div>
+                        </div>
+    
+                        <label class="labels" for="annediplo">Anneé d'obtention du diplome</label>
+                        <input type="number" name="annediplo" formControlName="annediplo" min="2014" max="2022" step="1"
+                            value="2016" />
+    
+                        <div *ngIf="education_step && education.controls.annediplo.errors">
+                            <div *ngIf="education_.annediplo.errors?.required">veuillez enter l'annee de votre diplome</div>
+                        </div>
+    
+                        <input type="text" formControlName="notediplo" placeholder="note du Diplome universitaire" />
+                        <div *ngIf="education_step && education.controls.notediplo.errors">
+                            <div *ngIf="education_.notediplo.errors?.required">la note du diplome est requis</div>
+                        </div>
+    
+                        <div>
+                            <input class="Attester" type="checkbox" formControlName="acceptTerms" id="acceptTerms"
+                                [ngClass]="{ 'is-invalid': submit && f.acceptTerms.errors }" />
+                            <label for="acceptTerms" class="labels">Attester sur l'honneur l'exactitude des renseignements
+                                portés à ce formulaire </label>
+                            <div *ngIf="submit&& f.acceptTerms.errors" class="invalid-feedback">veuillez Attester sur
+                                l'honneur l'exactitude des renseignements portés à ce formulaire</div>
+                        </div>
+                        <!-- diplome 1  -->
+                        <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
+                            value="Previous" />
+                        <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
+    
+                    </fieldset>
+                </form>
+    
+    
+                <form [formGroup]="choices" id="msform">
+                    <fieldset *ngIf="step == 4">
+                        <h2 class="fs-title">le choix des formations</h2>
+                        <div *ngIf="peuxpostuler==true">
+    
+                            <h2 class="mslabel">le Premier choix</h2>
+    
+    
+                            <select  class="f1select"  formControlName="filterN1" (ngModelChange)="PremierchoixChange($event)">
+                                <option disabled value="">--choisir la premiere option--</option>
+                                <option *ngFor="let fil of filsApostuler" [ngValue]="fil">
+                                    {{ fil.Intitule }}
                                 </option>
                             </select>
-                            <div *ngIf="submitted && f.Bac.errors" class="invalid-feedback">
-                                <div *ngIf="f.Bac.errors.required">Email is required</div>
-                            </div>
-                        </div>
-                        <div class="form-group col">
-                            <label>annee Bac</label>
-                            <input type="text" formControlName="anneBac" 
-                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.anneBac.errors }" />
-                            <div *ngIf="submitted && f.anneBac.errors" class="invalid-feedback">
-                                <div *ngIf="f.anneBac.errors.required">Email is required</div>
-                            </div>
-                        </div>
     
-                        <div class="form-group col">
-                            <label>Note Bac</label>
-                            <input type="text" formControlName="noteBac" 
-                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.noteBac.errors }" />
-                            <div *ngIf="submitted && f.noteBac.errors" class="invalid-feedback">
-                                <div *ngIf="f.noteBac.errors.required">Email is required</div>
-                            </div>
-                        </div>
     
-                    </div>
-                    <div class="border-top my-3"></div>
-                    <h4>les informations du diplome bac+2</h4>
-                    <div class="border-top my-3"></div>
     
-                    <div class="form-row">
+                            <h2 class="mslabel">le deuxieme choix</h2>
     
-                        <div class="form-group col">
-                            <label>diplome</label>
-                            <select formControlName="diplome" class="form-control" (ngModelChange)="onSecondDiplomeChange($event)"
-                                [ngClass]="{ 'is-invalid': submitted && f.diplome.errors }">
-                                <option *ngFor="let diplome of Seconddiplomes" [ngValue]="diplome"> {{ diplome.Intitule }}
+                            <select  class="f1select"  formControlName="filterN2" (ngModelChange)="deuxiemechoixChange($event)">
+                                <option disabled value="">--choisir deuxieme option--</option>
+                                <option *ngFor="let fil of filsApostuler" [ngValue]="fil">
+                                    {{ fil.Intitule }}
                                 </option>
                             </select>
-                            <div *ngIf="submitted && f.diplome.errors" class="invalid-feedback">
-                                <div *ngIf="f.diplome.errors.required">Email is required</div>
+                            <div *ngIf="choix_step && choices.controls.filterN1.errors">
+                                <div *ngIf="choix.filterN1.errors?.required">******</div>
                             </div>
                         </div>
-                        <div class="form-group col">
-                            <label>filiere Diplome</label>
-                            <select formControlName="filiereDip" class="form-control"
-                                (ngModelChange)="onSecondFiliereChange($event)"
-                                [ngClass]="{ 'is-invalid': submitted && f.filiereDip.errors }">
-                                <option *ngFor="let filiereDip of Secondfilcandidat" [ngValue]="filiereDip"> {{
-                                    filiereDip.Intitule }}</option>
-                            </select>
-                            <div *ngIf="submitted && f.filiereDip.errors" class="invalid-feedback">
-                                <div *ngIf="f.filiereDip.errors.required">Email is required</div>
-                            </div>
+                        <div *ngIf="!peuxpostuler">
+                            <h2 class="danger">vous ne pouvez pas postuler a aucune filieres </h2>
                         </div>
-                        <div class="form-group col">
-                            <label>etablissement</label>
-                            <select formControlName="etablissement" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && f.etablissement.errors }">
-                                <option *ngFor="let etablissement of Secondetablissements" [ngValue]="etablissement"> {{
-                                    etablissement.Nom }} ({{etablissement.ville}})</option>
-                            </select>
-                            <div *ngIf="submitted && f.etablissement.errors" class="invalid-feedback">
-                                <div *ngIf="f.etablissement.errors.required">Email is required</div>
-                            </div>
+                        <div *ngIf="memechoix==true">
+                            <h5 class="danger">choisir une formation differente </h5>
+                        </div>
+                        <div [ngClass]="{'buttonHolder' : !peuxpostuler}">
+                            <input (click)="previous()" type="button" name="previous"
+                                class="previous action-button-previous" value="Previous" />
                         </div>
     
     
+                        <input *ngIf="peuxpostuler==true &&  memechoix==false" (click)="next()" type="button" name="next"
+                            class="next action-button" value="Next" />
     
+                    </fieldset>
+                </form>
     
-                    </div>
-    
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label>Moyenne de Diplome</label>
-                            <input type="text" formControlName="MoyenneDiplome" 
-                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.MoyenneDiplome.errors }" />
-                            <div *ngIf="submitted && f.MoyenneDiplome.errors" class="invalid-feedback">
-                                <div *ngIf="f.MoyenneDiplome.errors.required">Email is required</div>
+                <form [formGroup]="files" id="msform">
+                    <fieldset *ngIf="step == 5">
+                        <h2 class="fs-title">Les documents</h2>
+                        <div class="row">
+                            <div class="col-8">
+                              <label class="btn btn-default p-0">
+                                <input type="file" multiple (change)="selectFile($event)" />
+                              </label>
                             </div>
-                        </div>
-                        <div class="form-group col">
-                            <label>Annee Diplome</label>
-                            <input type="text" formControlName="AnneeDiplome" 
-                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.AnneeDiplome.errors }" />
-                            <div *ngIf="submitted && f.AnneeDiplome.errors" class="invalid-feedback">
-                                <div *ngIf="f.AnneeDiplome.errors.required">Email is required</div>
+                           
+                            <div class="col-4">
+                              <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+                                Upload
+                              </button>
                             </div>
-                        </div>
-    
-                    </div>
-                    <h4>mes choix</h4>
-                    <div class="border-top my-3"></div>
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label>choix1</label>
-                            <select formControlName="choix1" class="form-control" (ngModelChange)="PremierchoixChange($event)"
-                                [ngClass]="{ 'is-invalid': submitted && f.choix1.errors }">
-                                <option *ngFor="let choix1 of SecondfilsApostuler" [ngValue]="choix1"> {{ choix1.Intitule }}
-                                </option>
-                            </select>
-                            <div *ngIf="submitted && f.choix1.errors" class="invalid-feedback">
-                                <div *ngIf="f.choix1.errors.required">Email is required</div>
+                          </div>
+                          <div *ngIf="currentFile" class="progress my-3">
+                            <div
+                              class="progress-bar progress-bar-info progress-bar-striped"
+                              role="progressbar"
+                              attr.aria-valuenow="{{ progress }}"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                              [ngStyle]="{ width: progress + '%' }"
+                            >
+                              {{ progress }}%
                             </div>
-                        </div>
-                        <div class="form-group col">
-                            <label>choix 2 </label>
-                            <select formControlName="choix2" class="form-control" (ngModelChange)="deuxiemechoixChange($event)"
-                                [ngClass]="{ 'is-invalid': submitted && f.choix2.errors }">
-                                <option *ngFor="let choix2 of SecondfilsApostuler" [ngValue]="choix2"> {{ choix2.Intitule }}
-                                </option>
-                            </select>
-                            <div *ngIf="submitted && f.choix2.errors" class="invalid-feedback">
-                                <div *ngIf="f.choix2.errors.required">Email is required</div>
-                            </div>
-                        </div>
+                          </div>
+                          <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
+                          <div class="card mt-3">
+                            <div class="card-header">List of Files</div>
+                            <ul
+                              class="list-group list-group-flush"
+                              *ngFor="let file of fileInfos | async"
+                            >
+                              <li class="list-group-item">
+                                <a href="{{ file.url }}">{{ file.name }}</a>
+                              </li>
+                            </ul>
+                          </div>
     
     
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col"></div>
     
-                        <div class="form-group col">
-                            <div *ngIf="memechoix==true">
-                                <p class="danger">choisir une formation differente </p>
-                            </div>
-                        </div>
+                        <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                        <input (click)="submit()"type="button" name="submit" class="submit action-button" value="Submit" />
     
-    
-                    </div>
-    
-                    <div class="text-center">
-                        <button class="btn btn-primary mr-1" [disabled]="memechoix">Ajouter une candidature</button>
-                        <button class="btn btn-secondary" routerLink="/profile" type="reset" (click)="onReset()">Annuler</button>
-                    </div>
+                    </fieldset>
                 </form>
             </div>
         </div>
     </div>
-<div *ngIf="numberOfcandidatures==2" class="container py-5">
-
-    <section  class="section">
-        <div *ngIf='noCondidature==true' class="container">
-          <div class="row">
-              <!-- Error Inner -->
-              <div class="success-inner">
-                <h1>
-                  <span>vous avez 2 applications liées à votre profil que vous ne pouvez modifier que maintenant</span>
-                </h1>
-                <br>
-                <a routerLink="/profile" class="btn btn-primary btn-lg">formulaire</a>
-              </div>
-              <!--/ End Error Inner -->
+    <div *ngIf="numberOfcandidatures==1" class="container py-5">
+    
+            <div class="alert alert-info text-center">  
+                <button type="button" class="close" data-dismiss="alert">×</button>  
+                <strong>Note!</strong> ceci est votre deuxième candidature
+                vous ne pouvez que changer les Informations de votre education <br/>
+                la nouvelle candidature sera envoyée avec les informations que vous avez soumises dans l'ancienne candidature        </div> 
+            <div class="row">
+                <div class="col-md-12 col-md-offset-3" id="msform">
+                    <form [formGroup]="secondCanidature" (ngSubmit)="onSecondCandidatureSubmit()">
+    
+                        <h4>les informations du bac</h4>
+                        <div class="border-top my-3"></div>
+                        <div class="form-row">
+        
+                            <div class="form-group col">
+                                <label>Bac</label>
+                                <select formControlName="Bac" class="form-control"   [ngClass]="{ 'is-invalid': submitted && f.Bac.errors }">
+                                    <option *ngFor="let Bac of SecondBacs" [ngValue]="Bac">
+                                        {{ Bac.Intitule }}
+                                    </option>
+                                </select>
+                                <div *ngIf="submitted && f.Bac.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Bac.errors.required">Email is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>annee Bac</label>
+                                <input type="text" formControlName="anneBac" 
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.anneBac.errors }" />
+                                <div *ngIf="submitted && f.anneBac.errors" class="invalid-feedback">
+                                    <div *ngIf="f.anneBac.errors.required">Email is required</div>
+                                </div>
+                            </div>
+        
+                            <div class="form-group col">
+                                <label>Note Bac</label>
+                                <input type="text" formControlName="noteBac" 
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.noteBac.errors }" />
+                                <div *ngIf="submitted && f.noteBac.errors" class="invalid-feedback">
+                                    <div *ngIf="f.noteBac.errors.required">Email is required</div>
+                                </div>
+                            </div>
+        
+                        </div>
+                        <div class="border-top my-3"></div>
+                        <h4>les informations du diplome bac+2</h4>
+                        <div class="border-top my-3"></div>
+        
+                        <div class="form-row">
+        
+                            <div class="form-group col">
+                                <label>diplome</label>
+                                <select formControlName="diplome" class="form-control" (ngModelChange)="onSecondDiplomeChange($event)"
+                                    [ngClass]="{ 'is-invalid': submitted && f.diplome.errors }">
+                                    <option *ngFor="let diplome of Seconddiplomes" [ngValue]="diplome"> {{ diplome.Intitule }}
+                                    </option>
+                                </select>
+                                <div *ngIf="submitted && f.diplome.errors" class="invalid-feedback">
+                                    <div *ngIf="f.diplome.errors.required">Email is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>filiere Diplome</label>
+                                <select formControlName="filiereDip" class="form-control"
+                                    (ngModelChange)="onSecondFiliereChange($event)"
+                                    [ngClass]="{ 'is-invalid': submitted && f.filiereDip.errors }">
+                                    <option *ngFor="let filiereDip of Secondfilcandidat" [ngValue]="filiereDip"> {{
+                                        filiereDip.Intitule }}</option>
+                                </select>
+                                <div *ngIf="submitted && f.filiereDip.errors" class="invalid-feedback">
+                                    <div *ngIf="f.filiereDip.errors.required">Email is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>etablissement</label>
+                                <select formControlName="etablissement" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.etablissement.errors }">
+                                    <option *ngFor="let etablissement of Secondetablissements" [ngValue]="etablissement"> {{
+                                        etablissement.Nom }} ({{etablissement.ville}})</option>
+                                </select>
+                                <div *ngIf="submitted && f.etablissement.errors" class="invalid-feedback">
+                                    <div *ngIf="f.etablissement.errors.required">Email is required</div>
+                                </div>
+                            </div>
+        
+        
+        
+        
+                        </div>
+        
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label>Moyenne de Diplome</label>
+                                <input type="text" formControlName="MoyenneDiplome" 
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.MoyenneDiplome.errors }" />
+                                <div *ngIf="submitted && f.MoyenneDiplome.errors" class="invalid-feedback">
+                                    <div *ngIf="f.MoyenneDiplome.errors.required">Email is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>Annee Diplome</label>
+                                <input type="text" formControlName="AnneeDiplome" 
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.AnneeDiplome.errors }" />
+                                <div *ngIf="submitted && f.AnneeDiplome.errors" class="invalid-feedback">
+                                    <div *ngIf="f.AnneeDiplome.errors.required">Email is required</div>
+                                </div>
+                            </div>
+        
+                        </div>
+                        <h4>mes choix</h4>
+                        <div class="border-top my-3"></div>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label>choix1</label>
+                                <select formControlName="choix1" class="form-control" (ngModelChange)="PremierchoixChange($event)"
+                                    [ngClass]="{ 'is-invalid': submitted && f.choix1.errors }">
+                                    <option *ngFor="let choix1 of SecondfilsApostuler" [ngValue]="choix1"> {{ choix1.Intitule }}
+                                    </option>
+                                </select>
+                                <div *ngIf="submitted && f.choix1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.choix1.errors.required">Email is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>choix 2 </label>
+                                <select formControlName="choix2" class="form-control" (ngModelChange)="deuxiemechoixChange($event)"
+                                    [ngClass]="{ 'is-invalid': submitted && f.choix2.errors }">
+                                    <option *ngFor="let choix2 of SecondfilsApostuler" [ngValue]="choix2"> {{ choix2.Intitule }}
+                                    </option>
+                                </select>
+                                <div *ngIf="submitted && f.choix2.errors" class="invalid-feedback">
+                                    <div *ngIf="f.choix2.errors.required">Email is required</div>
+                                </div>
+                            </div>
+        
+        
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col"></div>
+        
+                            <div class="form-group col">
+                                <div *ngIf="memechoix==true">
+                                    <p class="danger">choisir une formation differente </p>
+                                </div>
+                            </div>
+        
+        
+                        </div>
+        
+                        <div class="text-center">
+                            <button class="btn btn-primary mr-1" [disabled]="memechoix">Ajouter une candidature</button>
+                            <button class="btn btn-secondary" routerLink="/profile" type="reset" (click)="onReset()">Annuler</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-          </div>
-      </section>
+        </div>
+    <div *ngIf="numberOfcandidatures==2" class="container py-5">
+    
+        <section  class="section">
+            <div *ngIf='noCondidature==true' class="container">
+              <div class="row">
+                  <!-- Error Inner -->
+                  <div class="success-inner">
+                    <h1>
+                      <span>vous avez 2 applications liées à votre profil que vous ne pouvez modifier que maintenant</span>
+                    </h1>
+                    <br>
+                    <a routerLink="/profile" class="btn btn-primary btn-lg">formulaire</a>
+                  </div>
+                  <!--/ End Error Inner -->
+                </div>
+              </div>
+          </section>
+    </div>
 </div>
+<ng-template #Pasdutemps>
+    <div class="container py-4">
+
+    <div class="alert alert-primary" role="alert">
+         les Candidatures sont fermées
+      </div>
+      </div>
+</ng-template>

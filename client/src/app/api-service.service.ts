@@ -29,6 +29,10 @@ export class ApiServiceService {
 
     return this._http.get(`${this.apiUrl + "/AnneeUiversitaire"}`);
   }
+  getDatesFormated(): Observable<any> {
+
+    return this._http.get(`${this.apiUrl + "/AnneeUiversitaire/formated"}`);
+  }
 
   getAllfilsC(): Observable<any> {
 

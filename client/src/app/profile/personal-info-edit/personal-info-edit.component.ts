@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiServiceService } from '@app/api-service.service';
-import { AccountService, AlertService } from '@app/_services';
+import { AccountService, AlertService, TimeService } from '@app/_services';
 
 @Component({
   selector: 'app-personal-info-edit',
@@ -18,11 +18,12 @@ export class PersonalInfoEditComponent implements OnInit {
 
   constructor(private api: ApiServiceService, 
     private formBuilder: FormBuilder
-    , private accountService: AccountService, private alertService: AlertService
+    , private accountService: AccountService, private alertService: AlertService,public time:TimeService
     ) { }
 
   ngOnInit(): void {
-   
+    this.time.isTimeUp()
+
     this.api.getUserCandudatures().subscribe((result: { data: any; }) => {
       if (!Object.keys(result.data).length) {
         this.noCondidature = true;

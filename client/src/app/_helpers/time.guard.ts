@@ -11,7 +11,7 @@ export class TimeGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         
-            return this.timeService.timIsUp;
+            return this.timeService.ilResteDutemps;
         
     }
 }

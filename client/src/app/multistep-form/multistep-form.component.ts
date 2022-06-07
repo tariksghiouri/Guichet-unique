@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiServiceService } from '../api-service.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { AccountService, AlertService } from '@app/_services';
+import { AccountService, AlertService, TimeService } from '@app/_services';
 
 
 @Component({
@@ -63,6 +63,7 @@ export class MultistepFormComponent implements OnInit {
   Secondpeuxpostuler: boolean;
   Secondfilcandidat: any;
   Secondetablissements: any;
+  // ilResteDutemps: any;
   //  SecondSecondChoice
 
 
@@ -72,11 +73,15 @@ export class MultistepFormComponent implements OnInit {
     private service: ApiServiceService,
     private router: Router,
     private accountService: AccountService,
-    private alertService: AlertService
-
+    private alertService: AlertService,
+    public time:TimeService
   ) { }
 
   ngOnInit() {
+    // this.time_service.isTimeUp()
+    // this.ilResteDutemps=this.time_service.isTimeUp()
+    // console.log(  "time is up "+  this.time_service.isTimeUp()  );
+    
     this.userDetials = this.accountService.accountValue
     this.service.getAllbacs().subscribe((result: { data: any; }) => {
       this.SecondBacs = result.data;
@@ -127,7 +132,7 @@ export class MultistepFormComponent implements OnInit {
     });
 
     this.service.getNumberOfCandidatures(this.userDetials.id).subscribe((result: { data: any; }) => {
-      console.log(result[0].numberOfcandidatures);
+      // console.log(result[0].numberOfcandidatures);
       this.numberOfcandidatures = result[0].numberOfcandidatures;
 
     });

@@ -2,12 +2,26 @@
     <!-- main nav -->
     <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="account">
         <div class="navbar-nav">
+           
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link">Home</a>
+            <a routerLink="/criteres"   class="nav-item nav-link">CRITÈRES </a>
+            <a routerLink="/procedure"  class="nav-item nav-link">procédures </a>
             <a *ngIf="account.role === Role.User" routerLink="/profile" routerLinkActive="active" class="nav-item nav-link">Profile</a>
              <a *ngIf="account.role === Role.User" routerLink="/profile/mesCandidatures" routerLinkActive="active" class="nav-item nav-link">Mes Candidatures</a>
             <a *ngIf="account.role === Role.User" routerLink="/form" routerLinkActive="active" class="nav-item nav-link">formulaire</a>
             <a *ngIf="account.role === Role.Admin" routerLink="/admin" routerLinkActive="active" class="nav-item nav-link">Admin</a>
-            <a (click)="logout()" class="nav-item nav-link">Logout <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+            <a (click)="logout()" class="nav-item nav-link">Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
+
+            </a>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!account">
+        <div class="navbar-nav">
+           
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link">Home</a>
+            <a routerLink="/criteres"   class="nav-item nav-link">CRITÈRES </a>
+            <a routerLink="/procedure"  class="nav-item nav-link">procédures </a>
+            <a  routerLink="/account/login" class="nav-item nav-link">Conexion <i class="fa fa-sign-in" aria-hidden="true"></i>
             </a>
         </div>
     </nav>
