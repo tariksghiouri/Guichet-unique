@@ -48,6 +48,9 @@ export class EditFormComponent implements OnInit {
   oneCandidature: any;
   selectedCandidature: any;
   candidatureSelected: boolean;
+  Bac:String =null
+
+
   constructor(private alertService: AlertService,
      private accountService: AccountService, 
      private api: ApiServiceService,
@@ -56,6 +59,8 @@ export class EditFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    
     this.time.isTimeUp()
     this.api.getUserCandudatures().subscribe((result: { data: any; }) => {
 
@@ -92,13 +97,14 @@ export class EditFormComponent implements OnInit {
     this.api.getAlldips().subscribe((result: { data: any; }) => {
       this.diplomes = result.data;
     });
+    
 
   }
   get f() {
     return this.editForm.controls;
   }
 
- 
+  
   onSubmit() {
     // if (!this.time.ilResteDutemps) {
     //   window.scrollTo(0, 0);

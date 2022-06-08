@@ -15,37 +15,41 @@ import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component
 import { NavigationComponent } from './navigation/navigation.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';;
 import { ConfirmationComponent } from './confirmation/confirmation.component'
-;
+    ;
 import { EditFormComponent } from './edit-form/edit-form.component'
-import {DatePipe} from '@angular/common';;
+import { DatePipe } from '@angular/common';;
 import { CriteresComponent } from './criteres/criteres.component'
-;
+    ;
 import { ProcedureComponent } from './procedure/procedure.component'
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
+        FormsModule,
+
         HttpClientModule,
         AppRoutingModule,
         AccordionModule.forRoot(),
-        
 
-       
+
+
     ],
     declarations: [
-         MultistepFormComponent,
+        MultistepFormComponent,
         NavigationComponent,
         ThankYouPageComponent,
         AppComponent,
         AlertComponent,
         HomeComponent
-,
-        ConfirmationComponent ,
-        EditFormComponent ,
-        CriteresComponent ,
-        ProcedureComponent ],
+        ,
+        ConfirmationComponent,
+        EditFormComponent,
+        CriteresComponent,
+        ProcedureComponent],
     providers: [
         DatePipe,
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },

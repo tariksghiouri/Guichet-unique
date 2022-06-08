@@ -89,7 +89,7 @@
                                     <input type="text" formControlName="email" [(ngModel)]="candidature.email" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
                                         class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
                                     <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                        <div *ngIf="f.email.errors.required">Email is required</div>
+                                        <div *ngIf="f.email.errors.required">Ce champ est requis</div>
                                         <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                         [(ngModel)]="candidature.LieuDeNaissance" class="form-control"
                                         [ngClass]="{ 'is-invalid': submitted && f.LieuDeNaissance.errors }" />
                                     <div *ngIf="submitted && f.LieuDeNaissance.errors" class="invalid-feedback">
-                                        <div *ngIf="f.LieuDeNaissance.errors.required">Email is required</div>
+                                        <div *ngIf="f.LieuDeNaissance.errors.required">Ce champ est requis</div>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                     <input type="text" formControlName="telephone" [(ngModel)]="candidature.Tel" [attr.disabled]="!this.time.ilResteDutemps ? '' : null"
                                         class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
                                     <div *ngIf="submitted && f.telephone.errors" class="invalid-feedback">
-                                        <div *ngIf="f.telephone.errors.required">Email is required</div>
+                                        <div *ngIf="f.telephone.errors.required">Ce champ est requis</div>
                                     </div>
                                 </div>
                             </div>

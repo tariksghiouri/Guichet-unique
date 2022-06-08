@@ -2,7 +2,7 @@
     <div class="container py-4">
 
         <div class="alert alert-info">
-            <button type="button" class="close" data-dismiss="alert">×</button>
+            <button type="button" class="close" data-dismiss="alert">&#10005;</button>
             <strong>Note!</strong> Selectionner une candidature pour la modifier
         </div>
     </div>
@@ -13,65 +13,66 @@
             <option *ngFor="let Onecandidature  of candidature;let i = index" [value]=Onecandidature.NumcondidatureReel>
                 candidature numner: {{i+1}}</option>
         </select>
-    
-    
+
+
     </div>
     <div *ngIf="candidatureSelected" class="container py-5">
-    
-    
+
+
         <div class="border-top my-3"></div>
         <div class="row">
             <div class="col-md-12 col-md-offset-3" id="msform">
                 <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-                    
+
                     <h4>les informations du bac</h4>
                     <div class="border-top my-3"></div>
                     <div class="form-row">
-    
+
                         <div class="form-group col">
                             <label>Bac</label>
-                            <select formControlName="Bac" class="form-control"
+
+                            <select class="form-control" formControlName="Bac"
                                 [ngClass]="{ 'is-invalid': submitted && f.Bac.errors }">
-                                <option *ngFor="let bac of bacs" [ngValue]="bac"> {{ bac.Intitule }}</option>
+                                <option  *ngFor="let bac of bacs" [selected]="bac.id==2" [ngValue]="bac">
+                                    {{ bac.Intitule }}
+                                </option>
                             </select>
+
                             <div *ngIf="submitted && f.Bac.errors" class="invalid-feedback">
-                                <div *ngIf="f.Bac.errors.required">Email is required</div>
+                                <div *ngIf="f.Bac.errors.required">Ce champ est requis </div>
                             </div>
                         </div>
-                        <!-- <div class="form-group col">
-                            <label>annee Bac</label>
-                            <input type="text" formControlName="anneBac" [(ngModel)]="candidature[0].Anneebac"
-                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.anneBac.errors }" />
-                            <div *ngIf="submitted && f.anneBac.errors" class="invalid-feedback">
-                                <div *ngIf="f.anneBac.errors.required">Email is required</div>
-                            </div>
-                        </div> -->
-    
+                      
+
+
+
+
                         <div class="form-group col">
                             <label>Note Bac</label>
                             <input type="text" formControlName="noteBac" [(ngModel)]="candidature[0].noteBac"
                                 class="form-control" [ngClass]="{ 'is-invalid': submitted && f.noteBac.errors }" />
                             <div *ngIf="submitted && f.noteBac.errors" class="invalid-feedback">
-                                <div *ngIf="f.noteBac.errors.required">Email is required</div>
+                                <div *ngIf="f.noteBac.errors.required">Ce champ est requis </div>
                             </div>
                         </div>
-    
+
                     </div>
                     <div class="border-top my-3"></div>
                     <h4>les informations du diplome bac+2</h4>
                     <div class="border-top my-3"></div>
-    
+
                     <div class="form-row">
-    
+
                         <div class="form-group col">
                             <label>diplome</label>
-                            <select formControlName="diplome" class="form-control" (ngModelChange)="onDiplomeChange($event)"
+                            <select formControlName="diplome" class="form-control"
+                                (ngModelChange)="onDiplomeChange($event)"
                                 [ngClass]="{ 'is-invalid': submitted && f.diplome.errors }">
                                 <option *ngFor="let diplome of diplomes" [ngValue]="diplome"> {{ diplome.Intitule }}
                                 </option>
                             </select>
                             <div *ngIf="submitted && f.diplome.errors" class="invalid-feedback">
-                                <div *ngIf="f.diplome.errors.required">Email is required</div>
+                                <div *ngIf="f.diplome.errors.required">Ce champ est requis </div>
                             </div>
                         </div>
                         <div class="form-group col">
@@ -83,7 +84,7 @@
                                     filiereDip.Intitule }}</option>
                             </select>
                             <div *ngIf="submitted && f.filiereDip.errors" class="invalid-feedback">
-                                <div *ngIf="f.filiereDip.errors.required">Email is required</div>
+                                <div *ngIf="f.filiereDip.errors.required">Ce champ est requis </div>
                             </div>
                         </div>
                         <div class="form-group col">
@@ -94,22 +95,23 @@
                                     etablissement.Nom }} ({{etablissement.ville}})</option>
                             </select>
                             <div *ngIf="submitted && f.etablissement.errors" class="invalid-feedback">
-                                <div *ngIf="f.etablissement.errors.required">Email is required</div>
+                                <div *ngIf="f.etablissement.errors.required">Ce champ est requis </div>
                             </div>
                         </div>
-    
-    
-    
-    
+
+
+
+
                     </div>
-    
+
                     <div class="form-row">
                         <div class="form-group col">
                             <label>Moyenne de Diplome</label>
-                            <input type="text" formControlName="MoyenneDiplome" [(ngModel)]="candidature[0].MoyenneDiplome"
-                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.MoyenneDiplome.errors }" />
+                            <input type="text" formControlName="MoyenneDiplome"
+                                [(ngModel)]="candidature[0].MoyenneDiplome" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.MoyenneDiplome.errors }" />
                             <div *ngIf="submitted && f.MoyenneDiplome.errors" class="invalid-feedback">
-                                <div *ngIf="f.MoyenneDiplome.errors.required">Email is required</div>
+                                <div *ngIf="f.MoyenneDiplome.errors.required">Ce champ est requis </div>
                             </div>
                         </div>
                         <div class="form-group col">
@@ -117,10 +119,10 @@
                             <input type="text" formControlName="AnneeDiplome" [(ngModel)]="candidature[0].AnneeDiplome"
                                 class="form-control" [ngClass]="{ 'is-invalid': submitted && f.AnneeDiplome.errors }" />
                             <div *ngIf="submitted && f.AnneeDiplome.errors" class="invalid-feedback">
-                                <div *ngIf="f.AnneeDiplome.errors.required">Email is required</div>
+                                <div *ngIf="f.AnneeDiplome.errors.required">Ce champ est requis </div>
                             </div>
                         </div>
-    
+
                     </div>
                     <h4>mes choix</h4>
                     <div class="border-top my-3"></div>
@@ -134,7 +136,7 @@
                                 </option>
                             </select>
                             <div *ngIf="submitted && f.choix1.errors" class="invalid-feedback">
-                                <div *ngIf="f.choix1.errors.required">Email is required</div>
+                                <div *ngIf="f.choix1.errors.required">Ce champ est requis </div>
                             </div>
                         </div>
                         <div class="form-group col">
@@ -146,25 +148,25 @@
                                 </option>
                             </select>
                             <div *ngIf="submitted && f.choix2.errors" class="invalid-feedback">
-                                <div *ngIf="f.choix2.errors.required">Email is required</div>
+                                <div *ngIf="f.choix2.errors.required">Ce champ est requis </div>
                             </div>
                         </div>
-    
-    
+
+
                     </div>
-    
+
                     <div class="form-row">
                         <div class="form-group col"></div>
-    
+
                         <div class="form-group col">
                             <div *ngIf="memechoix==true">
                                 <p class="danger">choisir une formation differente </p>
                             </div>
                         </div>
-    
-    
+
+
                     </div>
-    
+
                     <div class="text-center">
                         <button class="btn btn-primary mr-1" [disabled]="memechoix">Modifier</button>
                         <button class="btn btn-secondary" routerLink="/profile" type="reset"
@@ -176,11 +178,12 @@
     </div>
 </div>
 
+
 <ng-template #Pasdutemps>
     <div class="container py-4">
 
-    <div class="alert alert-primary" role="alert">
-        vous ne pouvez pas modifier maintenant les Candidatures sont fermées
-      </div>
-      </div>
+        <div class="alert alert-primary" role="alert">
+            vous ne pouvez pas modifier maintenant les Candidatures sont fermées
+        </div>
+    </div>
 </ng-template>
