@@ -468,17 +468,12 @@
     
         <section  class="section">
             <div *ngIf='noCondidature==true' class="container">
-              <div class="row">
-                  <!-- Error Inner -->
-                  <div class="success-inner">
-                    <h1>
-                      <span>vous avez 2 applications liées à votre profil que vous ne pouvez modifier que maintenant</span>
-                    </h1>
+                <div class="alert alert-primary" role="alert">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    &nbsp; vous avez 2 applications liées à votre profil que vous ne pouvez modifier que maintenant
                     <br>
-                    <a routerLink="/profile" class="btn btn-primary btn-lg">formulaire</a>
-                  </div>
-                  <!--/ End Error Inner -->
-                </div>
+                    <a routerLink="/profile/edit">Profile</a>
+                     </div>
               </div>
           </section>
     </div>

@@ -1,0 +1,36 @@
+<div class="container py-5 align-items-center justify-content-center">
+  <h1 class="text-center">La liste des candidats</h1>
+          
+		<div class="search">
+      <span class="input input--nariko">
+        <input class="input__field input__field--nariko" type="text" [(ngModel)]="searchTerm"
+        (input)="search($event.target.value)"  id="input-22" />
+        <label class="input__label input__label--nariko" >
+          <span class="input__label-content input__label-content--nariko"> Rechercher par Numerode Candidature</span>
+        </label>
+      </span>
+    </div>
+     
+<div class="table-responsive">
+
+    <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th scope="col">Num candidature</th>
+          <th scope="col">1ere choix</th>
+          <th scope="col">2eme choix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let candidat of candidats listFilter: searchTerm | slice: (page-1) * pageSize : page * pageSize; index as i">
+
+          <td>{{ candidat.NumcondidatureReel }}</td>
+          <td>{{ allfils[candidat.choix1] }}</td>
+          <td>{{ allfils[candidat.choix2] }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  </div>

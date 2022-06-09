@@ -8,6 +8,7 @@ import { Role } from './_models';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { CriteresComponent } from './criteres/criteres.component';
 import { ProcedureComponent } from './procedure/procedure.component';
+import { AllCandidaturesComponent } from './all-candidatures/all-candidatures.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -23,6 +24,7 @@ const routes: Routes = [
     {path:'submitted',component:ThankYouPageComponent,canActivate: [AuthGuard]},
     {path:'criteres',component:CriteresComponent},
     {path:'procedure',component:ProcedureComponent},
+    {path:'listDesCandidats',component:AllCandidaturesComponent},
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
 ];

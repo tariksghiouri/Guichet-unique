@@ -1,11 +1,11 @@
 ﻿<div class="container py-5">
   <div *ngIf='noCondidature==true' class="container">
-    <div class="card text-center">
-      <div class="card-body">
-        <h5 class="card-title">Aucune candudature</h5>
-        <p class="card-text">Aucune candudature veuillez remplire le formulaire</p>
-        <a routerLink="/form" class="btn btn-primary">formulaire</a>
-      </div>
+    <div class=" text-center">
+      <div class="alert alert-primary" role="alert">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        Aucune candudature veuillez remplire le formulaire <br>
+        <a routerLink="/form">formulaire</a>
+         </div>
     
     </div>
   </div>
@@ -34,7 +34,7 @@
                 <h4> {{oneCandidature[0].nomFr}} {{oneCandidature[0].prenomFr}}</h4>
                 <p class="text-secondary mb-1"> <b>CIN</b>: {{oneCandidature[0].CIN}}</p>
                 <p class="text-muted font-size-sm"><b>CNE</b>: {{oneCandidature[0].CNE}}</p>
-                <p class="text-muted font-size-sm"><b>Numero de candidature</b>: {{account.id}}</p>
+                <p class="text-muted font-size-sm"><b>Numero de candidature</b>: {{oneCandidature[0].NumcondidatureReel}}</p>
               </div>
             </div>
           </div>
@@ -47,60 +47,7 @@
       <div class="col-md-8">
         <div class="card mb-3">
           <div class="card-body">
-            <!-- <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Full Name</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                {{oneCandidature[0].nomFr}} {{oneCandidature[0].prenomFr}}
-              </div>
-            </div> 
-            <hr> -->
-            <!-- <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Email</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                {{oneCandidature[0].email}}
-              </div>
-            </div>
-            <hr> -->
-            <!-- <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Phone</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                {{oneCandidature[0].Tel}}
-              </div>
-            </div> -->
-            <!-- <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">LieuDeNaissance</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                {{oneCandidature[0].LieuDeNaissance}}
-              </div>
-            </div> -->
-            <!-- <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Address</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                {{oneCandidature[0].Adresse}}
-              </div>
-            </div> -->
-            <!-- <hr> -->
-            <!-- <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">CIN</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                {{oneCandidature[0].CIN}}
-              </div>
-            </div> -->
-            <!-- <hr> -->
+            
             <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-0">bac</h6>

@@ -1,19 +1,23 @@
 <div class="container py-5">
 
-  <h3>la liste des candidats</h3>
+  <h3><i class="fa fa-list" aria-hidden="true"></i> &nbsp; la liste des candidats</h3>
   <div class="border-top my-3"></div>
 
  
     <div class="form-row">
 
-      <div class=" col-6 form-group form-inline">
-        Rechercher des candidats par CNE :
-        <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm"
-          (input)="search($event.target.value)" />
-
+      <div class="search orm-group col">
+        <span class="input input--nariko">
+          <input class="input__field input__field--nariko" type="text" [(ngModel)]="searchTerm"
+          (input)="search($event.target.value)"  id="input-22" />
+          <label class="input__label input__label--nariko" >
+            <span class="input__label-content input__label-content--nariko"> Rechercher par Numerode Candidature</span>
+          </label>
+        </span>
       </div>
-      <div class="form-group col-3"></div>
-      <div class="form-group col-3  ">
+
+      <div class="form-group col"></div>
+      <div class="form-group col  ">
         <h3><button (click)="downloadCSV()" type="button" class="btn btn-success">
             telecharger en format CSV
           </button>
@@ -56,7 +60,7 @@
         <tr
           *ngFor="let candidat of candidats listFilter: searchTerm | slice: (page-1) * pageSize : page * pageSize; index as i">
 
-          <td>{{ candidat.IdCompte }}</td>
+          <td>{{ candidat.NumcondidatureReel }}</td>
           <td>{{ candidat.CIN }}</td>
           <td>{{ candidat.nomFr }}</td>
           <td>{{ candidat.CNE }}</td>

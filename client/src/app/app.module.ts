@@ -21,7 +21,8 @@ import { DatePipe } from '@angular/common';;
 import { CriteresComponent } from './criteres/criteres.component'
     ;
 import { ProcedureComponent } from './procedure/procedure.component'
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';;
+import { AllCandidaturesComponent } from './all-candidatures/all-candidatures.component'
 
 
 
@@ -44,12 +45,12 @@ import { FormsModule } from '@angular/forms';
         ThankYouPageComponent,
         AppComponent,
         AlertComponent,
-        HomeComponent
-        ,
+        HomeComponent        ,
         ConfirmationComponent,
         EditFormComponent,
         CriteresComponent,
-        ProcedureComponent],
+        ProcedureComponent,
+        AllCandidaturesComponent],
     providers: [
         DatePipe,
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },

@@ -1,11 +1,12 @@
-﻿<h1>Accounts</h1>
+﻿<h1>
+     Accounts</h1>
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Create Account</a>
 <table class="table table-striped">
     <thead>
         <tr>
-            <th style="width:30%">email</th>
-            <th style="width:30%">role</th>
-            <th style="width:30%">action</th>
+            <th style="width:30%"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp; email</th>
+            <th style="width:30%"><i class="fa fa-sliders" aria-hidden="true"></i> &nbsp;rôle</th>
+            <th style="width:30%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  &nbsp; action</th>
         </tr>
     </thead>
     <tbody>
@@ -14,7 +15,8 @@
             <td>{{account.role}}</td>
             <td style="white-space: nowrap">
                 <a routerLink="edit/{{account.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-                <button (click)="deleteAccount(account.id)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
+                <button (click)="deleteAccount(account.id)" class="btn btn-sm btn-danger btn-delete-account"
+                    [disabled]="account.isDeleting">
                     <span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!account.isDeleting">Delete</span>
                 </button>

@@ -78,9 +78,8 @@ export class MultistepFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.time_service.isTimeUp()
-    // this.ilResteDutemps=this.time_service.isTimeUp()
-    // console.log(  "time is up "+  this.time_service.isTimeUp()  );
+    this.time.isTimeUp()
+
     
     this.userDetials = this.accountService.accountValue
     this.service.getAllbacs().subscribe((result: { data: any; }) => {
@@ -362,9 +361,7 @@ export class MultistepFormComponent implements OnInit {
     if (this.step == 5) {
       this.choix_step = true;
       if (this.choices.invalid) { return }
-      // console.table(this.personalDetails.value);
-      // console.table(this.addressDetails.value);
-      // console.table(this.personalDetails.value);
+
       const data = {
         user: this.userDetials.id,
         personelinfos: this.personalDetails.value,
@@ -383,8 +380,10 @@ export class MultistepFormComponent implements OnInit {
 
           window.scrollTo(0, 0);
           this.alertService.success("vous Ajouter votre Premiere application avec succès <a [routerLink]='/profile'> profile</a>");
-          // this.router.navigate(['/confirmation']);
-          // this.router.navigate(['/submitted']);
+          
+          setTimeout(() => {
+            this.router.navigate(['profile/mesCandidatures']);
+        }, 3000);  //3s
         }
         else {
           window.scrollTo(0, 0);
