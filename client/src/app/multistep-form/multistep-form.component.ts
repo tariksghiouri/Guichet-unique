@@ -254,7 +254,9 @@ export class MultistepFormComponent implements OnInit {
           window.scrollTo(0, 0);
           this.alertService.success("vous Ajouter votre Deuxieme application avec succès voir => <b> <a [routerLink]='/profile/mesCandidatures'> profile</a></b>");
           // this.router.navigate(['/confirmation']);
-          this.router.navigate(['/submitted']);
+          setTimeout(() => {
+            this.router.navigate(['profile/mesCandidatures']);
+        }, 3000);  //3s
         }
         else {
           window.scrollTo(0, 0);
