@@ -65,6 +65,7 @@ export class MultistepFormComponent implements OnInit {
   Secondetablissements: any;
   // ilResteDutemps: any;
   //  SecondSecondChoice
+  Docsuploaded:boolean=false
 
 
 
@@ -157,16 +158,17 @@ export class MultistepFormComponent implements OnInit {
       LieuDeNaissance: ['', Validators.required],
       datenaiss: ['', Validators.required],
       cne: ['', Validators.required],
-      // nomFr: ['',],
-      // prenomFr: ['',],
-      // nomAr: ['',],
-      // prenomAr: ['',],
-      // email: [this.userDetials.email,],
-      // phone: ['',],
-      // cin: ['',],
-      // LieuDeNaissance: ['',],
-      // datenaiss: ['',],
-      // cne: ['',]
+      // nomFr: ['', ],
+      // prenomFr: ['', ],
+      // nomAr: ['', ],
+      // prenomAr: ['', ],
+      // email: [this.userDetials.email, ],
+      // phone: ['', ],
+      // cin: ['', ],
+      // LieuDeNaissance: ['', ],
+      // datenaiss: ['', ],
+      // cne: ['', ],
+ 
 
     });
 
@@ -189,18 +191,17 @@ export class MultistepFormComponent implements OnInit {
       notediplo: ['', Validators.required],
       filC: ['', Validators.required],
       etablissement: ['',Validators.required],
-
-
-
-      // bac: ['',],
-      // notebac: ['',],
-      // anneebac: ['',],
-
-      // diplome: ['',],
-      // filC: ['',],
+      // bac: ['', ],
+      // notebac: ['', ],
+      // anneebac: ['', ],
+      // diplome: ['', ],
+      // annediplo: ['', ],
+      // notediplo: ['', ],
+      // filC: ['', ],
       // etablissement: ['',],
-      // annediplo: ['',],
-      // notediplo: ['',],
+
+
+      
 
 
     });
@@ -281,16 +282,19 @@ export class MultistepFormComponent implements OnInit {
               if (event.type === HttpEventType.UploadProgress) {
                 this.progress = Math.round(100 * event.loaded / event.total);
               } else if (event instanceof HttpResponse) {
+                  this.Docsuploaded=true
                 this.message = event.body.message;
+                this.alertService.info(event.body.message);
                 this.fileInfos = this.service.getFiles();
               }
             },
             error: (err: any) => {
               console.log(err);
-              this.progress = 0;
+              
               if (err.error && err.error.message) {
-                this.message = err.error.message;
+                this.alertService.error(err.error.message);
               } else {
+                this.alertService.error("Impossible d'uploader le fichier verifier la taille (max 2MB)!");
                 this.message = 'Could not upload the file!';
               }
               this.currentFile = undefined;
@@ -373,32 +377,34 @@ export class MultistepFormComponent implements OnInit {
         education: this.education.value,
         choices: this.choices.value
       }
-      console.log(this.userDetials.id);
-
-      console.table(data);
-      this.service.sendcandidatData(data).subscribe((res: any) => {
-
-        if (res.success == true) {
-
-          window.scrollTo(0, 0);
-          this.alertService.success("vous Ajouter votre Premiere application avec succès <a [routerLink]='/profile'> profile</a>");
-          
-          setTimeout(() => {
-            this.router.navigate(['profile/mesCandidatures']);
-        }, 3000);  //3s
-        }
-        else {
-          window.scrollTo(0, 0);
-          this.alertService.error(res.message);
-
-
-        }
-
-        // this.router.navigate(['/confirmation']);
-
-
-
-      });
+      // console.log(this.userDetials.id);
+      // console.table(data);
+      // this.upload();
+      if (this.Docsuploaded) {
+        this.service.sendcandidatData(data).subscribe((res: any) => {
+        
+          if (res.success == true) {
+            window.scrollTo(0, 0);
+            this.alertService.success("vous Ajouter votre Premiere application avec succès <a [routerLink]='/profile'> profile</a>");
+            
+            setTimeout(() => {
+              this.router.navigate(['profile/mesCandidatures']);
+          }, 3000);  //3s
+          }
+          else {
+            window.scrollTo(0, 0);
+            this.alertService.error(res.message);
+  
+  
+          }
+  
+          // this.router.navigate(['/confirmation']);
+  
+  
+  
+        });
+      }
+     
 
 
 

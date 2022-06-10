@@ -8,7 +8,7 @@ import { AccountService, AlertService } from './_services/';
 })
 export class ApiServiceService {
 
-
+  account= this.accountService.accountValue;
   constructor(
     private _http: HttpClient,
     private alertService: AlertService,
@@ -77,6 +77,7 @@ export class ApiServiceService {
   }
 
   upload(file: File, index): Observable<HttpEvent<any>> {
+    index+=1
     const formData: FormData = new FormData();
     if (file.name.split('.').pop() != "pdf") {
            this.alertService.clear();
@@ -84,7 +85,7 @@ export class ApiServiceService {
       return;
 
     }
-    formData.append('file', file, 'test'+index+'.' + file.name.split('.').pop());
+    formData.append('file', file, this.account.id+ file.name+'-'+index+'.' + file.name.split('.').pop());
     const req = new HttpRequest('POST', `${this.apiUrl}/upload`, formData, {
       reportProgress: true,
       responseType: 'json'

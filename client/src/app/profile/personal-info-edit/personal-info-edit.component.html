@@ -2,14 +2,14 @@
 
         <section  class="mail-seccess section">
             <div *ngIf='noCondidature' class="container">
-                <div class="card text-center">
-                    <div class="card-body">
-                      <h5 class="card-title">Aucune candudature</h5>
-                      <p class="card-text">vous n'avez fourni aucune information, veuillez remplir le formulaire</p>
-                      <a routerLink="/form" class="btn btn-primary">formulaire</a>
-                    </div>
-                  
-                  </div>
+                <div class="alert alert-primary text-center" role="alert">
+                    Aucune Information
+                    <br>
+                    vous n'avez fourni aucune information, veuillez remplir le formulaire
+                    <br>
+                    <a routerLink="/form"> <i class="fa fa-caret-right" aria-hidden="true"></i>
+                         formulaire</a>
+                </div>
             </div>
           </section>
         <form *ngIf='!noCondidature' [formGroup]="editForm" (ngSubmit)="onSubmit()">
