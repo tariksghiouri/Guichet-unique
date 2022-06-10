@@ -1,7 +1,7 @@
 <div *ngIf="this.time.ilResteDutemps; else Pasdutemps">
     <div class="container py-4">
 
-        <div class="alert alert-info">
+        <div class="alert alert-info ">
             <button type="button" class="close" data-dismiss="alert">&#10005;</button>
             <strong>Note!</strong> Selectionner une candidature pour la modifier
         </div>
@@ -49,7 +49,7 @@
 
                         <div class="form-group col">
                             <label>Note Bac</label>
-                            <input type="text" formControlName="noteBac" [(ngModel)]="candidature[0].noteBac"
+                            <input type="text" formControlName="noteBac" [(ngModel)]="oneCandidature[0].noteBac"
                                 class="form-control" [ngClass]="{ 'is-invalid': submitted && f.noteBac.errors }" />
                             <div *ngIf="submitted && f.noteBac.errors" class="invalid-feedback">
                                 <div *ngIf="f.noteBac.errors.required">Ce champ est requis </div>
@@ -108,7 +108,7 @@
                         <div class="form-group col">
                             <label>Moyenne de Diplome</label>
                             <input type="text" formControlName="MoyenneDiplome"
-                                [(ngModel)]="candidature[0].MoyenneDiplome" class="form-control"
+                                [(ngModel)]="oneCandidature[0].MoyenneDiplome" class="form-control"
                                 [ngClass]="{ 'is-invalid': submitted && f.MoyenneDiplome.errors }" />
                             <div *ngIf="submitted && f.MoyenneDiplome.errors" class="invalid-feedback">
                                 <div *ngIf="f.MoyenneDiplome.errors.required">Ce champ est requis </div>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="form-group col">
                             <label>Annee Diplome</label>
-                            <input type="text" formControlName="AnneeDiplome" [(ngModel)]="candidature[0].AnneeDiplome"
+                            <input type="text" formControlName="AnneeDiplome" [(ngModel)]="oneCandidature[0].AnneeDiplome"
                                 class="form-control" [ngClass]="{ 'is-invalid': submitted && f.AnneeDiplome.errors }" />
                             <div *ngIf="submitted && f.AnneeDiplome.errors" class="invalid-feedback">
                                 <div *ngIf="f.AnneeDiplome.errors.required">Ce champ est requis </div>

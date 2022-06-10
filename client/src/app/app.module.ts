@@ -23,7 +23,7 @@ import { CriteresComponent } from './criteres/criteres.component'
 import { ProcedureComponent } from './procedure/procedure.component'
 import { FormsModule } from '@angular/forms';;
 import { AllCandidaturesComponent } from './all-candidatures/all-candidatures.component'
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -31,11 +31,11 @@ import { AllCandidaturesComponent } from './all-candidatures/all-candidatures.co
         BrowserModule,
         ReactiveFormsModule,
         FormsModule,
-
+        FontAwesomeModule,
         HttpClientModule,
         AppRoutingModule,
         AccordionModule.forRoot(),
-
+        
 
 
     ],
