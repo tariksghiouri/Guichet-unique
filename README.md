@@ -1,5 +1,5 @@
 
-# Guichet de candiaturesde la LP pour EST Safi
+# Guichet de candiatures de la LP pour EST Safi
 
 [![N](https://i.ibb.co/ygt4JxK/ecole-sup-rieure-de-technologie-safi-5.png)](http://www.ests.uca.ma)
 
