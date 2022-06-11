@@ -21,7 +21,7 @@
                             [ngClass]="{ 'is-invalid': personal_step && personal.nomFr.errors }"
                             placeholder="nom en francais" />
                         <div *ngIf="personal_step && personalDetails.controls.nomFr.errors">
-                            <div class="danger" *ngIf="personal.nomFr.errors?.required">Le nom est requis</div>
+                            <div class="danger" *ngIf="personal.nomFr.errors?.required">ce champ est invalide</div>
                         </div>
                         <input type="text" dir="rtl" class="keyboardInput" formControlName="nomAr"
                             [ngClass]="{ 'is-invalid': personal_step && personal.nomAr.errors }"
@@ -35,7 +35,7 @@
                             [ngClass]="{ 'is-invalid': personal_step && personal.prenomFr.errors }"
                             placeholder="prenom en francais" />
                         <div *ngIf="personal_step && personalDetails.controls.prenomFr.errors">
-                            <div class="danger" *ngIf="personal.prenomFr.errors?.required">Le nom est requis</div>
+                            <div class="danger" *ngIf="personal.prenomFr.errors?.required">ce champ est invalide</div>
                         </div>
 
                         <input type="text" dir="rtl" class="keyboardInput" formControlName="prenomAr"
@@ -49,9 +49,9 @@
                         <input type="text" formControlName="email" name="email" placeholder="Email"
                             [attr.disabled]="true" />
                         <div *ngIf="personal_step && personalDetails.controls.email.errors">
-                            <div class="danger" *ngIf="personal.email.errors?.required">l'Email nom est requis</div>
+                            <div class="danger" *ngIf="personal.email.errors?.required">ce champ est invalide</div>
                         </div>
-                        <h3 class="mslabel" for="datenaiss"> date de naissance</h3>
+                        <p class="mslabel" for="datenaiss"> Date de naissance</p>
                         <input type="date" formControlName="datenaiss" name="datenaiss"
                             placeholder="date de naissance" />
                         <div *ngIf="personal_step && personalDetails.controls.datenaiss.errors">
@@ -62,28 +62,26 @@
                         <input type="text" formControlName="cin" name="cin"
                             placeholder="CIN (code d'identite nationale)" />
                         <div *ngIf="personal_step && personalDetails.controls.cin.errors">
-                            <div class="danger" *ngIf="personal.cin.errors?.required">CIN est requis</div>
+                            <div class="danger" *ngIf="personal.cin.errors?.required">ce champ est invalide</div>
                             <div class="danger" *ngIf="personal.cin.hasError('minlength')">Entrez un Cin Valid</div>
                         </div>
                         <input type="text" formControlName="cne" name="cne"
                             placeholder="CNE(code national d'etudiant)" />
                         <div *ngIf="personal_step && personalDetails.controls.cne.errors">
-                            <div class="danger" *ngIf="personal.cne.errors?.required">CNE est requis</div>
+                            <div class="danger" *ngIf="personal.cne.errors">ce champ est invalide</div>
                         </div>
                         <input type="text" formControlName="LieuDeNaissance" name="LieuDeNaissance"
                             placeholder="Lieu De Naissance" />
                         <div *ngIf="personal_step && personalDetails.controls.LieuDeNaissance.errors">
-                            <div class="danger" *ngIf="personal.LieuDeNaissance.errors?.required">le Lieu De Naissance
-                                est
-                                requis</div>
+                            <div class="danger" *ngIf="personal.LieuDeNaissance.errors?.required">ce champ est invalide</div>
                         </div>
 
                         <input type="text" formControlName="phone" name="phone" placeholder="Phone" />
                         <div *ngIf="personal_step && personalDetails.controls.phone.errors">
-                            <div class="danger" *ngIf="personal.phone.errors?.required">Le telephone est requis</div>
+                            <div class="danger" *ngIf="personal.phone.errors">ce champ est invalide</div>
                         </div>
                         <button (click)="next()" class="btn btn-primary mr-1"
-                            [disabled]="personal.invalid">Suivant</button>
+                            [disabled]="personalDetails.controls.invalid">Suivant</button>
 
                     </fieldset>
                 </form>
@@ -93,16 +91,16 @@
                     <fieldset *ngIf="step == 2">
                         <h2 class="fs-title">Address Details</h2>
                         <input type="text" formControlName="city" placeholder="City" />
-                        <div *ngIf="address_step && addressDetails.controls.city.errors">
-                            <div *ngIf="address.city.errors?.required">City is required</div>
+                        <div class="danger"  *ngIf="address_step && addressDetails.controls.city.errors">
+                            <div *ngIf="address.city.errors?.required">ce champ Obligatoire</div>
                         </div>
                         <input type="text" placeholder="Adresse" formControlName="address" />
-                        <div *ngIf="address_step && addressDetails.controls.address.errors">
-                            <div *ngIf="address.address.errors?.required">Address is required</div>
+                        <div class="danger"  *ngIf="address_step && addressDetails.controls.address.errors">
+                            <div *ngIf="address.address.errors?.required">ce champ Obligatoire</div>
                         </div>
                         <input type="text" formControlName="codePostal" placeholder="code Postal" />
-                        <div *ngIf="address_step && addressDetails.controls.codePostal.errors">
-                            <div *ngIf="address.codePostal.errors?.required">Pincode is required</div>
+                        <div class="danger"  *ngIf="address_step && addressDetails.controls.codePostal.errors">
+                            <div *ngIf="address.codePostal.errors?.required">ce champ Obligatoire</div>
                         </div>
                         <button (click)="previous()" type="button" name="previous" class="btn btn-primary mr-1"
                             value="précédent">précédent</button>
@@ -128,24 +126,23 @@
                             </option>
                         </select>
 
-
-
-
-                        <div *ngIf="education_step && education.controls.bac.errors">
-                            <div *ngIf="education_.bac.errors?.required">Highest qualification is required</div>
+                        <div  class="danger"  *ngIf="education_step && education.controls.bac.errors">
+                            <div *ngIf="education_.bac.errors?.required">ce champ est obligatoire</div>
                         </div>
                         <!-- annee bac -->
                         <label class="labels" for="anneebac">Anne du Baccalauréat</label>
                         <input type="number" name="anneebac" formControlName="anneebac" min="2014" max="2022" step="1"
                             value="2016" />
 
-                        <div *ngIf="education_step && education.controls.anneebac.errors">
+                        <div class="danger"  *ngIf="education_step && education.controls.anneebac.errors">
                             <div *ngIf="education_.anneebac.errors?.required">veuillez enter l'annee de votre bac</div>
                         </div>
 
                         <input type="text" formControlName="notebac" placeholder="note du Baccalauréat" />
-                        <div *ngIf="education_step && education.controls.notebac.errors">
-                            <div *ngIf="education_.notebac.errors?.required">University is required</div>
+                        <div class="danger"  *ngIf="education_step && education.controls.notebac.errors">
+                            <div *ngIf="education_.notebac.errors?.required">ce champ est obligatoire</div>
+                            <div *ngIf="education_.notebac.errors?.max">entrez une note valid</div>
+                            <div *ngIf="education_.notebac.errors?.min">entrez une note valid</div>
                         </div>
                         <!--baaac  -->
                         <div class="border-top my-3"></div>
@@ -182,22 +179,22 @@
                             </option>
                         </select>
 
-                        <div class="f1select" *ngIf="education_step && education.controls.diplome.errors">
-                            <div *ngIf="education_.diplome.errors?.required">nom dipome est requis</div>
+                        <div class="danger" class="f1select" *ngIf="education_step && education.controls.diplome.errors">
+                            <div  *ngIf="education_.diplome.errors?.required">ce champ est invalide</div>
                         </div>
 
                         <label class="labels" for="annediplo">Anneé d'obtention du diplome</label>
                         <input type="number" name="annediplo" formControlName="annediplo" min="2014" max="2022" step="1"
                             value="2016" />
 
-                        <div *ngIf="education_step && education.controls.annediplo.errors">
+                        <div class="danger" *ngIf="education_step && education.controls.annediplo.errors">
                             <div *ngIf="education_.annediplo.errors?.required">veuillez enter l'annee de votre diplome
                             </div>
                         </div>
 
                         <input type="text" formControlName="notediplo" placeholder="note du Diplome universitaire" />
-                        <div *ngIf="education_step && education.controls.notediplo.errors">
-                            <div *ngIf="education_.notediplo.errors?.required">la note du diplome est requis</div>
+                        <div  class="danger" *ngIf="education_step && education.controls.notediplo.errors">
+                            <div *ngIf="education_.notediplo.errors?.required">ce champ est invalide</div>
                         </div>
                         <!--     
                         <div>
@@ -270,10 +267,14 @@
                         <h2 class="fs-title">Les documents</h2>
                         <div class="alert alert-primary text-left" role="alert">
                             <h5>veuillez uploader les fichiers suivants (obligatoires)</h5>
-                            <br>&#x2022; bac Recto verso
-                            <br>&#x2022; Diplome bac+2
-                            <br>&#x2022; CIN
-
+                            <p><i class="fa fa-info-circle" aria-hidden="true"></i>
+                           les tries ficher doivent etre nommer comme le suivant: 
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp; &#x2022;  bac Recto verso (BAC+NOM complet)  exemple: &nbsp;<span class="badge badge-secondary">BACMohamedAlaoui.pdf</span>
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp; &#x2022;  Diplome bac+2 (Diplome+NOM complet) exemple:&nbsp;<span class="badge badge-secondary">DiplomeMohamedAlaoui.pdf</span>
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp; &#x2022;  CIN (CIN+NOM complet) exemple:&nbsp;<span class="badge badge-secondary">CINMohamedAlaoui.pdf</span>
+                            </p>
+                           
+    
                         </div>
                         <div class="row">
                             <div class="col-8">

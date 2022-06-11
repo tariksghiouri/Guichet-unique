@@ -1,28 +1,4 @@
-/* ********************************************************************
- **********************************************************************
- * HTML Virtual Keyboard Interface Script - v1.10
- *   Copyright (c) 2008 - GreyWyvern
- *
- *  - Licenced for free distribution under the BSDL
- *          http://www.opensource.org/licenses/bsd-license.php
- *
- * Add a script-driven keyboard interface to text fields, password
- * fields and textareas.
- *
- * See http://www.arabic-keyboard.org/keyboard for examples and
- * usage instructions.
- * Version 1.3 - July 30, 2007
- *   - Interaction styling changes (Alt, AltGr, Shift)
- *   - Justified keys - last key expands to fit width
- *   - If no dead keys in layout, dead key checkbox is hidden
- *   - Option to disable dead keys per keyboard
- *   - Added the Number Pad layout
- *   - Pulled all variations of script up to same version number
- *
- * Keyboard Credits
- *   - Arabic keyboard layout added by Srinivas Reddy
- *
- */
+
 
  function VKI_buildKeyboardInputs() {
     var self = this;

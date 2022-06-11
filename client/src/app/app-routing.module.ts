@@ -9,6 +9,7 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { CriteresComponent } from './criteres/criteres.component';
 import { ProcedureComponent } from './procedure/procedure.component';
 import { AllCandidaturesComponent } from './all-candidatures/all-candidatures.component';
+import { ResultatComponent } from './resultat/resultat.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -24,8 +25,9 @@ const routes: Routes = [
     {path:'submitted',component:ThankYouPageComponent,canActivate: [AuthGuard]},
     {path:'criteres',component:CriteresComponent},
     {path:'procedure',component:ProcedureComponent},
+    {path:'resultat',component:ResultatComponent},
     {path:'listDesCandidats',component:AllCandidaturesComponent},
-    // otherwise redirect to home
+    // si le chemin est invalide rediriger vers home
     { path: '**', redirectTo: 'home' }
 ];
 

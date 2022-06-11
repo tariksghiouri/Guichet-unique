@@ -23,7 +23,8 @@ import { CriteresComponent } from './criteres/criteres.component'
 import { ProcedureComponent } from './procedure/procedure.component'
 import { FormsModule } from '@angular/forms';;
 import { AllCandidaturesComponent } from './all-candidatures/all-candidatures.component'
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';;
+import { ResultatComponent } from './resultat/resultat.component'
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         EditFormComponent,
         CriteresComponent,
         ProcedureComponent,
-        AllCandidaturesComponent],
+        AllCandidaturesComponent,
+        ResultatComponent,],
     providers: [
         DatePipe,
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
