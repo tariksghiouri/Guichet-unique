@@ -195,6 +195,8 @@
                         <input type="text" formControlName="notediplo" placeholder="note du Diplome universitaire" />
                         <div  class="danger" *ngIf="education_step && education.controls.notediplo.errors">
                             <div *ngIf="education_.notediplo.errors?.required">ce champ est invalide</div>
+                            <div *ngIf="education_.notediplo.errors?.max">entrez une note valid</div>
+                            <div *ngIf="education_.notediplo.errors?.min">entrez une note valid</div>
                         </div>
                         <!--     
                         <div>
@@ -273,6 +275,11 @@
                             <br>&nbsp;&nbsp;&nbsp;&nbsp; &#x2022;  Diplome bac+2 (Diplome+NOM complet) exemple:&nbsp;<span class="badge badge-secondary">DiplomeMohamedAlaoui.pdf</span>
                             <br>&nbsp;&nbsp;&nbsp;&nbsp; &#x2022;  CIN (CIN+NOM complet) exemple:&nbsp;<span class="badge badge-secondary">CINMohamedAlaoui.pdf</span>
                             </p>
+                            <div class="alert alert-dark text-left" role="alert">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                &nbsp;sélectionner les trois ficher à la fois
+        
+                            </div>
                            
     
                         </div>

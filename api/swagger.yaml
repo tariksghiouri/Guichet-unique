@@ -1,14 +1,39 @@
 openapi: 3.0.0
 info:
-  title: Node.js Sign-up and Verification API
-  description: Node.js + MySQL - API with email sign-up, verification, authentication and forgot password
+  title: Documentation de L'api du Guichet de candiatures de la LP pour EST Safi
+  description: 
   version: 1.0.0
 
 servers:
   - url: http://localhost:4000
-    description: Local development server
-
+    description:   serveur de developpement
+  - url: ests://test.test  
+    description:   serveur de déploiement
+ 
 paths:
+  /bacs:
+    post:
+      summary: bacs list
+      description: accessible to everyone.
+            
+      responses:
+        "200":
+          description: bacs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "1"
+               
+                  Intitule:
+                    type: string
+                    example: "BAC SCIENCES AGRONOMIQUES"
+                 
+
+
   /accounts/authenticate:
     post:
       summary: Authenticate account credentials and return a JWT token and a cookie with a refresh token
@@ -23,7 +48,7 @@ paths:
               properties:
                 email:
                   type: string
-                  example: "jason@example.com"
+                  example: "tarik@mail.org"
                 password:
                   type: string
                   example: "pass123"
@@ -47,18 +72,16 @@ paths:
                   id:
                     type: string
                     example: "5eb12e197e06a76ccdefc121"
-                  title:
-                    type: string
-                    example: "Mr"
+               
                   firstName:
                     type: string
-                    example: "Jason"
+                    example: "tarik"
                   lastName:
                     type: string
-                    example: "Watmore"
+                    example: "idrissi"
                   email:
                     type: string
-                    example: "jason@example.com"
+                    example: "tarik@mail.org"
                   role:
                     type: string
                     example: "Admin"
@@ -110,18 +133,17 @@ paths:
                   id:
                     type: string
                     example: "5eb12e197e06a76ccdefc121"
-                  title:
-                    type: string
-                    example: "Mr"
+                
+                
                   firstName:
                     type: string
-                    example: "Jason"
+                    example: "tarik"
                   lastName:
                     type: string
-                    example: "Watmore"
+                    example: "idrissi"
                   email:
                     type: string
-                    example: "jason@example.com"
+                    example: "tarik@mail.org"
                   role:
                     type: string
                     example: "Admin"
@@ -202,18 +224,16 @@ paths:
             schema:
               type: object
               properties:
-                title:
-                  type: string
-                  example: "Mr"
+               
                 firstName:
                   type: string
-                  example: "Jason"
+                  example: "tarik"
                 lastName:
                   type: string
-                  example: "Watmore"
+                  example: "idrissi"
                 email:
                   type: string
-                  example: "jason@example.com"
+                  example: "tarik@mail.org"
                 password:
                   type: string
                   example: "pass123"
@@ -223,7 +243,6 @@ paths:
                 acceptTerms:
                   type: boolean
               required:
-                - title
                 - firstName
                 - lastName
                 - email
@@ -291,7 +310,7 @@ paths:
               properties:
                 email:
                   type: string
-                  example: "jason@example.com"
+                  example: "tarik@mail.org"
               required:
                 - email
       responses:
@@ -407,18 +426,16 @@ paths:
                     id:
                       type: string
                       example: "5eb12e197e06a76ccdefc121"
-                    title:
-                      type: string
-                      example: "Mr"
+                   
                     firstName:
                       type: string
-                      example: "Jason"
+                      example: "tarik"
                     lastName:
                       type: string
-                      example: "Watmore"
+                      example: "idrissi"
                     email:
                       type: string
-                      example: "jason@example.com"
+                      example: "tarik@mail.org"
                     role:
                       type: string
                       example: "Admin"
@@ -443,18 +460,16 @@ paths:
             schema:
               type: object
               properties:
-                title:
-                  type: string
-                  example: "Mr"
+               
                 firstName:
                   type: string
-                  example: "Jason"
+                  example: "tarik"
                 lastName:
                   type: string
-                  example: "Watmore"
+                  example: "idrissi"
                 email:
                   type: string
-                  example: "jason@example.com"
+                  example: "tarik@mail.org"
                 password:
                   type: string
                   example: "pass123"
@@ -465,7 +480,6 @@ paths:
                   type: string
                   enum: [Admin, User]
               required:
-                - title
                 - firstName
                 - lastName
                 - email
@@ -483,18 +497,16 @@ paths:
                   id:
                     type: string
                     example: "5eb12e197e06a76ccdefc121"
-                  title:
-                    type: string
-                    example: "Mr"
+                 
                   firstName:
                     type: string
-                    example: "Jason"
+                    example: "tarik"
                   lastName:
                     type: string
-                    example: "Watmore"
+                    example: "idrissi"
                   email:
                     type: string
-                    example: "jason@example.com"
+                    example: "tarik@mail.org"
                   role:
                     type: string
                     example: "Admin"
@@ -510,7 +522,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "Email 'jason@example.com' is already registered"
+                    example: "Email 'tarik@mail.org' is already registered"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
   /accounts/{id}:
@@ -539,18 +551,16 @@ paths:
                   id:
                     type: string
                     example: "5eb12e197e06a76ccdefc121"
-                  title:
-                    type: string
-                    example: "Mr"
+                
                   firstName:
                     type: string
-                    example: "Jason"
+                    example: "tarik"
                   lastName:
                     type: string
-                    example: "Watmore"
+                    example: "idrissi"
                   email:
                     type: string
-                    example: "jason@example.com"
+                    example: "tarik@mail.org"
                   role:
                     type: string
                     example: "Admin"
@@ -577,18 +587,16 @@ paths:
             schema:
               type: object
               properties:
-                title:
-                  type: string
-                  example: "Mr"
+               
                 firstName:
                   type: string
-                  example: "Jason"
+                  example: "tarik"
                 lastName:
                   type: string
-                  example: "Watmore"
+                  example: "idrissi"
                 email:
                   type: string
-                  example: "jason@example.com"
+                  example: "tarik@mail.org"
                 password:
                   type: string
                   example: "pass123"
@@ -609,18 +617,16 @@ paths:
                   id:
                     type: string
                     example: "5eb12e197e06a76ccdefc121"
-                  title:
-                    type: string
-                    example: "Mr"
+                 
                   firstName:
                     type: string
-                    example: "Jason"
+                    example: "tarik"
                   lastName:
                     type: string
-                    example: "Watmore"
+                    example: "idrissi"
                   email:
                     type: string
-                    example: "jason@example.com"
+                    example: "tarik@mail.org"
                   role:
                     type: string
                     example: "Admin"
