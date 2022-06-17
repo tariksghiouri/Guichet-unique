@@ -279,6 +279,12 @@ export class MultistepFormComponent implements OnInit {
         const file: File | null = this.selectedFiles[i];
         if (file) {
           this.currentFile = file;
+          if ( file.name.split('.').pop() != "pdf") {
+            this.alertService.clear();
+            this.message="les fichers doivent etre en format PDF";
+        return;
+ 
+      }
           this.service.upload(this.currentFile, i).subscribe({
             next: (event: any) => {
               if (event.type === HttpEventType.UploadProgress) {

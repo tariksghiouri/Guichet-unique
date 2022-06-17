@@ -20,36 +20,36 @@ export class LesDatesComponent implements OnInit {
   mInscriptionsListP: any;
   mInscriptionsListAtt: any;
 
-  constructor(private formBuilder: FormBuilder,private alertService: AlertService, private api: ApiServiceService) { }
+  constructor(private formBuilder: FormBuilder, private alertService: AlertService, private api: ApiServiceService) { }
 
   ngOnInit(): void {
-    
+
     this.api.getDatesFormated().subscribe((result: { data: any; }) => {
 
       console.log(result);
-        this.lesDates = result;
-        // this.mDebutCandidatures = this.lesDates[0].DebutCandidatures.slice(0, 10);
-        // this.mFinCandidatures = this.lesDates[0].FinCandidatures.slice(0, 10);
-        // this.mDebutPreselection = this.lesDates[0].DebutPreselection.slice(0, 10);
-        // this.mFinPreselection = this.lesDates[0].FinPreselection.slice(0, 10);
-        // this.mTest = this.lesDates[0].Test.slice(0, 10);
-        // this.mInscriptionsListP = this.lesDates[0].InscriptionsListP.slice(0, 10);
-        // this.mInscriptionsListAtt = this.lesDates[0].InscriptionsListAtt.slice(0, 10);
-        this.mDebutCandidatures = this.lesDates[0].DebutCandidatures;
-        this.mFinCandidatures = this.lesDates[0].FinCandidatures;
-        this.mDebutPreselection = this.lesDates[0].DebutPreselection;
-        this.mFinPreselection = this.lesDates[0].FinPreselection;
-        this.mTest = this.lesDates[0].Test;
-        this.mInscriptionsListP = this.lesDates[0].InscriptionsListP;
-        this.mInscriptionsListAtt = this.lesDates[0].InscriptionsListAtt;
-        console.log(this.mDebutCandidatures);
-        console.log(this.mFinCandidatures);
-        console.log(this.mDebutPreselection);
-        console.log(this.mFinPreselection);
-        console.log(this.mTest);
-        console.log(this.mInscriptionsListP);
-        console.log(this.mInscriptionsListAtt);
-      
+      this.lesDates = result;
+      // this.mDebutCandidatures = this.lesDates[0].DebutCandidatures.slice(0, 10);
+      // this.mFinCandidatures = this.lesDates[0].FinCandidatures.slice(0, 10);
+      // this.mDebutPreselection = this.lesDates[0].DebutPreselection.slice(0, 10);
+      // this.mFinPreselection = this.lesDates[0].FinPreselection.slice(0, 10);
+      // this.mTest = this.lesDates[0].Test.slice(0, 10);
+      // this.mInscriptionsListP = this.lesDates[0].InscriptionsListP.slice(0, 10);
+      // this.mInscriptionsListAtt = this.lesDates[0].InscriptionsListAtt.slice(0, 10);
+      this.mDebutCandidatures = this.lesDates[0].DebutCandidatures;
+      this.mFinCandidatures = this.lesDates[0].FinCandidatures;
+      this.mDebutPreselection = this.lesDates[0].DebutPreselection;
+      this.mFinPreselection = this.lesDates[0].FinPreselection;
+      this.mTest = this.lesDates[0].Test;
+      this.mInscriptionsListP = this.lesDates[0].InscriptionsListP;
+      this.mInscriptionsListAtt = this.lesDates[0].InscriptionsListAtt;
+      console.log(this.mDebutCandidatures);
+      console.log(this.mFinCandidatures);
+      console.log(this.mDebutPreselection);
+      console.log(this.mFinPreselection);
+      console.log(this.mTest);
+      console.log(this.mInscriptionsListP);
+      console.log(this.mInscriptionsListAtt);
+
     });
     this.editdates = this.formBuilder.group(
       {
@@ -63,7 +63,7 @@ export class LesDatesComponent implements OnInit {
 
 
       });
-    
+
 
   }
   onSubmit() {
@@ -72,21 +72,44 @@ export class LesDatesComponent implements OnInit {
       this.alertService.error("vous devez remplir tous les champs");
       return;
     }
-    this.api.EditDates(this.editdates.value).subscribe((res: any) => {
 
-      if (res.success == true) {
+    if (
+      // can be optimized 
+      this.editdates.value.DebutCandidatures < this.editdates.value.FinCandidatures
+      &&
+      this.editdates.value.FinCandidatures < this.editdates.value.DebutPreselection
+      &&
+      this.editdates.value.DebutPreselection < this.editdates.value.FinPreselection
+      &&
+      this.editdates.value.FinPreselection < this.editdates.value.Test
+      &&
+      this.editdates.value.Test < this.editdates.value.InscriptionsListP
+      &&
+      this.editdates.value.InscriptionsListP < this.editdates.value.InscriptionsListAtt
 
-        window.scrollTo(0, 0);
-        this.alertService.success("vous avez mis à jour les dates avec succès");
-      }
-      else{
-        window.scrollTo(0, 0);
-        this.alertService.error(res.message);
-      }
-    })
+    ) {
+      this.api.EditDates(this.editdates.value).subscribe((res: any) => {
 
-  } 
- public get f() {
+        if (res.success == true) {
+
+          window.scrollTo(0, 0);
+          this.alertService.success("vous avez mis à jour les dates avec succès");
+        }
+        else {
+          window.scrollTo(0, 0);
+          this.alertService.error(res.message);
+        }
+      })
+    }
+    else {
+
+
+      this.alertService.error("les dates doivemt etre dans un ordre logique");
+
+    }
+
+  }
+  public get f() {
     return this.editdates.controls;
   }
   onReset() {

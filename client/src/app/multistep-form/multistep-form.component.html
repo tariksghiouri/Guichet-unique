@@ -472,14 +472,15 @@
                     <h4>Les documents</h4>
                     <div class="border-top my-3"></div>
                     <div class="alert alert-primary text-left" role="alert">
-                        <h5>veuillez uploader les fichiers suivants (obligatoires)</h5>
+                        <h5>veuillez uploader les documents suivants (obligatoires)</h5>
                         <p><i class="fa fa-info-circle" aria-hidden="true"></i>
-                       les tries ficher doivent etre nommer comme le suivant: 
-                        <br>&nbsp;&nbsp;&nbsp;&nbsp; &#x2022;  bac Recto verso (BAC+NOM complet)  exemple: &nbsp;<span class="badge badge-secondary">BACMohamedAlaoui.pdf</span>
-                        <br>&nbsp;&nbsp;&nbsp;&nbsp; &#x2022;  Diplome bac+2 (Diplome+NOM complet) exemple:&nbsp;<span class="badge badge-secondary">DiplomeMohamedAlaoui.pdf</span>
-                        <br>&nbsp;&nbsp;&nbsp;&nbsp; &#x2022;  CIN (CIN+NOM complet) exemple:&nbsp;<span class="badge badge-secondary">CINMohamedAlaoui.pdf</span>
+                       fournir un seul PDF qui contient  les documents suivant: 
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp; &#x2022;  les relevet de notes 1ere et 2eme année 
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp; &#x2022;  Diplome bac+2 
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp; &#x2022;  CIN
                         </p>
-                       
+                        <a href="https://www.ilovepdf.com/merge_pdf" target="_blank"> <span class="badge badge-info"><h6>vous pouvez utiliser cet outil pour construir votre PDF <i class="fa fa-link" aria-hidden="true"></i>
+                        </h6></span></a>
 
                     </div>
                     <div *ngIf="message" class="alert alert-secondary text-left" role="alert">
@@ -487,7 +488,7 @@
                     </div>
                     <div class="form-row">
                         <label class="btn btn-default p-0">
-                            <input type="file" multiple (change)="selectFile($event)" />
+                            <input type="file"  (change)="selectFile($event)" />
                         </label>
 
                     </div>

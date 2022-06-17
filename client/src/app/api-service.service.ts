@@ -79,12 +79,7 @@ export class ApiServiceService {
   upload(file: File, index): Observable<HttpEvent<any>> {
     index+=1
     const formData: FormData = new FormData();
-    if (file.name.split('.').pop() != "pdf") {
-           this.alertService.clear();
-    this.alertService.error("les fichers doivent etre en format PDF");
-      return;
 
-    }
     formData.append('file', file, this.account.id+ file.name+'-'+index+'.' + file.name.split('.').pop());
     const req = new HttpRequest('POST', `${this.apiUrl}/upload`, formData, {
       reportProgress: true,
