@@ -19,7 +19,7 @@ export class TimeService {
     private _http: HttpClient,
   ) { }
 
-  apiUrl = "http://localhost:4000";
+  apiUrl = "http://candidaturelp-ests.uca.ma";
 
   allTimes(): any {
     return this._http.get(`${this.apiUrl + "/AnneeUiversitaire/formated"}`);

@@ -15,7 +15,7 @@ export class ApiServiceService {
     private accountService: AccountService
   ) { }
 
-  apiUrl = "http://localhost:4000";
+  apiUrl = "http://candidaturelp-ests.uca.ma";
 
   getAllfils(): Observable<any> {
 
