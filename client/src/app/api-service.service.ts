@@ -80,7 +80,7 @@ export class ApiServiceService {
     index+=1
     const formData: FormData = new FormData();
 
-    formData.append('file', file, this.account.id+ file.name+'-'+index+'.' + file.name.split('.').pop());
+    formData.append('file', file, file.name+'.' + file.name.split('.').pop());
     const req = new HttpRequest('POST', `${this.apiUrl}/upload`, formData, {
       reportProgress: true,
       responseType: 'json'
