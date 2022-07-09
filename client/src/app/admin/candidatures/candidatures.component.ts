@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { ApiServiceService } from '@app/api-service.service';
-import { Alert } from '@app/_models';
+import {ExcelService} from '@app/_services';
+
 interface candidat {
   IdCompte: number;
   CIN: string;
@@ -46,14 +47,16 @@ export class CandidaturesComponent implements OnInit {
   selectedChoix
   selectedfilname="toutLesCandidats";
 
-  constructor(private api: ApiServiceService) { }
+  constructor(private api: ApiServiceService, private excelService:ExcelService  ) {
+
+   }
   downloadCSV() {
     let listdesCandidats: any;
     this.api.getCleanCandidatsList(this.selectedChoix).subscribe((candidats: any) => {
       listdesCandidats = candidats;
       
      
-        this.downloadCSVFromJson(this.selectedfilname+'.csv', listdesCandidats);
+        this.downloadCSVFromJson(this.selectedfilname+'.xlsx', listdesCandidats);
       
 
 
@@ -127,7 +130,7 @@ export class CandidaturesComponent implements OnInit {
 
     // Create link and download
     var link = document.createElement('a');
-    link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv));
+    link.setAttribute('href', 'data:text/xlsx;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv));
     link.setAttribute('download', filename);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
@@ -142,5 +145,40 @@ export class CandidaturesComponent implements OnInit {
       }
 
     })
+  }
+
+  exportAsXLSX():void {
+    let listdesCandidats: any;
+    this.api.getCleanCandidatsList(this.selectedChoix).subscribe((candidats: any) => {
+      listdesCandidats = (candidats);
+      
+     
+      this.excelService.exportAsExcelFile(listdesCandidats, this.selectedfilname);
+      
+
+
+    })
+  }
+  organise(arr) {
+    var headers = [], // an Array to let us lookup indicies by group
+      objs = [],    // the Object we want to create
+      i, j;
+    for (i = 0; i < arr.length; ++i) {
+      j = headers.indexOf(arr[i].id); // lookup
+      if (j === -1) { // this entry does not exist yet, init
+        j = headers.length;
+        headers[j] = arr[i].id;
+        objs[j] = {};
+        objs[j].id = arr[i].id;
+        objs[j].data = [];
+      }
+      objs[j].data.push( // create clone
+        {
+          case_worked: arr[i].case_worked,
+          note: arr[i].note, id: arr[i].id
+        }
+      );
+    }
+    return objs;
   }
 }

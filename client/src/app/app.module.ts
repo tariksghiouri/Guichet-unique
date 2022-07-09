@@ -8,6 +8,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor, appInitializer } from './_helpers';
 import { AccountService } from './_services';
+import { ExcelService } from './_services';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
@@ -52,10 +53,12 @@ import { ResultatComponent } from './resultat/resultat.component'
         EditFormComponent,
         CriteresComponent,
         ProcedureComponent,
+        
         AllCandidaturesComponent,
         ResultatComponent,],
     providers: [
         DatePipe,
+        ExcelService,
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
